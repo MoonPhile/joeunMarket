@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joeun.mapper.TestMapper">
+    <insert id="save" parameterType="com.joeun.dto.TestRequest">
+        insert into testtable (title)
+        values(
+               #{title}
+              )
+    </insert>
+
+    <select id="findById" parameterType="long" resultType="com.joeun.dto.TestResponse">
+        select *
+        from    testtable
+        where id = #{id}
+
+    </select>
+
+    <update id="update" parameterType="com.joeun.dto.TestRequest">
+        update testtable
+set title = #{title}
+where id = #{id}
+    </update>
+<delete id="deleteById" parameterType="long">
+    delete from testtable where id = #{id}
+</delete>
+    <select id="findAll" parameterType="com.joeun.dto.TestResponse">
+        select *
+        from testtable
+    </select>
+</mapper>
