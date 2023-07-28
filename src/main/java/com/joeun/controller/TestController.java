@@ -28,6 +28,7 @@ public class TestController {
         return "test/testView";
     }
 
+    //매핑테스트
     @GetMapping("/hello")
     @ResponseBody
     public String hello() {
@@ -35,6 +36,6 @@ public class TestController {
     }
 
     @GetMapping("/login")
-    public String login() { return "logintest";}
+    public String login() { return "test/logintest";}
 
 }
