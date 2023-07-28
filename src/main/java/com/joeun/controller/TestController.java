@@ -25,5 +25,7 @@ public class TestController {
         List<TestResponse> list = testService.findAll();
         model.addAttribute("list",list);
         return "test/testView";
+        
+        lllll
     }
 }
