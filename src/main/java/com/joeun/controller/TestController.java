@@ -34,4 +34,7 @@ public class TestController {
         return "hiyoaaaa";
     }
 
+    @GetMapping("/login")
+    public String login() { return "logintest";}
+
 }
