@@ -1,5 +1,6 @@
 package com.joeun.controller;
 
+import com.joeun.dto.EmailMessage;
 import com.joeun.dto.UserResponse;
 import com.joeun.service.AdminService;
 import com.joeun.service.MailService;
@@ -32,8 +33,17 @@ public class AdminController {
         return adminService.findAllUser();
     }
 
-    @PostMapping("/adminMailTest")
-    public void mainTest(){
+    @GetMapping("/adminMail.do")
+    public String goToMailForm(){
+        return "/admin/adminMail";
+    }
 
+    @PostMapping("/adminMailSend")
+    public String mainTest(final EmailMessage message){
+        System.out.println(message.getTo());
+        System.out.println(message.getSubject());
+        System.out.println(message.getMessage());
+        mailService.sendMailReject(message);
+        return "/admin/adminMain";
     }
 }

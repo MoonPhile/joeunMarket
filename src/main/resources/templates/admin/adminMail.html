@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminMail</title>
+</head>
+<body>
+메일 보내기
+<div>
+    <form id="mailForm" method="post" action="/adminMailSend">
+        <input type="text" id="to" name="to"/>
+        <input type="text" id="subject" name="subject" />
+        <input type="text" id="message" name="message"/>
+        <button type="submit" id="sendMail">메일 전송</button>
+    </form>
+</div>
+
+
+</body>
+</html>
