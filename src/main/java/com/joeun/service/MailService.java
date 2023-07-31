@@ -18,9 +18,9 @@ public class MailService {
         boolean msg = false;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
+        simpleMailMessage.setFrom("joeunMarketTeam@gamil.com");
         simpleMailMessage.setTo(message.getTo());
         simpleMailMessage.setSubject(message.getSubject());
-        simpleMailMessage.setFrom("joeunMarketTeam@gamil.com");
         simpleMailMessage.setText(message.getMessage());
 
         try {

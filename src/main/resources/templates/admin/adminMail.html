@@ -8,7 +8,9 @@
 메일 보내기
 <div>
     <form id="mailForm" method="post" action="/adminMailSend">
-        <input type="text" id="to" name="to"/>
+        <select id="to" name="to" multiple>
+            <option th:each="user :${users}" th:value="${user.getUserEmail()}" th:utext="${user.getUserEmail()}"></option>
+        </select>
         <input type="text" id="subject" name="subject" />
         <input type="text" id="message" name="message"/>
         <button type="submit" id="sendMail">메일 전송</button>

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -39,7 +40,12 @@ public class AdminTest {
         message.setTo("lunatic1702@gmail.com");
         message.setSubject("테스트 이메일입니다.");
         message.setMessage("메일 보내기 성공");
-        mailService.sendMailReject(message);
+        List<EmailMessage> messagesList =new ArrayList<>();
+        messagesList.add(message);
+        messagesList.add(message);
+        messagesList.add(message);
+        messagesList.add(message);
+        mailService.sendMailReject(messagesList);
 
     }
 }

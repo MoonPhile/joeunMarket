@@ -34,7 +34,9 @@ public class AdminController {
     }
 
     @GetMapping("/adminMail.do")
-    public String goToMailForm(){
+    public String goToMailForm(Model model){
+        List<UserResponse> list = adminService.findAllUser();
+        model.addAttribute("users",list);
         return "/admin/adminMail";
     }
 
@@ -43,7 +45,7 @@ public class AdminController {
         System.out.println(message.getTo());
         System.out.println(message.getSubject());
         System.out.println(message.getMessage());
-        mailService.sendMailReject(message);
+//        mailService.sendMailReject(message);
         return "/admin/adminMain";
     }
 }
