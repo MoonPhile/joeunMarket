@@ -1,5 +1,3 @@
-
-
 function getUserList() {
     console.log("비동기 통신 시작")
     $.ajax({
@@ -10,7 +8,6 @@ function getUserList() {
             console.log("통신 성공");
             console.log(result);
             $('#userListTable').html("")
-            // 서버에서 반환된 JSON 데이터 파싱
             // 데이터를 처리하고 화면에 출력
             var html = '<table>\n' +
                 '    <tr>\n' +
@@ -37,7 +34,6 @@ function getUserList() {
                 tableTd += '</tr>';
 
                 $('#UserListTbody').append(tableTd);
-                // $('#tableBody').load();
             }
         },
         error: function () {
