@@ -19,7 +19,8 @@ public class UserService {
     public User create(String id, String password, String address, String phone, String email){
         User user = new User();
         user.setId(id);
-        user.setPassword(passwordEncoder.encode(password));
+//        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
         user.setAddress(address);
         user.setPhone(phone);
         user.setEmail(email);

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- 부트스트랩 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 
     <!-- css -->
-    <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 
     <title>조은마켓</title>
 </head>
@@ -19,7 +20,7 @@
 <th:block layout:fragment="content"></th:block>
 <!-- 기본 템플릿 안에 삽입될 내용 끝 -->
 <!--부트스트랩 JS-->
-<script th:src="@{/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- 부트스트랩 JS 끝 -->
 <!-- 자바스크립트 시작 -->
 <th:block layout:fragment="script"></th:block>

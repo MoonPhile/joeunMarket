@@ -18,11 +18,11 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(){
-        return "login";
+        return "login_form";
     }
 
-    @GetMapping("/login")
-    public String signup(UserCreateForm userCreateForm){ return "signup_form";}
+//    @GetMapping("/login")
+//    public String signup(UserCreateForm userCreateForm){ return "signup_form";}
 
     @PostMapping("/login")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
