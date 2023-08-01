@@ -3,11 +3,9 @@ package com.joeun.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-
 @Getter
 @Setter
-public class UserDTO {
+public class User {
 
     private String id;
     private String password;
@@ -15,9 +13,9 @@ public class UserDTO {
     private String phone;
     private String email;
 
-    public UserDTO(){}
+    public User(){}
 
-    public UserDTO(String id, String password, String address, String phone, String email){
+    public User(String id, String password, String address, String phone, String email){
         this.id = id;
         this.password = password;
         this.address = address;

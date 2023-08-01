@@ -1,6 +1,6 @@
 package com.joeun.service;
 
-import com.joeun.dto.UserDTO;
+import com.joeun.dto.User;
 import com.joeun.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,8 +16,8 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserDTO create(String id, String password, String address, String phone, String email){
-        UserDTO user = new UserDTO();
+    public User create(String id, String password, String address, String phone, String email){
+        User user = new User();
         user.setId(id);
         user.setPassword(passwordEncoder.encode(password));
         user.setAddress(address);

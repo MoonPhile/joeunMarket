@@ -1,14 +1,14 @@
 package com.joeun.mapper;
 
-import com.joeun.dto.UserDTO;
+import com.joeun.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
 
 @Mapper
 public interface UserMapper {
-    int insertUser(UserDTO user);
+    int insertUser(User user);
 
-    Optional<UserDTO> selectById(String id);
+    Optional<User> selectById(String id);
 
 }
