@@ -27,6 +27,11 @@ public class ProductController {
         return "/admin/addProduct";
     }
 
+    @GetMapping("/addCategory.do")
+    public String goToAddCategory() {
+        return "/admin/addCategory";
+    }
+
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("image") List<MultipartFile> images, ProductDto product) {
         System.out.println("상품 등록");
