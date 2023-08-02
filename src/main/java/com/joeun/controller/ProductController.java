@@ -32,6 +32,12 @@ public class ProductController {
         return "/admin/addCategory";
     }
 
+    @PostMapping("/addCategory")
+    public String addCategory(final ProductCategoryDto categoryDto) {
+        productService.addCategory(categoryDto);
+        return "/admin/adminMain";
+    }
+
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("image") List<MultipartFile> images, ProductDto product) {
         System.out.println("상품 등록");
