@@ -16,8 +16,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests().requestMatchers(
-                        new AntPathRequestMatcher("/**")).permitAll()
+        http
+                .csrf().disable()
+                .authorizeHttpRequests().requestMatchers(
                 .and()
                 .formLogin()
                 .loginPage("/login")
