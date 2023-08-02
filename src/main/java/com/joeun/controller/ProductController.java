@@ -58,10 +58,10 @@ public class ProductController {
         return "/admin/addProduct";
     }
     
-    @GetMapping("/itemlist.do")
+    @GetMapping("/productlist.do")
     String itemlist(Model model){
-    	List<ProductDto> itemList = productMapper.findAll();
-        model.addAttribute("items", itemList);
-        return "test/itemList";
+    	List<ProductDto> productlist = productMapper.findAll();
+        model.addAttribute("items", productlist);
+        return "test/productlist";
     }
 }
