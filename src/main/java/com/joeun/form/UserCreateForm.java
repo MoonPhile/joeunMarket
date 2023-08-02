@@ -2,7 +2,7 @@ package com.joeun.form;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
+//import org.hibernate.annotations.BatchSize;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
