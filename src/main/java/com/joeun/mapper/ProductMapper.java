@@ -4,6 +4,8 @@ import com.joeun.dto.ProductCategoryDto;
 import com.joeun.dto.ProductDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ProductMapper {
 
@@ -14,5 +16,7 @@ public interface ProductMapper {
     void addProduct(ProductDto product);
 
     void addCategory(ProductCategoryDto category);
+
+    List<ProductCategoryDto> findAllCategory();
 
 }

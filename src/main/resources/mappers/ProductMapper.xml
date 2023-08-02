@@ -3,7 +3,7 @@
 
 <mapper namespace="com.joeun.mapper.ProductMapper">
     <insert id="addProduct" parameterType="com.joeun.dto.ProductDto">
-        insert into product
+        insert into product (product_id, product_name, product_condition, product_price, product_description, img1, img2, img3, img4, product_category_id)
         values (#{productId},
                 #{productName},
                 #{productCondition},
@@ -22,4 +22,7 @@
             #{productCategoryName}
             )
     </insert>
+    <select id="findAllCategory" resultType="com.joeun.dto.ProductCategoryDto">
+        select * from product_category
+    </select>
 </mapper>
