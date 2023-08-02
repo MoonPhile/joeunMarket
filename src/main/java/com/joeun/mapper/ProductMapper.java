@@ -3,6 +3,7 @@ package com.joeun.mapper;
 import com.joeun.dto.ProductCategoryDto;
 import com.joeun.dto.ProductDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,5 +21,10 @@ public interface ProductMapper {
     List<ProductCategoryDto> findAllCategory();
 
     List<ProductDto> findAll();
+    
+    List<ProductDto> findAllProductsPaging(@Param("offset") int offset, @Param("size") int size);
+    int getTotalCount();
+    
+    int countAllProducts();
     
 }

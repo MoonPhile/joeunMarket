@@ -81,7 +81,24 @@
         </div>
     </div>
 </section>
-
+<div class="pagination d-flex justify-content-center">
+    <ul class="pagination">
+        
+        <li th:if="${currentPage > 1}">
+            <a th:href="@{/productlist(do=productlist, page=${currentPage - 1})}"> ◀</a>
+        </li>
+  		<li th:each="page : ${#numbers.sequence(1, totalPages)}">
+            <span th:if="${page == currentPage}">
+                <strong th:text="${page}" style="margin-right: 10px;"></strong>
+            </span>
+            <a th:if="${page != currentPage}" th:href="@{/productlist(do='productlist', page=${page})}" th:text="${page}" style="margin-right: 10px;"></a>
+        </li>
+        <li th:if="${currentPage < totalPages}">
+            <a th:href="@{/productlist(do=productlist, page=${currentPage + 1})}"> ▶ </a>
+        </li>
+      
+    </ul>
+</div>
 				<!-- Footer -->
 				<footer class="my-5 pt-5 text-muted text-center text-small">
 					<p class="mb-1">&copy; 조은 - 2023년 07월 쇼핑몰 프로젝트</p>

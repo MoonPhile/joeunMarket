@@ -57,6 +57,19 @@ public class ProductService {
 
     }
     
+    public int countAllProducts() {
+        return productMapper.countAllProducts();
+    }
+
+   
+    public List<ProductDto> findAllProductsPaging(int offset, int size) {
+        return productMapper.findAllProductsPaging(offset, size);
+    }
+
+    public int getTotalProductCount() {
+        return productMapper.countAllProducts();
+    }
+    
     public List<ProductDto> findAll() {
         return productMapper.findAll();
     }

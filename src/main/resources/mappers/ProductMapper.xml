@@ -51,5 +51,23 @@
     <result property="productDescription" column="product_description" />
   	<result property="imgs" javaType="java.lang.String" column="img" jdbcType="VARCHAR" />
     <result property="productCategoryId" column="product_category_id" />
-</resultMap>
+	</resultMap>
+	
+	<select id="findAllProductsPaging" resultType="com.joeun.dto.ProductDto" resultMap="productResultMap">
+    SELECT
+        product_id,
+        product_name,
+        product_condition,
+        product_price,
+        product_description,
+        CONCAT_WS(',', IFNULL(img1, ''), IFNULL(img2, ''), IFNULL(img3, ''), IFNULL(img4, '')) as imgs,
+        product_category_id
+    FROM
+        product
+   LIMIT #{param2} OFFSET #{param1}
+	</select>
+	
+	<select id="countAllProducts" resultType="int">
+    SELECT COUNT(*) FROM product
+	</select>
 </mapper>
