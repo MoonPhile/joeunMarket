@@ -13,14 +13,6 @@ public class User {
     private String phone;
     private String email;
 
-    public User(){}
 
-    public User(String id, String password, String address, String phone, String email){
-        this.id = id;
-        this.password = password;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-    }
 
 }

@@ -3,6 +3,7 @@ package com.joeun.controller;
 import com.joeun.form.UserCreateForm;
 import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +17,15 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/login")
-    public String login(){
+    @GetMapping("/signup")
+    public String login(UserCreateForm userCreateForm){
         return "login_form";
     }
 
 //    @GetMapping("/login")
 //    public String signup(UserCreateForm userCreateForm){ return "signup_form";}
 
-    @PostMapping("/login")
+    @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "login_form";
@@ -36,8 +37,18 @@ public class UserController {
             return "login_form";
         }
 
-        userService.create(userCreateForm.getId(),userCreateForm.getPassword1(), userCreateForm.getEmail(),
-                userCreateForm.getPhone(), userCreateForm.getAddress());
+        try{
+            userService.create(userCreateForm.getId(),userCreateForm.getPassword1(), userCreateForm.getEmail(),
+                    userCreateForm.getPhone(), userCreateForm.getAddress());
+        }catch (DataIntegrityViolationException e){
+            e.printStackTrace();
+            bindingResult.reject("signupFailed","이미 등록된 사용자 입니다.");
+            return "login_form";
+        }catch (Exception e){
+            e.printStackTrace();
+            bindingResult.reject("signupFailed",e.getMessage());
+            return "login_form";
+        }
 
         return "redirect:/";
     }
