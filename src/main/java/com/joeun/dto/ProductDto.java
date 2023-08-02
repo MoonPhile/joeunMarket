@@ -11,10 +11,11 @@ public class ProductDto {
     private String productCondition;
     private int productPrice;
     private String productDescription;
-    private String img1;
-    private String img2;
-    private String img3;
-    private String img4;
+//    private String img1;
+//    private String img2;
+//    private String img3;
+//    private String img4;
+    private String[] imgs;
     private int productCategoryId;
 
 }

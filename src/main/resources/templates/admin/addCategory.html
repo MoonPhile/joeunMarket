@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>카테고리추가</title>
+</head>
+<body>
+<div>
+    <h3>카테고리 ID는 자동으로 들어갑니다</h3>
+</div>
+<div>
+    <form id="addCategoryForm" method="post" action="/addCategory">
+        <input type="text" name="productCategoryName">
+        <button type="submit">카테고리 추가</button>
+    </form>
+</div>
+</body>
+</html>

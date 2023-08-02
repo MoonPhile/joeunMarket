@@ -18,7 +18,7 @@
       <!--        <p>상품 이미지2: <input type="file" name="image2">-->
       <!--        <p>상품 이미지3: <input type="file" name="image3">-->
       <!--        <p>상품 이미지4: <input type="file" name="image4">-->
-    <p>상품 카테고리:<select id="productCategoryId">
+    <p>상품 카테고리:<select name="productCategoryId">
       <option th:each="category : ${categoryList}" th:value="${category.getProductCategoryId()}" th:utext="${category.getProductCategoryName()}"></option>
     </select>
       <button type="submit">등록하기</button>

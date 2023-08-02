@@ -9,11 +9,10 @@
                 #{productCondition},
                 #{productPrice},
                 #{productDescription},
-                #{img1},
-                #{img2},
-                #{img3},
-                #{img4},
-                #{productCategoryId})
+                <foreach collection="imgs" item="img" separator=",">
+                    #{img}
+                </foreach>
+                ,#{productCategoryId})
     </insert>
 
     <insert id="addCategory" parameterType="com.joeun.dto.ProductCategoryDto">
