@@ -41,16 +41,16 @@
                 <tbody>
                     <!-- Use th:each to iterate over the list of items -->
                     <tr th:each="item : ${items}">
-                        <td th:text="${item?.product_id}"></td>
-                        <td th:text="${item?.product_name}"></td>
-                        <td th:text="${item?.product_condition}"></td>
-                        <td th:text="${item?.product_price}"></td>
-                        <td th:text="${item?.product_description}"></td>
+                        <td th:text="${item?.productId}"></td>
+                        <td th:text="${item?.productName}"></td>
+                        <td th:text="${item?.productCondition}"></td>
+                        <td th:text="${item?.productPrice}"></td>
+                        <td th:text="${item?.productDescription}"></td>
                         <td><img th:src="${item?.img1}" width="100" height="100" alt="Item Image 1"></td>
                         <td><img th:src="${item?.img2}" width="100" height="100" alt="Item Image 2"></td>
                         <td><img th:src="${item?.img3}" width="100" height="100" alt="Item Image 3"></td>
                         <td><img th:src="${item?.img4}" width="100" height="100" alt="Item Image 4"></td>
-                        <td th:text="${item?.product_category_id}"></td>
+                        <td th:text="${item?.productCategoryId}"></td>
                     </tr>
                 </tbody>
             </table>
