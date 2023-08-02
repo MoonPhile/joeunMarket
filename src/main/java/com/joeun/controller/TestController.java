@@ -1,20 +1,25 @@
 package com.joeun.controller;
 
-import com.joeun.dto.TestResponse;
-import com.joeun.service.TestService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.joeun.dto.Item;
+import com.joeun.dto.TestResponse;
+import com.joeun.mapper.ItemMapper;
+import com.joeun.service.TestService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class TestController {
 
     private final TestService testService;
-
+    private final ItemMapper itemMapper;
     @GetMapping("/test.do")
     String test(){
         return "test/test";
@@ -26,4 +31,19 @@ public class TestController {
         model.addAttribute("list",list);
         return "test/testView";
     }
+
+    @GetMapping("/hello")
+    @ResponseBody
+    public String hello() {
+        return "hiyoaaaa";
+    }
+
+    @GetMapping("/itemlist.do")
+    String itemlist(Model model){
+    	List<Item> itemList = itemMapper.findAll();
+        model.addAttribute("items", itemList);
+        return "test/itemList";
+    }
+
+
 }
