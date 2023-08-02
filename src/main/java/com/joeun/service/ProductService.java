@@ -34,8 +34,9 @@ public class ProductService {
     }
 
     public String uploadFile(MultipartFile file){
+        System.out.println("이미지 업로드");
         if (file.isEmpty()){
-            return null;
+            return "NULL";
         }
         String origName = file.getOriginalFilename();
         String savedPath = "C:/images/" + origName;

@@ -38,8 +38,6 @@ public class TestController {
         return "hiyoaaaa";
     }
 
-<<<<<<< HEAD
-=======
     @GetMapping("/itemlist.do")
     String itemlist(Model model){
     	List<Item> itemList = itemMapper.findAll();
@@ -47,6 +45,4 @@ public class TestController {
         return "test/itemList";
     }
 
-
->>>>>>> itemlist
 }
