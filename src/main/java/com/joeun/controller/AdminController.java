@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -41,11 +42,11 @@ public class AdminController {
     }
 
     @PostMapping("/adminMailSend")
-    public String mainTest(final EmailMessage message){
-        System.out.println(message.getTo());
-        System.out.println(message.getSubject());
-        System.out.println(message.getMessage());
-//        mailService.sendMailReject(message);
+    public String mailSend(@RequestParam String toList, final EmailMessage message){
+        System.out.println("컨트롤러 : 메일 보내기");
+        System.out.println(toList);
+        String[] toArray = toList.split(",");
+        mailService.sendMailReject(toArray,message);
         return "/admin/adminMain";
     }
 }

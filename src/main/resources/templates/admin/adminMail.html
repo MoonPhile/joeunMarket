@@ -2,21 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>AdminMail</title>
 </head>
 <body>
 메일 보내기
 <div>
-    <form id="mailForm" method="post" action="/adminMailSend">
-        <select id="to" name="to" multiple>
-            <option th:each="user :${users}" th:value="${user.getUserEmail()}" th:utext="${user.getUserEmail()}"></option>
-        </select>
-        <input type="text" id="subject" name="subject" />
-        <input type="text" id="message" name="message"/>
-        <button type="submit" id="sendMail">메일 전송</button>
-    </form>
+    <select id="toList" name="toList" multiple>
+        <option th:each="user :${users}" th:value="${user.getUserEmail()}" th:utext="${user.getUserEmail()}"></option>
+    </select>
+    <textarea id="subject" placeholder="제목을 입력해주세요" ></textarea>
+    <textarea id="message" placeholder="내용을 입력해주세요" ></textarea>
+    <button onclick="send()">이메일 보내기</button>
 </div>
 
 
+<script>
+    function send(){
+        const selectedEmails = Array.from(document.querySelectorAll('#toList option:checked'))
+            .map(option => option.value).join(',');
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
+        console.log(selectedEmails);
+        console.log(subject);
+        console.log(message);
+
+        $.ajax({
+            url:"/adminMailSend",
+            type:"POST",
+            data: {
+                toList : selectedEmails,
+                subject : subject,
+                message : message
+            },
+            success:function (){
+                alert("메일 전송에 성공했습니다")
+            },
+            error:function (){
+                alert("비동기 통신 실패")
+            }
+
+            }
+        )
+    }
+</script>
 </body>
 </html>

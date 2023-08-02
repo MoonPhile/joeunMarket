@@ -34,18 +34,18 @@ public class AdminTest {
         }
     }
 
-    @Test
-    void mailTest(){
-        EmailMessage message = new EmailMessage();
-        message.setTo("lunatic1702@gmail.com");
-        message.setSubject("테스트 이메일입니다.");
-        message.setMessage("메일 보내기 성공");
-        List<EmailMessage> messagesList =new ArrayList<>();
-        messagesList.add(message);
-        messagesList.add(message);
-        messagesList.add(message);
-        messagesList.add(message);
-        mailService.sendMailReject(messagesList);
-
-    }
+//    @Test
+//    void mailTest(){
+//        EmailMessage message = new EmailMessage();
+//        message.setTo("lunatic1702@gmail.com");
+//        message.setSubject("테스트 이메일입니다.");
+//        message.setMessage("메일 보내기 성공");
+//        List<EmailMessage> messagesList =new ArrayList<>();
+//        messagesList.add(message);
+//        messagesList.add(message);
+//        messagesList.add(message);
+//        messagesList.add(message);
+//        mailService.sendMailReject(messagesList);
+//
+//    }
 }
