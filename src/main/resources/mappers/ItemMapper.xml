@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joeun.mapper.ItemMapper">
+    <insert id="save" parameterType="com.joeun.dto.Item">
+        insert into item (product_id, product_name, product_condition, product_price, product_description, img1, img2, img3, img4, product_category_id)
+        values(
+               #{product_id},
+               #{product_name},
+               #{img1}
+              )
+    </insert>
+
+    <select id="findById" parameterType="long" resultType="com.joeun.dto.Item">
+        select *
+        from product
+        where id = #{product_id}
+    </select>
+
+    <update id="update" parameterType="com.joeun.dto.Item">
+        update product
+        set name = #{product_name},
+        img1 = #{img1}
+        where product_id = #{product_id}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        delete from product
+        where product_id = #{product_id}
+    </delete>
+<select id="findAll" resultType="com.joeun.dto.Item" fetchSize="100">
+    select *
+    from product
+</select>
+</mapper>
