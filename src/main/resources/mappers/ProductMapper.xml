@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joeun.mapper.ProductMapper">
+    <insert id="addProduct" parameterType="com.joeun.dto.ProductDto">
+        insert into product
+        values (#{productId},
+                #{productName},
+                #{productCondition},
+                #{productPrice},
+                #{productDescription},
+                #{img1},
+                #{img2},
+                #{img3},
+                #{img4},
+                #{productCategoryId})
+    </insert>
+
+    <insert id="addCategory" parameterType="com.joeun.dto.ProductCategoryDto">
+        insert into product_category(product_category_name)
+            value (
+            #{productCategoryName}
+            )
+    </insert>
+</mapper>
