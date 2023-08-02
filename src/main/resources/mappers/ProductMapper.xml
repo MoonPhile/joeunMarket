@@ -25,4 +25,10 @@
     <select id="findAllCategory" resultType="com.joeun.dto.ProductCategoryDto">
         select * from product_category
     </select>
+    
+    <select id="findAll" resultType="com.joeun.dto.Item"
+		fetchSize="100">
+		select *
+		from product
+	</select>
 </mapper>

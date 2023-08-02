@@ -1,19 +1,17 @@
 package com.joeun.service;
 
-import com.joeun.dto.ProductCategoryDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.mapper.ProductMapper;
-import lombok.RequiredArgsConstructor;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import com.joeun.dto.ProductCategoryDto;
+import com.joeun.dto.ProductDto;
+import com.joeun.mapper.ProductMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +51,12 @@ public class ProductService {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
+        
 
     }
+    
+    public List<ProductDto> findAll() {
+        return productMapper.findAll();
+    }
+    
 }

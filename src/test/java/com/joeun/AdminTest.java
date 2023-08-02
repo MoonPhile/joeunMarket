@@ -1,15 +1,14 @@
 package com.joeun;
 
-import com.joeun.dto.EmailMessage;
-import com.joeun.dto.UserResponse;
-import com.joeun.mapper.AdminMapper;
-import com.joeun.service.MailService;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.joeun.dto.UserResponse;
+import com.joeun.mapper.AdminMapper;
+import com.joeun.service.MailService;
 
 @SpringBootTest
 public class AdminTest {

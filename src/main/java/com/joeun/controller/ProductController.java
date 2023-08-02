@@ -1,9 +1,7 @@
 package com.joeun.controller;
 
-import com.joeun.dto.ProductCategoryDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.service.ProductService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import com.joeun.dto.ProductCategoryDto;
+import com.joeun.dto.ProductDto;
+import com.joeun.mapper.ProductMapper;
+import com.joeun.service.ProductService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
+    private final ProductMapper productMapper;
+    
     @GetMapping("/addProduct")
     public String goToAddProduct(Model model) {
         List<ProductCategoryDto> categoryList = productService.findAllCategory();
@@ -52,5 +56,12 @@ public class ProductController {
 
 //        productService.addProduct(product);
         return "/admin/addProduct";
+    }
+    
+    @GetMapping("/itemlist.do")
+    String itemlist(Model model){
+    	List<ProductDto> itemList = productMapper.findAll();
+        model.addAttribute("items", itemList);
+        return "test/itemList";
     }
 }
