@@ -38,8 +38,8 @@ public class UserController {
         }
 
         try{
-            userService.create(userCreateForm.getId(),userCreateForm.getPassword1(), userCreateForm.getEmail(),
-                    userCreateForm.getPhone(), userCreateForm.getAddress());
+            userService.create(userCreateForm.getId(),userCreateForm.getPassword1(),
+                    userCreateForm.getAddress(),userCreateForm.getPhone(), userCreateForm.getEmail());
         }catch (DataIntegrityViolationException e){
             e.printStackTrace();
             bindingResult.reject("signupFailed","이미 등록된 사용자 입니다.");
