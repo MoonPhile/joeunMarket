@@ -1,6 +1,8 @@
-package dao;
-import dao.PageVO;
-public class SearchVO extends PageVO{
+package com.joeun.search;
+
+import com.joeun.paging.PageVO;
+
+public class SearchVO extends PageVO {
 
     private String keyword;
     private String condition;
@@ -30,4 +32,3 @@ public class SearchVO extends PageVO{
 
 
 }
-

@@ -2,13 +2,12 @@ package com.joeun.service;
 
 import java.util.List;
 
+import com.joeun.search.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joeun.mapper.IBoardMapper;
-import dao.PageVO;
-import dao.SearchVO;
-import dao.BoardVO;
+import com.joeun.dao.IBoardMapper;
+import com.joeun.vo.BoardVO;
 
 @Service
 public class BoardService implements IBoardService{

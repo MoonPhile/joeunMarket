@@ -1,4 +1,4 @@
-package dao;
+package com.joeun.vo;
 
 import java.util.Date;
 
@@ -12,6 +12,7 @@ public class BoardVO {
     private int viewCnt;
 
     public int getboardNum() {
+
         return boardNum;
     }
 

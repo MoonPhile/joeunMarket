@@ -1,4 +1,4 @@
-package dao;
+package com.joeun.paging;
 
 public class PageCreator {
 

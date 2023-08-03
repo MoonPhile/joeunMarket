@@ -1,8 +1,7 @@
 package com.joeun.service;
 
-import dao.BoardVO;
-import dao.SearchVO;
-import dao.PageVO;
+import com.joeun.search.SearchVO;
+import com.joeun.vo.BoardVO;
 
 import java.util.List;
 

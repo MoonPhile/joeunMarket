@@ -1,19 +1,27 @@
 package com.joeun.controller;
 
+import com.joeun.search.SearchVO;
 import com.joeun.service.BoardService;
-import dao.BoardVO;
-import dao.PageCreator;
-import dao.SearchVO;
+import com.joeun.vo.BoardVO;
+import com.joeun.paging.PageCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import java.util.List;
 
-@Controller
-public class BoardController {
+    @Controller
+    public class BoardController {
+
+        @GetMapping("/board")
+        public String goToBoard(Model model){
+
+           model.addAttribute("vo","게시판 테스트입니다");
+           return "list";
+        }
     @Autowired
     BoardService service;
 

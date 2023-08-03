@@ -1,14 +1,12 @@
-package com.joeun.mapper;
+package com.joeun.dao;
 
+import com.joeun.search.SearchVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 
-
-import dao.PageVO;
-import dao.SearchVO;
-import dao.BoardVO;
+import com.joeun.vo.BoardVO;
 
 @Mapper
 public interface IBoardMapper {
