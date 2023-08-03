@@ -1,73 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <title>상품등록을 해봐요</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>상품등록을 해봐요</title>
 </head>
 <body>
 <div>
-  <form id="addProductForm" method="post" action="/addProduct" enctype="multipart/form-data">
-    <p>상품 ID: <input type="text" name="productId">
-    <p>상품 이름: <input type="text" name="productName">
-    <p>상품 상태: <input type="text" name="productCondition">
-    <p>상품 가격: <input type="text" name="productPrice">
-    <p>상품 설명:</p><textarea name="productDescription"></textarea>
-    <p>상품 이미지: <input type="file" name="image" multiple="multiple">
-      <!--        <p>상품 이미지2: <input type="file" name="image2">-->
-      <!--        <p>상품 이미지3: <input type="file" name="image3">-->
-      <!--        <p>상품 이미지4: <input type="file" name="image4">-->
-    <p>상품 카테고리:<select id="productCategoryId">
-      <option th:each="category : ${categoryList}" th:value="${category.getProductCategoryId()}" th:utext="${category.getProductCategoryName()}"></option>
-    </select>
-      <button type="submit">등록하기</button>
-  </form>
+    <form id="addProductForm" method="post" action="/addProduct" enctype="multipart/form-data">
+        <p>상품 ID: <input type="text" name="productId">
+        <p>상품 이름: <input type="text" name="productName">
+        <p>상품 상태: <input type="text" name="productCondition">
+        <p>상품 가격: <input type="text" name="productPrice">
+        <p>상품 설명:</p><textarea name="productDescription"></textarea>
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>이미지는 최대 4개까지 설정 가능합니다.
+            <!--        <p>상품 이미지2: <input type="file" name="image2">-->
+            <!--        <p>상품 이미지3: <input type="file" name="image3">-->
+            <!--        <p>상품 이미지4: <input type="file" name="image4">-->
+        <p>상품 카테고리:<select name="productCategoryId">
+            <option th:each="category : ${categoryList}" th:value="${category.productCategoryId}"
+                    th:utext="${category.productCategoryName}"></option>
+        </select>
+            <p><button type="button" onclick="check()">등록하기</button>
+    </form>
 </div>
 
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        $('#addProductForm').submit(function(e) {-->
-<!--            e.preventDefault();-->
-<!--            var formData = new FormData(this);-->
+<script>
+    function check() {
+        const imageInputs = document.querySelectorAll('.image-input');
+        const imageTypes = ['image/jpeg', 'image/png', 'image/gif']; // 허용되는 이미지 타입
 
-<!--            // 이미지 파일 데이터와 텍스트 데이터를 분리하여 서버로 전송-->
-<!--            var imageFile1 = formData.get('img1');-->
-<!--            var imageFile2 = formData.get('img2');-->
-<!--            var imageFile3 = formData.get('img3');-->
-<!--            var imageFile4 = formData.get('img4');-->
-<!--            var productId = document.getElementById("productId").value;-->
-<!--            var productName = document.getElementById('productName').value;-->
-<!--            var productCondition = document.getElementById('productCondition').value;-->
-<!--            var productPrice = document.getElementById('productPrice').value;-->
-<!--            var productDescription =document.getElementById('productDescription').value;-->
-<!--            var productCategoryId = document.getElementById('productCategoryId').value;-->
+        imageInputs.forEach(input => {
+            const files = input.files;
+            if (files.length > 0) {
+                const file = files[0];
+                if (imageTypes.includes(file.type)) {
+                    console.log("Image selected!")
+                } else {
+                    alert("이미지 파일만 업로드 가능합니다.")
+                    return;
+                }
+            } else {
+                console.log('No file selected');
+                return;
+            }
+        });
+        console.log("submit^^")
+        // document.getElementById('addProductForm').submit();
 
-<!--            $.ajax({-->
-<!--                url: '/addProduct', // 데이터 전송을 처리하는 서버 엔드포인트-->
-<!--                type: 'POST',-->
-<!--                data: {-->
-<!--                    imageFile1: imageFile1,-->
-<!--                    imageFile2: imageFile2,-->
-<!--                    imageFile3: imageFile3,-->
-<!--                    imageFile4: imageFile4,-->
-<!--                    productId : productId,-->
-<!--                    productName : productName,-->
-<!--                    productCondition : productCondition,-->
-<!--                    productPrice : productPrice,-->
-<!--                    productDescription: productDescription,-->
-<!--                    productCategoryId : productCategoryId-->
-<!--                     }, // 데이터를 객체로 전달-->
-<!--                success: function(data) {-->
-<!--                    console.log('전송 성공:', data);-->
-<!--                },-->
-<!--                error: function() {-->
-<!--                    console.error('전송 실패');-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-
-<!--</script>-->
+    }
+</script>
 </body>
 </html>

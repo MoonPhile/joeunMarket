@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>index</title>
-</head>
-<body>
-<h3>Index pages</h3>
-<a th:href="@{/admin.do}">어드민 페이지</a>
-</body>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <h3>Index pages</h3>
+    <a th:href="@{/admin.do}">어드민 페이지</a>
+</div>
 </html>

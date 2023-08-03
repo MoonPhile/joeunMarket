@@ -1,7 +1,10 @@
 package com.joeun.controller;
 
-import java.util.List;
-
+import com.joeun.dto.EmailMessage;
+import com.joeun.dto.User;
+import com.joeun.service.AdminService;
+import com.joeun.service.MailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,14 +34,14 @@ public class AdminController {
     }
     @GetMapping("/adminGetUserList")
     @ResponseBody
-    public List<UserResponse> adminGetUserList(){
+    public List<User> adminGetUserList(){
         System.out.println("회원정보 불러오기 실행");
         return adminService.findAllUser();
     }
 
     @GetMapping("/adminMail.do")
     public String goToMailForm(Model model){
-        List<UserResponse> list = adminService.findAllUser();
+        List<User> list = adminService.findAllUser();
         model.addAttribute("users",list);
         return "/admin/adminMail";
     }
