@@ -2,7 +2,7 @@ package com.joeun.form;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
+//import org.hibernate.annotations.BatchSize;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -21,7 +21,6 @@ public class UserCreateForm {
 
     @NotEmpty(message = "비밀번호 확인은 필수항목입니다.")
     private String password2;
-
 
     @NotEmpty(message = "번호는 필수항목입니다.")
     private String phone;

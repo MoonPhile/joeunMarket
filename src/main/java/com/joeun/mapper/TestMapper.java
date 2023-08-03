@@ -1,10 +1,11 @@
 package com.joeun.mapper;
 
-import com.joeun.dto.TestRequest;
-import com.joeun.dto.TestResponse;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+import com.joeun.dto.TestRequest;
+import com.joeun.dto.TestResponse;
 
 @Mapper
 public interface TestMapper {

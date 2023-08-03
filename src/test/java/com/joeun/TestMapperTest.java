@@ -1,13 +1,14 @@
 package com.joeun;
 
-import com.joeun.dto.TestRequest;
-import com.joeun.dto.TestResponse;
-import com.joeun.mapper.TestMapper;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import com.joeun.dto.TestRequest;
+import com.joeun.dto.TestResponse;
+import com.joeun.mapper.TestMapper;
 
 @SpringBootTest
 public class TestMapperTest {
@@ -30,7 +31,7 @@ public class TestMapperTest {
 
     @Test
     void update(){
-        
+
         TestRequest testRequest = new TestRequest();
         TestResponse testResponse = testMApper.findById(1L);
         System.out.println("변경 전 : "+testResponse.getTitle());
@@ -39,7 +40,7 @@ public class TestMapperTest {
         testMApper.update(testRequest);
         testResponse = testMApper.findById(1L);
         System.out.println("변경 후 : "+testResponse.getTitle());
-        
+
     }
 
     @Test
