@@ -59,8 +59,13 @@ public class ProductController {
         }
         tempArray = originPath.split(" ");
 
-        for(int i=0;i<tempArray.length;i++){
-            filePath[i] = tempArray[i];
+        for(int i=0;i<filePath.length;i++){
+            if(!tempArray[i].isEmpty()){
+                filePath[i] = tempArray[i];
+            }else {
+                filePath[i] = null;
+            }
+
         }
         product.setImg1(filePath[0]);
         product.setImg2(filePath[1]);
