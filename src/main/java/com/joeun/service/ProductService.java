@@ -58,7 +58,7 @@ public class ProductService {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
+	}
 
 	public int countAllProducts() {
 		return productMapper.countAllProducts();
