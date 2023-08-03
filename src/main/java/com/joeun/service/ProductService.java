@@ -29,6 +29,10 @@ public class ProductService {
         productMapper.addCategory(category);
     }
 
+    public List<ProductDto> findAllProduct(){
+        return productMapper.findAllProduct();
+    }
+
     public List<ProductCategoryDto> findAllCategory(){
         return productMapper.findAllCategory();
     }

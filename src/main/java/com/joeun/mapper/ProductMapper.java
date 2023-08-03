@@ -17,6 +17,8 @@ public interface ProductMapper {
 
     void addCategory(ProductCategoryDto category);
 
+    List<ProductDto> findAllProduct();
+
     List<ProductCategoryDto> findAllCategory();
 
 }

@@ -21,7 +21,11 @@
             #{productCategoryName}
             )
     </insert>
+    <select id="findAllProduct" resultType="com.joeun.dto.ProductDto">
+        select * from product
+    </select>
+
     <select id="findAllCategory" resultType="com.joeun.dto.ProductCategoryDto">
-        select * from product_category
+        select * from product
     </select>
 </mapper>

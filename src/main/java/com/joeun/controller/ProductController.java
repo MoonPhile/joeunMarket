@@ -32,10 +32,17 @@ public class ProductController {
         return "/admin/addCategory";
     }
 
+    @GetMapping("/productList.do")
+    public String goToProductList(Model model) {
+        List<ProductDto> productList = productService.findAllProduct();
+        model.addAttribute("products", productList);
+        return "/admin/adminProductList";
+    }
+
     @PostMapping("/addCategory")
     public String addCategory(final ProductCategoryDto categoryDto) {
         productService.addCategory(categoryDto);
-        return "/admin/adminMain";
+        return "redirect:/admin.do";
     }
 
     @PostMapping("/addProduct")
