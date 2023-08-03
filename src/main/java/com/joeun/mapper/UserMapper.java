@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface UserMapper {
     int insertUser(User user);
 
-    Optional<User> selectById(String id);
+    Optional<User> selectById(String userUseId);
 
 }

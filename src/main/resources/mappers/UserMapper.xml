@@ -5,7 +5,9 @@
         insert into user(user_use_id, user_pw, user_address, user_phone, user_email) values (#{userUseId}, #{userPw}, #{userAddress}, #{userPhone}, #{userEmail});
     </insert>
     <select id="selectById" resultType="com.joeun.dto.User">
-        select * from user where user_use_id =#{userUseId};
+        <if test="userUseId != null">
+            select * from user where user_use_id = #{userUseId};
+        </if>
     </select>
 <!--    <update id="updateUser" parameterType="User">-->
 <!--        update user set password=#{password}, name=#{name}, birth=#{birth}, gender=#{gender},-->

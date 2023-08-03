@@ -27,13 +27,13 @@ public class UserService {
         this.userMapper.insertUser(user);
         return user;
     }
-    public User getUser(String id){
-        Optional<User> user = this.userMapper.selectById(id);
-        if(user.isPresent()){
-            return user.get();
-        }else{
-            throw new DataNotFoundException("user not found");
-        }
-    }
+//    public User getUser(String id){
+//        Optional<User> user = this.userMapper.selectById(id);
+//        if(user.isPresent()){
+//            return user.get();
+//        }else{
+//            throw new DataNotFoundException("user not found");
+//        }
+//    }
 }
 
