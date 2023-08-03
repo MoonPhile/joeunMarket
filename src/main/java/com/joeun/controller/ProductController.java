@@ -79,23 +79,43 @@ public class ProductController {
     @GetMapping("/productlist")
     public String showProductList(@RequestParam(defaultValue = "1") int page,
                                   @RequestParam(defaultValue = "10") int size,
+                                  @RequestParam(required = false) String keyword, // 검색어 파라미터 추가
                                   Model model) {
-        int totalCount = productService.countAllProducts();
-        int totalPages = (int) Math.ceil((double) totalCount / size);
+        int totalCount;
+        int totalPages;
+        List<ProductDto> products;
 
-        if (page < 1) {
-            page = 1;
-        } else if (page > totalPages) {
-            page = totalPages;
+        // 검색어가 있는 경우와 없는 경우를 구분하여 처리
+        if (keyword != null && !keyword.isEmpty()) {
+            totalCount = productService.countProductsByKeyword(keyword);
+            totalPages = (int) Math.ceil((double) totalCount / size);
+
+            if (page < 1) {
+                page = 1;
+            } else if (page > totalPages) {
+                page = totalPages;
+            }
+
+            int offset = (page - 1) * size;
+            products = productService.findProductsByKeywordPaging(offset, size,keyword);
+        } else {
+            totalCount = productService.countAllProducts();
+            totalPages = (int) Math.ceil((double) totalCount / size);
+
+            if (page < 1) {
+                page = 1;
+            } else if (page > totalPages) {
+                page = totalPages;
+            }
+
+            int offset = (page - 1) * size;
+            products = productService.findAllProductsPaging(offset, size);
         }
-
-        int offset = (page - 1) * size;
-
-        List<ProductDto> products = productService.findAllProductsPaging(offset, size);
 
         model.addAttribute("items", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
+        model.addAttribute("keyword", keyword); // 검색어를 다시 뷰로 전달
 
         return "productlist";
     }
