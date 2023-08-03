@@ -1,5 +1,6 @@
 package com.joeun.controller;
 
+import com.joeun.dto.User;
 import com.joeun.form.UserCreateForm;
 import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,6 @@ public class UserController {
         return "login_form";
     }
 
-//    @GetMapping("/login")
-//    public String signup(UserCreateForm userCreateForm){ return "signup_form";}
 
     @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
@@ -38,8 +37,7 @@ public class UserController {
         }
 
         try{
-            userService.create(userCreateForm.getId(),userCreateForm.getPassword1(),
-                    userCreateForm.getAddress(),userCreateForm.getPhone(), userCreateForm.getEmail());
+            userService.create(userCreateForm);
         }catch (DataIntegrityViolationException e){
             e.printStackTrace();
             bindingResult.reject("signupFailed","이미 등록된 사용자 입니다.");
