@@ -65,18 +65,20 @@ public class ProductController {
         int totalCount = productService.countAllProducts();
         int totalPages = (int) Math.ceil((double) totalCount / size);
 
-        int offset = (page - 1) * size; // offset 계산
-
         if (page < 1) {
             page = 1;
         } else if (page > totalPages) {
             page = totalPages;
         }
 
-        model.addAttribute("items", productService.findAllProductsPaging(offset, size));
+        int offset = (page - 1) * size;
+
+        List<ProductDto> products = productService.findAllProductsPaging(offset, size);
+
+        model.addAttribute("items", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
 
-        return "test/productlist";
+        return "productlist";
     }
 }
