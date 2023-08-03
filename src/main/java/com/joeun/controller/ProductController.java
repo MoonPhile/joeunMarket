@@ -76,3 +76,26 @@ public class ProductController {
         return "/admin/adminMain";
     }
 }
+    private final ProductMapper productMapper;
+    @GetMapping("/productlist")
+    public String showProductList(@RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "10") int size,
+                                  Model model) {
+        int totalCount = productService.countAllProducts();
+        int totalPages = (int) Math.ceil((double) totalCount / size);
+
+        if (page < 1) {
+            page = 1;
+        } else if (page > totalPages) {
+            page = totalPages;
+        }
+
+        int offset = (page - 1) * size;
+
+        List<ProductDto> products = productService.findAllProductsPaging(offset, size);
+
+        model.addAttribute("items", products);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        return "productlist";
