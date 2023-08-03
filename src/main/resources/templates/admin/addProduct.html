@@ -19,14 +19,12 @@
         <p>상품 이미지: <input type="file" name="imgs" class="image-input">
         <p>상품 이미지: <input type="file" name="imgs" class="image-input">
         <p>이미지는 최대 4개까지 설정 가능합니다.
-            <!--        <p>상품 이미지2: <input type="file" name="image2">-->
-            <!--        <p>상품 이미지3: <input type="file" name="image3">-->
-            <!--        <p>상품 이미지4: <input type="file" name="image4">-->
         <p>상품 카테고리:<select name="productCategoryId">
             <option th:each="category : ${categoryList}" th:value="${category.productCategoryId}"
                     th:utext="${category.productCategoryName}"></option>
         </select>
-            <p><button type="button" onclick="check()">등록하기</button>
+        <p>
+            <button type="button" onclick="check()">등록하기</button>
     </form>
 </div>
 
@@ -35,23 +33,61 @@
         const imageInputs = document.querySelectorAll('.image-input');
         const imageTypes = ['image/jpeg', 'image/png', 'image/gif']; // 허용되는 이미지 타입
 
-        imageInputs.forEach(input => {
-            const files = input.files;
+        var productId = document.querySelector("input[name='productId']").value;
+        var productName = document.querySelector("input[name='productName']").value;
+        var productCondition = document.querySelector("input[name='productCondition']").value;
+        var productPrice = document.querySelector("input[name='productPrice']").value;
+        var productDescription = document.querySelector("textarea[name='productDescription']").value;
+
+        var numberPattern = /^[0-9]+$/;
+        var stringPattern = /^[a-zA-Z가-힣!@#$%^&*()-_=+';:,.<>?/\\"[\]{}\|`~]+$/;
+
+        var hasImage;
+        for (var i = 0; i < imageInputs.length; i++) {
+            var input = imageInputs[i];
+            var files = input.files;
+
             if (files.length > 0) {
-                const file = files[0];
+                var file = files[0];
                 if (imageTypes.includes(file.type)) {
-                    console.log("Image selected!")
+                    console.log("Image selected!");
+                    hasImage = true;
                 } else {
-                    alert("이미지 파일만 업로드 가능합니다.")
+                    alert("이미지 파일만 업로드 가능합니다.");
                     return;
                 }
-            } else {
-                console.log('No file selected');
-                return;
             }
-        });
+        }
+        if (!numberPattern.test(productId)) {
+            alert("상품 ID는 숫자만 입력 가능합니다.");
+            return;
+        }
+
+        if (!stringPattern.test(productName)) {
+            alert("상품 이름은 문자열만 입력 가능합니다.");
+            return;
+        }
+
+        if (!stringPattern.test(productCondition)) {
+            alert("상품 상태는 문자열만 입력 가능합니다.");
+            return;
+
+        }if (!stringPattern.test(productDescription)) {
+            alert("상품 설명은 문자열만 입력 가능합니다.");
+            return;
+        }
+
+        if (!numberPattern.test(productPrice)) {
+            alert("상품 가격은 숫자만 입력 가능합니다.");
+            return;
+        }
+
+        if (!hasImage) {
+            alert("파일을 선택해주세요")
+            return;
+        }
         console.log("submit^^")
-        // document.getElementById('addProductForm').submit();
+        document.getElementById('addProductForm').submit();
 
     }
 </script>
