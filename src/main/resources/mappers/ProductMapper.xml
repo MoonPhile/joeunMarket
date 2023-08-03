@@ -35,35 +35,20 @@
         from product_category
     </select>
 
-<!--    <resultMap id="productResultMap" type="com.joeun.dto.ProductDto">-->
-<!--        <id property="productId" column="product_id"/>-->
-<!--        <result property="productName" column="product_name"/>-->
-<!--        <result property="productCondition" column="product_condition"/>-->
-<!--        <result property="productPrice" column="product_price"/>-->
-<!--        <result property="productDescription" column="product_description"/>-->
-<!--        <result property="productCategoryId" column="product_category_id"/>-->
-<!--        <collection property="imgs" ofType="com.joeun.dto.ProductDto">-->
-<!--            <result column="img1"/>-->
-<!--            <result column="img2"/>-->
-<!--            <result column="img3"/>-->
-<!--            <result column="img4"/>-->
-<!--        </collection>-->
-<!--    </resultMap>-->
-
-<!--    <select id="findAllProductsPaging" resultMap="productResultMap">-->
-<!--        SELECT product_id,-->
-<!--               product_name,-->
-<!--               product_condition,-->
-<!--               product_price,-->
-<!--               product_description,-->
-<!--               product_category_id,-->
-<!--               img1,-->
-<!--               img2,-->
-<!--               img3,-->
-<!--               img4-->
-<!--        FROM product-->
-<!--        LIMIT #{param2} OFFSET #{param1}-->
-<!--    </select>-->
+    <select id="findAllProductsPaging">
+        SELECT product_id,
+               product_name,
+               product_condition,
+               product_price,
+               product_description,
+               product_category_id,
+               img1,
+               img2,
+               img3,
+               img4
+        FROM product
+        LIMIT #{param2} OFFSET #{param1}
+    </select>
 
     <select id="countAllProducts" resultType="int">
         SELECT COUNT(*)
