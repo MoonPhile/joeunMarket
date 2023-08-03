@@ -22,6 +22,8 @@ public interface ProductMapper {
 
 	List<ProductDto> findAll();
 
+	List<ProductDto> findAllProduct();
+	
 	List<ProductDto> findAllProductsPaging(@Param("offset") int offset, @Param("size") int size);
 
 	int getTotalCount();
