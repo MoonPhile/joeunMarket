@@ -27,7 +27,7 @@ public interface ProductMapper {
 	int getTotalCount();
 
 	int countAllProducts();
+	List<ProductDto> findAllProduct();
 
 }
 
-    List<ProductDto> findAllProduct();

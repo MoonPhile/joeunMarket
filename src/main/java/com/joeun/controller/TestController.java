@@ -31,18 +31,7 @@ public class TestController {
         return "test/testView";
     }
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "hiyoaaaa";
-    }
 
-    @GetMapping("/itemlist.do")
-    String itemlist(Model model){
-    	List<Item> itemList = itemMapper.findAll();
-        model.addAttribute("items", itemList);
-        return "test/itemList";
-    }
 
 
 }

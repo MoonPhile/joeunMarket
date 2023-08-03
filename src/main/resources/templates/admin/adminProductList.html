@@ -21,7 +21,18 @@
             <td>Img4</td>
             <td>ProductCategory</td>
         </tr>
-        <tr></tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productId}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productCondition}"></td>
+            <td th:text="${product.productPrice}"></td>
+            <td th:text="${product.productDescription}"></td>
+            <td th:text="${product?.imgs}"></td>
+            <td th:text="${product?.imgs}"></td>
+            <td th:text="${product?.imgs}"></td>
+            <td th:text="${product?.imgs}"></td>
+            <td th:text="${product.productCategoryId}"></td>
+        </tr>
     </table>
 </div>
 </body>

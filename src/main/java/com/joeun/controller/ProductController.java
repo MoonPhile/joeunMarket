@@ -2,6 +2,7 @@ package com.joeun.controller;
 
 import com.joeun.dto.ProductCategoryDto;
 import com.joeun.dto.ProductDto;
+import com.joeun.mapper.ProductMapper;
 import com.joeun.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductMapper productMapper;
 
     @GetMapping("/addProduct.do")
     public String goToAddProduct(Model model) {
@@ -46,37 +48,29 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@RequestParam("image") List<MultipartFile> images, ProductDto product) {
+    public String addProduct(@RequestParam("imgs") List<MultipartFile> imgs, ProductDto product) {
         System.out.println("상품 등록");
-//        System.out.println(product.getProductId());
-//        System.out.println(product.getProductName());
-//        System.out.println(product.getProductCondition());
-//        System.out.println(product.getProductPrice());
-//        System.out.println(product.getProductDescription());
-//        System.out.println(product.getProductCategoryId());
-
-//        List<String> filePath = new ArrayList<>();
         String originPath = "";
         String[] filePath = new String[4];
         String[] tempArray;
-        for (MultipartFile file : images) {
+        for (MultipartFile file : imgs) {
             String temp = productService.uploadFile(file);
             originPath += temp + " ";
         }
         tempArray = originPath.split(" ");
 
-        for (int i = 0; i < tempArray.length; i++) {
+        for(int i=0;i<tempArray.length;i++){
             filePath[i] = tempArray[i];
         }
-
-//        product.setImgs(filePath);
-
-        product.setImgs(filePath);
+        product.setImg1(filePath[0]);
+        product.setImg2(filePath[1]);
+        product.setImg3(filePath[2]);
+        product.setImg4(filePath[3]);
         productService.addProduct(product);
         return "/admin/adminMain";
     }
-}
-    private final ProductMapper productMapper;
+
+
     @GetMapping("/productlist")
     public String showProductList(@RequestParam(defaultValue = "1") int page,
                                   @RequestParam(defaultValue = "10") int size,
@@ -99,3 +93,5 @@ public class ProductController {
         model.addAttribute("totalPages", totalPages);
 
         return "productlist";
+    }
+}
