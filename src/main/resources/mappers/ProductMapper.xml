@@ -2,17 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.joeun.mapper.ProductMapper">
+
     <insert id="addProduct" parameterType="com.joeun.dto.ProductDto">
-        insert into product (product_id, product_name, product_condition, product_price, product_description, img1, img2, img3, img4, product_category_id)
+        insert into product (product_id, product_name, product_condition, product_price, product_description, img1,
+        img2, img3, img4, product_category_id)
         values (#{productId},
-                #{productName},
-                #{productCondition},
-                #{productPrice},
-                #{productDescription},
-                <foreach collection="imgs" item="img" separator=",">
-                    #{img}
-                </foreach>
-                ,#{productCategoryId})
+        #{productName},
+        #{productCondition},
+        #{productPrice},
+        #{productDescription},
+        #{img1},
+        #{img2},
+        #{img3},
+        #{img4},
+        #{productCategoryId})
     </insert>
 
     <insert id="addCategory" parameterType="com.joeun.dto.ProductCategoryDto">
@@ -21,7 +24,50 @@
             #{productCategoryName}
             )
     </insert>
-    <select id="findAllCategory" resultType="com.joeun.dto.ProductCategoryDto">
-        select * from product_category
+
+    <select id="findAllProduct" resultType="com.joeun.dto.ProductDto">
+        SELECT * FROM product
     </select>
+
+
+    <select id="findAllCategory" resultType="com.joeun.dto.ProductCategoryDto">
+        select *
+        from product_category
+    </select>
+
+<!--    <resultMap id="productResultMap" type="com.joeun.dto.ProductDto">-->
+<!--        <id property="productId" column="product_id"/>-->
+<!--        <result property="productName" column="product_name"/>-->
+<!--        <result property="productCondition" column="product_condition"/>-->
+<!--        <result property="productPrice" column="product_price"/>-->
+<!--        <result property="productDescription" column="product_description"/>-->
+<!--        <result property="productCategoryId" column="product_category_id"/>-->
+<!--        <collection property="imgs" ofType="com.joeun.dto.ProductDto">-->
+<!--            <result column="img1"/>-->
+<!--            <result column="img2"/>-->
+<!--            <result column="img3"/>-->
+<!--            <result column="img4"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+<!--    <select id="findAllProductsPaging" resultMap="productResultMap">-->
+<!--        SELECT product_id,-->
+<!--               product_name,-->
+<!--               product_condition,-->
+<!--               product_price,-->
+<!--               product_description,-->
+<!--               product_category_id,-->
+<!--               img1,-->
+<!--               img2,-->
+<!--               img3,-->
+<!--               img4-->
+<!--        FROM product-->
+<!--        LIMIT #{param2} OFFSET #{param1}-->
+<!--    </select>-->
+
+    <select id="countAllProducts" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+    </select>
+
 </mapper>

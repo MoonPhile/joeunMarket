@@ -1,9 +1,11 @@
 package com.joeun;
 
 import com.joeun.dto.EmailMessage;
+import com.joeun.dto.ProductDto;
 import com.joeun.dto.UserResponse;
 import com.joeun.mapper.AdminMapper;
 import com.joeun.service.MailService;
+import com.joeun.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +22,8 @@ public class AdminTest {
     @Autowired
     MailService mailService;
 
+    @Autowired
+    ProductService productService;
     @Test
     void findAllUser(){
         List<UserResponse> userResponses = adminMapper.findAllUser();
@@ -30,6 +34,18 @@ public class AdminTest {
             System.out.println("Address : "+user.getUserAddress());
             System.out.println("Email : "+user.getUserEmail());
             System.out.println("Phone : "+user.getUserPhone());
+            System.out.println();
+        }
+    }
+    @Test
+    void listTest(){
+        List<ProductDto> productList = productService.findAllProduct();
+        for(ProductDto product:productList){
+            System.out.println(product.getProductName());
+            System.out.println(product.getImg1());
+            System.out.println(product.getImg2());
+            System.out.println(product.getImg3());
+            System.out.println(product.getImg4());
             System.out.println();
         }
     }

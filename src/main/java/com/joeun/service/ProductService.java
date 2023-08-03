@@ -21,21 +21,25 @@ public class ProductService {
 
     private final ProductMapper productMapper;
 
-    public void addProduct(ProductDto product){
+    public void addProduct(ProductDto product) {
         productMapper.addProduct(product);
     }
 
-    public void addCategory(ProductCategoryDto category){
+    public void addCategory(ProductCategoryDto category) {
         productMapper.addCategory(category);
     }
 
-    public List<ProductCategoryDto> findAllCategory(){
+    public List<ProductDto> findAllProduct() {
+        return productMapper.findAllProduct();
+    }
+
+    public List<ProductCategoryDto> findAllCategory() {
         return productMapper.findAllCategory();
     }
 
-    public String uploadFile(MultipartFile file){
+    public String uploadFile(MultipartFile file) {
         System.out.println("이미지 업로드");
-        if (file.isEmpty()){
+        if (file.isEmpty()) {
             return "NULL";
         }
         String origName = file.getOriginalFilename();
@@ -56,5 +60,22 @@ public class ProductService {
 //        }
 
 
+    }
+
+    public int countAllProducts() {
+        return productMapper.countAllProducts();
+    }
+
+    public List<ProductDto> findAllProductsPaging(int offset, int size) {
+        return productMapper.findAllProductsPaging(offset, size);
+    }
+
+
+    public int getTotalProductCount() {
+        return productMapper.countAllProducts();
+    }
+
+    public List<ProductDto> findAll() {
+        return productMapper.findAll();
     }
 }
