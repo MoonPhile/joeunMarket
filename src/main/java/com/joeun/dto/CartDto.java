@@ -7,28 +7,29 @@ import lombok.Setter;
 @Setter
 public class CartDto {
 
+    //Cart 테이블
     private int cartId;
+    private int cartUserId;
+    private int cartProductId;
+    private int cartProductCnt;
 
-    private String userId;
 
-    private int productId;
 
-    private int productCnt;
 
-    //수정해야함!! 여기서부터 완전히!!!!
-    private String productNm;
+// cart 테이블과 조인하기 위해 변수값 장바구니 페이지에 뿌려주려고 추가함
+    private String productName;
     private int productPrice;
-    private double productDiscount;
 
-    public void initSaleTotal() {
-        this.salePrice = (int) (this.productPrice * (1-this.productDiscount));
-        this.totalPrice = this.salePrice*this.productCnt;
-    }
 
-    // 추가
-    private int salePrice;
-
-    private int totalPrice;
+//    public void initSaleTotal() {
+//        this.salePrice = (int) (this.productPrice * (1-this.productDiscount));
+//        this.totalPrice = this.salePrice*this.productCnt;
+//    }
+//
+//    // 추가
+//    private int salePrice;
+//
+//    private int totalPrice;
 
 
 }

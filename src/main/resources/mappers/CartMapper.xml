@@ -4,33 +4,34 @@
 <mapper namespace="com.joeun.mapper.CartMapper">
 
     <!-- 카트 추가 -->
-    <insert id="addCart" parameterType="com.joeun.dto.Cart">
-        insert into cart(cart_id, user_id, product_id, cart_cnt)
-        values(#{cart_id}, #{user_id}, #{product_id}, #{cart_cnt})
+    <insert id="addCart">
+        INSERT INTO cart(user_id, product_id, cart_cnt)
+        VALUES ( #{cartUserId},
+        #{cartProductId},
+        #{cartProductCnt})
     </insert>
-
 
     <!-- 카트 삭제 -->
     <delete id="deleteCart">
-        delete from cart where cart_id = #{cart_id}
+        delete from cart where cart_id = #{cartId}
     </delete>
 
     <!-- 카트 수량 수정 -->
     <update id="modifyCount">
-        update cart set cart_cnt=#{cart_cnt} where cart_id = #{cart_id}
+        update cart set cart_cnt=#{cartProductCnt} where cart_id = #{cartId}
     </update>
 
 
     <!-- 카트 목록 -->
-    <select id="getCart" resultType="com.joeun.dto.Cart">
-        select a.cart_id, a.user_id, a.product_id, a.cart_cnt, b.productNm, b.productPrice, b.productDiscount
-        from cart a left outer join product b on a.product_id = b.product_id
-        where userId = #{userId}
+    <select id="getCart" resultType="com.joeun.dto.CartDto">
+        SELECT a.cart_id, a.user_id, a.product_id, a.cart_cnt, b.product_name, b.product_price
+        FROM cart a LEFT OUTER JOIN product b ON a.product_id = b.product_id
+        where user_id = #{cartUserId}
     </select>
 
     <!-- 카트 확인 -->
-    <select id="checkCart" resultType="com.joeun.dto.Cart">
+    <select id="checkCart" resultType="com.joeun.dto.CartDto">
         select * from cart
-        where user_id = #{user_id} and product_id = #{product_id}
+        where user_id = #{cartUserId} and product_id = #{cartProductId}
     </select>
 </mapper>

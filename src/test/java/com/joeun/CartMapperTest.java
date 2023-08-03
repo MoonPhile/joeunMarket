@@ -12,23 +12,21 @@ import java.util.List;
 @SpringBootTest
 public class CartMapperTest {
     @Autowired
-    private CartMapper mapper;
+    CartMapper mapper;
 
     @Test
     public void addCart() {
-        String userId = "admin";
-        int productId = 61;
+        int cartUserId = 1;
+        int cartProductId = 1;
         int count = 2;
 
         CartDto cart = new CartDto();
-        cart.setUserId(userId);
-        cart.setProductId(productId);
-        cart.setProductCnt(count);
-
+        cart.setCartUserId(cartUserId);
+        cart.setCartProductId(cartProductId);
+        cart.setCartProductCnt(count);
         int result = 0;
         result = mapper.addCart(cart);
-
-        System.out.println("결과 : " + result);
+        System.out.println(cart);
 
     }
 
@@ -37,8 +35,7 @@ public class CartMapperTest {
 
     @Test
     public void deleteCartTest() {
-        int cartId = 1;
-
+        int cartId = 12;
         mapper.deleteCart(cartId);
     }
 
@@ -52,7 +49,7 @@ public class CartMapperTest {
 
         CartDto cart = new CartDto();
         cart.setCartId(cartId);
-        cart.setProductCnt(count);
+        cart.setCartProductCnt(count);
         mapper.modifyCount(cart);
 
     }
@@ -61,11 +58,10 @@ public class CartMapperTest {
     /* 카트 목록 */
     @Test
     public void getCartTest() {
-        String userId = "admin";
-        List<CartDto> list = mapper.getCart(userId);
+        int cartUserId = 3;
+        List<CartDto> list = mapper.getCart(cartUserId);
         for(CartDto cart : list) {
             System.out.println(cart);
-            cart.initSaleTotal();
             System.out.println("init cart : " + cart);
         }
     }
@@ -74,13 +70,12 @@ public class CartMapperTest {
 
     @Test
     public void checkCartTest() {
-
-        String userId = "admin";
-        int productId = 71;
+        int cartUserId = 10;
+        int cartProductId = 71;
 
         CartDto cart = new CartDto();
-        cart.setUserId(userId);
-        cart.setProductId(productId);
+        cart.setCartUserId(cartUserId);
+        cart.setCartProductId(cartProductId);
 
         CartDto resutlCart = mapper.checkCart(cart);
         System.out.println("결과 : " + resutlCart);
