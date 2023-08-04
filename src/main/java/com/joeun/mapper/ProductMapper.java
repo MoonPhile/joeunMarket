@@ -27,14 +27,13 @@ public interface ProductMapper {
 	List<ProductDto> findAllProduct();
 	
 	List<ProductDto> findAllProductsPaging(@Param("offset") int offset, @Param("size") int size);
-
-	int getTotalCount();
-
-	int countAllProducts();
 	
 	List<ProductDto> findProductsByKeywordPaging(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
-	int countProductsByKeyword(String keyword);
+	List<ProductDto> findAllProductsPrice(@Param("offset") int offset, @Param("size") int size);
+	
+	List<ProductDto> findProductsByKeywordPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
+	
 
 }
 
