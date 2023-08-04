@@ -35,5 +35,12 @@ public interface ProductMapper {
 	List<ProductDto> findProductsByKeywordPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
 
+
+	List<Integer> findAllProductId();
+
+	ProductDto findProductById(int productId);
+
+	void updateProduct(ProductDto product);
+
 }
 
