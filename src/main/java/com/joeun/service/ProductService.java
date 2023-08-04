@@ -1,19 +1,17 @@
 package com.joeun.service;
 
-import com.joeun.dto.ProductCategoryDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.mapper.ProductMapper;
-import lombok.RequiredArgsConstructor;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
+import com.joeun.dto.ProductCategoryDto;
+import com.joeun.dto.ProductDto;
+import com.joeun.mapper.ProductMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -68,6 +66,24 @@ public class ProductService {
 	public List<ProductDto> findAllProductsPaging(int offset, int size) {
         return productMapper.findAllProductsPaging(offset, size);
     }
-	
+	public List<ProductDto> findProductsByKeywordPrice(int offset, int size, String keyword) {
+        return productMapper.findProductsByKeywordPrice(offset, size, keyword);
+    }
 
+	public List<ProductDto> findAllProductsPrice(int offset, int size) {
+        return productMapper.findAllProductsPrice(offset, size);
+    }
+
+
+	public List<Integer> findAllProductId(){
+		return productMapper.findAllProductId();
+	}
+
+	public ProductDto findProductById(int productId){
+		return productMapper.findProductById(productId);
+	}
+
+	public void updateProduct(ProductDto product){
+		productMapper.updateProduct(product);
+	}
 }

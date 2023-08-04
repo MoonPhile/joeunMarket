@@ -1,11 +1,13 @@
 package com.joeun.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
 import com.joeun.dto.ProductCategoryDto;
 import com.joeun.dto.ProductDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
 public interface ProductMapper {
@@ -28,7 +30,17 @@ public interface ProductMapper {
 	
 	List<ProductDto> findProductsByKeywordPaging(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
+	List<ProductDto> findAllProductsPrice(@Param("offset") int offset, @Param("size") int size);
+	
+	List<ProductDto> findProductsByKeywordPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
+	
 
+
+	List<Integer> findAllProductId();
+
+	ProductDto findProductById(int productId);
+
+	void updateProduct(ProductDto product);
 
 }
 
