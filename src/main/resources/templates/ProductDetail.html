@@ -30,6 +30,11 @@
 				<div class="col-md-2">
 					<img th:src="${item?.img4}" width="100" height="100" alt="Item Image 4">
 				</div>
+				<form th:action="@{/ordershow}" method="get">
+					<a th:href="@{/ordershow(order=${item?.productName})}">
+						<img src="/jpg/carttest.png" alt="장바구니 이미지" width="20" height="20">
+					</a>
+				</form>
 			</tr>
 			<table class="table">
 				<thead>
