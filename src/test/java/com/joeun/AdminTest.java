@@ -34,4 +34,12 @@ public class AdminTest {
             System.out.println();
         }
     }
+
+    @Test
+    void findIdTest(){
+        List<Integer> idList = productService.findAllProductId();
+        for(int i: idList){
+            System.out.println(i);
+        }
+    }
 }

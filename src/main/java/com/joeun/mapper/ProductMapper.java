@@ -34,5 +34,7 @@ public interface ProductMapper {
 	
 	int countProductsByKeyword(String keyword);
 
+	List<Integer> findAllProductId();
+
 }
 

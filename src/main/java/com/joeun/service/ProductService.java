@@ -79,4 +79,8 @@ public class ProductService {
 	public int getTotalProductCount() {
 		return productMapper.countAllProducts();
 	}
+
+	public List<Integer> findAllProductId(){
+		return productMapper.findAllProductId();
+	}
 }

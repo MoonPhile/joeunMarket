@@ -34,6 +34,10 @@
 		SELECT * FROM product
 	</select>
 
+	<select id="findAllProductId" resultType="int">
+		select product_id from product
+	</select>
+
 
 	<select id="findAllCategory"
 		resultType="com.joeun.dto.ProductCategoryDto">

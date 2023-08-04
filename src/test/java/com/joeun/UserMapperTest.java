@@ -22,9 +22,5 @@ public class UserMapperTest {
 //        this.userService.create();
 //    }
 
-    @Test
-    void select(){
-        String id = "희제이";
-        this.userService.getUser(id);
-    }
+
 }

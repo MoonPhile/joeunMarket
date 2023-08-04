@@ -59,10 +59,10 @@ public class ProductController {
         }
         tempArray = originPath.split(" ");
 
-        for(int i=0;i<filePath.length;i++){
-            if(!tempArray[i].isEmpty()){
+        for (int i = 0; i < filePath.length; i++) {
+            if (!tempArray[i].isEmpty()) {
                 filePath[i] = tempArray[i];
-            }else {
+            } else {
                 filePath[i] = null;
             }
 
@@ -74,6 +74,7 @@ public class ProductController {
         productService.addProduct(product);
         return "/admin/adminMain";
     }
+
 
 
     @GetMapping("/productlist")
@@ -97,7 +98,7 @@ public class ProductController {
             }
 
             int offset = (page - 1) * size;
-            products = productService.findProductsByKeywordPaging(offset, size,keyword);
+            products = productService.findProductsByKeywordPaging(offset, size, keyword);
         } else {
             totalCount = productService.countAllProducts();
             totalPages = (int) Math.ceil((double) totalCount / size);
@@ -119,4 +120,12 @@ public class ProductController {
 
         return "productlist";
     }
+
+    @GetMapping("productUpdate.do")
+    public String goToProductUpdate(Model model) {
+        List<Integer> idList = productService.findAllProductId();
+        model.addAttribute("idList", idList);
+        return "/admin/productUpdate";
+    }
+
 }
