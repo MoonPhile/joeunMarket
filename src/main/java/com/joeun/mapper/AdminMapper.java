@@ -1,6 +1,6 @@
 package com.joeun.mapper;
 
-import com.joeun.dto.UserResponse;
+import com.joeun.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,6 +12,6 @@ public interface AdminMapper {
      *
      * @return - 회원정보 리스트
      */
-    List<UserResponse> findAllUser();
+    List<User> findAllUser();
 
 }
