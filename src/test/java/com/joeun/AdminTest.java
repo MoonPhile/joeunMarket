@@ -42,4 +42,10 @@ public class AdminTest {
             System.out.println(i);
         }
     }
+
+    @Test
+    void findById(){
+        ProductDto productDto = productService.findProductById(1);
+        System.out.println(productDto.getProductName());
+    }
 }

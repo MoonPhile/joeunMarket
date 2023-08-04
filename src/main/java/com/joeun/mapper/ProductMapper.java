@@ -36,5 +36,7 @@ public interface ProductMapper {
 
 	List<Integer> findAllProductId();
 
+	ProductDto findProductById(int productId);
+
 }
 

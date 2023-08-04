@@ -63,9 +63,41 @@ function check(button) {
         document.getElementById('addProductForm').submit();
     } else if (buttonId === 'updateProduct') {
         document.getElementById('updateProductForm').submit();
-    }else {
+    } else {
         alert("비정상적인 접근입니다.")
     }
 
 
 }
+
+$(document).ready(function () {
+    $('#productId').on('change', function () {
+        var selectedProductId = $(this).val();
+        const imageInputs = document.querySelectorAll('.image-input');
+        $.ajax({
+            url: '/getProductInfo', // 백엔드에서 데이터를 가져올 URL
+            type: 'GET',
+            data: {productId: selectedProductId},
+            success: function (product) {
+                document.querySelector('input[name="productName"]').value = product.productName;
+                document.querySelector('input[name="productCondition"]').value = product.productCondition;
+                document.querySelector('input[name="productPrice"]').value = product.productPrice;
+                document.querySelector('textarea[name="productDescription"]').value = product.productDescription;
+                document.querySelector('p[name="filePath1"]').innerHTML = product.img1;
+                document.querySelector('p[name="filePath2"]').innerHTML = product.img2;
+                document.querySelector('p[name="filePath3"]').innerHTML = product.img3;
+                document.querySelector('p[name="filePath4"]').innerHTML = product.img4;
+                var selectCategory = document.querySelector('select[name="productCategoryId"]');
+                $(selectCategory).find('option').each(function () {
+                    if ($(this).val() === product.productCategoryId) {
+                        $(this).prop('selected', true);
+                    }
+                })
+
+            },
+            error: function () {
+                alert('상품 정보를 가져오는 데 실패했습니다.');
+            }
+        });
+    });
+});

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -76,7 +77,6 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/productlist")
     public String showProductList(@RequestParam(defaultValue = "1") int page,
                                   @RequestParam(defaultValue = "10") int size,
@@ -124,8 +124,19 @@ public class ProductController {
     @GetMapping("productUpdate.do")
     public String goToProductUpdate(Model model) {
         List<Integer> idList = productService.findAllProductId();
+        List<ProductCategoryDto> categoryList = productService.findAllCategory();
+        model.addAttribute("categoryList", categoryList);
         model.addAttribute("idList", idList);
         return "/admin/productUpdate";
+    }
+
+    @GetMapping("/getProductInfo")
+    @ResponseBody
+    public ProductDto getProductInfo(Model model, int productId) {
+//        ProductDto product = productService.findProductById(productId);
+        List<ProductCategoryDto> category = productService.findAllCategory();
+        model.addAttribute("categoryList", category);
+        return productService.findProductById(productId);
     }
 
 }
