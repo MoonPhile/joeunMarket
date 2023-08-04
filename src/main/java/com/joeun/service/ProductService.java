@@ -66,6 +66,13 @@ public class ProductService {
 	public List<ProductDto> findAllProductsPaging(int offset, int size) {
         return productMapper.findAllProductsPaging(offset, size);
     }
+	public List<ProductDto> findProductsByKeywordPrice(int offset, int size, String keyword) {
+        return productMapper.findProductsByKeywordPrice(offset, size, keyword);
+    }
+
+	public List<ProductDto> findAllProductsPrice(int offset, int size) {
+        return productMapper.findAllProductsPrice(offset, size);
+    }
 	
 
 }

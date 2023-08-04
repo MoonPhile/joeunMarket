@@ -5,6 +5,9 @@ import com.joeun.dto.User;
 import com.joeun.service.AdminService;
 import com.joeun.service.MailService;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joeun.dto.EmailMessage;
-import com.joeun.dto.UserResponse;
 import com.joeun.service.AdminService;
 import com.joeun.service.MailService;
 

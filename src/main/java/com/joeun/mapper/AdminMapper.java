@@ -1,9 +1,12 @@
 package com.joeun.mapper;
 
 import com.joeun.dto.User;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
-import com.joeun.dto.UserResponse;
+
 
 @Mapper
 public interface AdminMapper {

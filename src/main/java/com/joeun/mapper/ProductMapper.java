@@ -30,7 +30,10 @@ public interface ProductMapper {
 	
 	List<ProductDto> findProductsByKeywordPaging(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
-
+	List<ProductDto> findAllProductsPrice(@Param("offset") int offset, @Param("size") int size);
+	
+	List<ProductDto> findProductsByKeywordPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
+	
 
 }
 
