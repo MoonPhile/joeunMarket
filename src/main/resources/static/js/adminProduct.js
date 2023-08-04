@@ -16,7 +16,8 @@ function check(button) {
     var productDescription = document.querySelector("textarea[name='productDescription']").value;
 
     var numberPattern = /^[0-9]+$/;
-    var stringPattern = /^[a-zA-Z가-힣!@#$%^&*()-_=+';:,.<>?/\\"[\]{}\|`~]+$/;
+    var stringPattern = /^[a-zA-Z가-힣!@#$%^&*()\s-=+';:,.<>?/\\"[\]{}\|`~]+$/;
+
 
     var hasImage;
     for (var i = 0; i < imageInputs.length; i++) {
