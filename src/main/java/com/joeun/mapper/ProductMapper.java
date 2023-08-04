@@ -38,5 +38,7 @@ public interface ProductMapper {
 
 	ProductDto findProductById(int productId);
 
+	void updateProduct(ProductDto product);
+
 }
 

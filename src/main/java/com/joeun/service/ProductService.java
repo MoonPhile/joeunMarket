@@ -87,4 +87,8 @@ public class ProductService {
 	public ProductDto findProductById(int productId){
 		return productMapper.findProductById(productId);
 	}
+
+	public void updateProduct(ProductDto product){
+		productMapper.updateProduct(product);
+	}
 }

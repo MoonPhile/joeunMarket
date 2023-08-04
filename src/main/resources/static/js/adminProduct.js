@@ -2,8 +2,14 @@ function check(button) {
     var buttonId = button.id;
     const imageInputs = document.querySelectorAll('.image-input');
     const imageTypes = ['image/jpeg', 'image/png', 'image/gif']; // 허용되는 이미지 타입
+    if (buttonId === 'addProduct') {
+        var productId = document.querySelector("input[name='productId']").value;
+    } else if (buttonId === 'updateProduct') {
+        var productId = document.querySelector("select[name='productId']").value;
+    } else {
+        alert("비정상적인 접근입니다.")
+    }
 
-    var productId = document.querySelector("input[name='productId']").value;
     var productName = document.querySelector("input[name='productName']").value;
     var productCondition = document.querySelector("input[name='productCondition']").value;
     var productPrice = document.querySelector("input[name='productPrice']").value;
@@ -60,8 +66,10 @@ function check(button) {
 
     console.log("submit^^")
     if (buttonId === 'addProduct') {
+        console.log("상품 등록하기")
         document.getElementById('addProductForm').submit();
     } else if (buttonId === 'updateProduct') {
+        console.log("상품 수정하기")
         document.getElementById('updateProductForm').submit();
     } else {
         alert("비정상적인 접근입니다.")
