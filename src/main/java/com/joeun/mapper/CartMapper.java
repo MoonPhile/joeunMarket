@@ -13,7 +13,7 @@ public interface CartMapper {
 
     /* 카트 추가 */
 
-    public int addCart(CartDto cart);
+    public int addCart(CartDto cart) throws Exception;
 
     /* 카트 삭제 */
     public int deleteCart(int cartId);

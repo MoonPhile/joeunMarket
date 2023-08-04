@@ -19,7 +19,7 @@ public class TestMapperTest {
     @Test
     void save(){
         TestRequest testRequest = new TestRequest();
-        testRequest.setTitle("2번 테스트입니다");
+        testRequest.setTitle("3번 테스트입니다");
         testMApper.save(testRequest);
     }
 

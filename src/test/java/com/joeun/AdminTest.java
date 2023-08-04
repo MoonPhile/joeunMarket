@@ -34,4 +34,18 @@ public class AdminTest {
             System.out.println();
         }
     }
+
+    @Test
+    void findIdTest(){
+        List<Integer> idList = productService.findAllProductId();
+        for(int i: idList){
+            System.out.println(i);
+        }
+    }
+
+    @Test
+    void findById(){
+        ProductDto productDto = productService.findProductById(1);
+        System.out.println(productDto.getProductName());
+    }
 }
