@@ -71,7 +71,7 @@
 	<select id="orderproduct">
 		SELECT *
 		FROM product
-		WHERE product_name = #{order}
+		WHERE product_id = #{order}
 	</select>
 	
 		<!-- 상품 검색 가격순 조회 -->

@@ -94,11 +94,11 @@
 									<img th:src="${item?.img4}" width="100" height="100" alt="Item Image 4">
 								</div>
 								<form th:action="@{/ordershow}" method="get" class="d-flex">
-									<input type="hidden" name="order" th:value="${item?.productName}">
+									<input type="hidden" name="order" th:value="${item?.productId}">
 									<button type="submit" class="btn btn-outline-dark">상세정보</button>
 								</form>
 								<form th:action="@{/ordershow}" method="get">
-									<a th:href="@{/ordershow(order=${item?.productName})}">
+									<a th:href="@{/ordershow(order=${item?.productId})}">
 										<img src="/jpg/carttest.png" alt="장바구니 이미지" width="20" height="20">
 									</a>
 								</form>
