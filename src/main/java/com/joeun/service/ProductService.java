@@ -69,5 +69,19 @@ public class ProductService {
         return productMapper.findAllProductsPaging(offset, size);
     }
 	
+	public int getTotalProductCount() {
+		return productMapper.countAllProducts();
+	}
 
+	public List<Integer> findAllProductId(){
+		return productMapper.findAllProductId();
+	}
+
+	public ProductDto findProductById(int productId){
+		return productMapper.findProductById(productId);
+	}
+
+	public void updateProduct(ProductDto product){
+		productMapper.updateProduct(product);
+	}
 }
