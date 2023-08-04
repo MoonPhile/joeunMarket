@@ -86,4 +86,9 @@ public class ProductService {
 	public void updateProduct(ProductDto product){
 		productMapper.updateProduct(product);
 	}
+
+	public List<ProductDto> orderproduct(String order) {
+		return productMapper.orderproduct(order);
+		 
+	}
 }

@@ -39,6 +39,8 @@ public interface ProductMapper {
 	List<Integer> findAllProductId();
 
 	ProductDto findProductById(int productId);
+	
+	List<ProductDto> orderproduct(@Param("order") String order);
 
 	void updateProduct(ProductDto product);
 
