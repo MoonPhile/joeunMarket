@@ -89,7 +89,8 @@ $(document).ready(function () {
                 document.querySelector('p[name="filePath4"]').innerHTML = product.img4;
                 var selectCategory = document.querySelector('select[name="productCategoryId"]');
                 $(selectCategory).find('option').each(function () {
-                    if ($(this).val() === product.productCategoryId) {
+                    var optionValue = parseInt($(this).val());
+                    if (optionValue === product.productCategoryId) {
                         $(this).prop('selected', true);
                     }
                 })
