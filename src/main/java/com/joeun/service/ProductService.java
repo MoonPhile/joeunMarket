@@ -73,6 +73,17 @@ public class ProductService {
 	public List<ProductDto> findAllProductsPrice(int offset, int size) {
         return productMapper.findAllProductsPrice(offset, size);
     }
-	
 
+
+	public List<Integer> findAllProductId(){
+		return productMapper.findAllProductId();
+	}
+
+	public ProductDto findProductById(int productId){
+		return productMapper.findProductById(productId);
+	}
+
+	public void updateProduct(ProductDto product){
+		productMapper.updateProduct(product);
+	}
 }

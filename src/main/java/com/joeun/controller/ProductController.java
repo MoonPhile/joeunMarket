@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -72,10 +70,10 @@ public class ProductController {
         }
         tempArray = originPath.split(" ");
 
-        for(int i=0;i<filePath.length;i++){
-            if(!tempArray[i].isEmpty()){
+        for (int i = 0; i < filePath.length; i++) {
+            if (!tempArray[i].isEmpty()) {
                 filePath[i] = tempArray[i];
-            }else {
+            } else {
                 filePath[i] = null;
             }
 
@@ -140,4 +138,51 @@ public class ProductController {
 
 		return "productlist";
     }
+
+    @GetMapping("productUpdate.do")
+    public String goToProductUpdate(Model model) {
+        List<Integer> idList = productService.findAllProductId();
+        List<ProductCategoryDto> categoryList = productService.findAllCategory();
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("idList", idList);
+        return "/admin/productUpdate";
+    }
+
+    @GetMapping("/getProductInfo")
+    @ResponseBody
+    public ProductDto getProductInfo(Model model, int productId) {
+//        ProductDto product = productService.findProductById(productId);
+        List<ProductCategoryDto> category = productService.findAllCategory();
+        model.addAttribute("categoryList", category);
+        return productService.findProductById(productId);
+    }
+
+    @PostMapping("/updateProduct")
+    public String updateProduct(@RequestParam("imgs") List<MultipartFile> imgs, ProductDto product) {
+        System.out.println("상품 수정");
+        String originPath = "";
+        String[] filePath = new String[4];
+        String[] tempArray;
+        for (MultipartFile file : imgs) {
+            String temp = productService.uploadFile(file);
+            originPath += temp + " ";
+        }
+        tempArray = originPath.split(" ");
+
+        for (int i = 0; i < filePath.length; i++) {
+            if (!tempArray[i].isEmpty()) {
+                filePath[i] = tempArray[i];
+            } else {
+                filePath[i] = null;
+            }
+
+        }
+        product.setImg1(filePath[0]);
+        product.setImg2(filePath[1]);
+        product.setImg3(filePath[2]);
+        product.setImg4(filePath[3]);
+        productService.updateProduct(product);
+        return "/admin/adminMain";
+    }
+
 }

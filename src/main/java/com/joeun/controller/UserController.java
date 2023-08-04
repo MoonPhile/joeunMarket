@@ -23,6 +23,9 @@ public class UserController {
         return "login_form";
     }
 
+//    @GetMapping("/login")
+//    public String signup(UserCreateForm userCreateForm){ return "signup_form";}
+
     @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
