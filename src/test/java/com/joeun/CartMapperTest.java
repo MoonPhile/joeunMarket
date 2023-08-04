@@ -15,7 +15,7 @@ public class CartMapperTest {
     CartMapper mapper;
 
     @Test
-    public void addCart() {
+    public void addCart() throws Exception {
         int cartUserId = 1;
         int cartProductId = 1;
         int count = 2;
