@@ -1,4 +1,4 @@
-//package com.joeun;
+package com.joeun;
 //
 //import com.joeun.dto.ProductCategoryDto;
 //import com.joeun.dto.ProductDto;

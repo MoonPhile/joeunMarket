@@ -138,6 +138,14 @@ public class ProductController {
 
 		return "productlist";
     }
+    
+
+    @GetMapping("/ordershow")
+    public String odershow(@RequestParam(defaultValue = "1") String order,Model model){
+    	List<ProductDto> products = productService.orderproduct(order);
+    	 model.addAttribute("items", products);
+        return "ProductDetail";
+    }
 
     @GetMapping("productUpdate.do")
     public String goToProductUpdate(Model model) {

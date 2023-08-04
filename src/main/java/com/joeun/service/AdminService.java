@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AdminService {
-    private final AdminMapper adminMapper;
+    private final AdminMapper adminMapper; 
 
     public List<User> findAllUser(){
         return adminMapper.findAllUser();

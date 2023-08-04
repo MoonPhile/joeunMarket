@@ -40,7 +40,7 @@ public class AdminController {
     public List<User> adminGetUserList() {
         System.out.println("회원정보 불러오기 실행");
         return adminService.findAllUser();
-    }
+    } 
 
 
 

@@ -67,6 +67,13 @@
 		LIMIT #{offset}, #{size} 
 	</select>
 	
+	<!-- 상품 상세 조회 -->
+	<select id="orderproduct">
+		SELECT *
+		FROM product
+		WHERE product_id = #{order}
+	</select>
+	
 		<!-- 상품 검색 가격순 조회 -->
 	<select id="findProductsByKeywordPrice">
 		SELECT *
