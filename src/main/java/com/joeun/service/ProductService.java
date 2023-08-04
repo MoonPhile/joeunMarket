@@ -58,14 +58,7 @@ public class ProductService {
 //        }
 	}
 
-	public int countAllProducts() {
-		return productMapper.countAllProducts();
-	}
 	
-	public int countProductsByKeyword(String keyword) {
-		return productMapper.countProductsByKeyword(keyword);
-	}
-
 	public List<ProductDto> findProductsByKeywordPaging(int offset, int size, String keyword) {
         return productMapper.findProductsByKeywordPaging(offset, size, keyword);
     }
@@ -74,7 +67,5 @@ public class ProductService {
         return productMapper.findAllProductsPaging(offset, size);
     }
 	
-	public int getTotalProductCount() {
-		return productMapper.countAllProducts();
-	}
+
 }
