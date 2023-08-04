@@ -12,12 +12,26 @@
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" th:href="@{/user/signup}">회원가입</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" th:href="@{/question/list}">질문목록</a>-->
-<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/productlist}">상품목록</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/openReviewList.do}">리뷰게시판</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{#}">장바구니</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin.do}">관리자페이지</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <form th:action="@{/productlist}" method="get" class="d-flex">
+                        <input type="text" name="keyword" class="form-control me-2" placeholder="상품 이름 검색">
+                        <button type="submit" class="btn btn-outline-dark">검색</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
