@@ -15,13 +15,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.joeun.dto.ProductCategoryDto;
+import com.joeun.dto.ProductDto;
+import com.joeun.mapper.ProductMapper;
+import com.joeun.service.ProductService;
+
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
     private final ProductMapper productMapper;
-
     @GetMapping("/addProduct.do")
     public String goToAddProduct(Model model) {
         List<ProductCategoryDto> categoryList = productService.findAllCategory();
@@ -87,7 +93,7 @@ public class ProductController {
 
         // 검색어가 있는 경우와 없는 경우를 구분하여 처리
         if (keyword != null && !keyword.isEmpty()) {
-            totalCount = productService.countProductsByKeyword(keyword);
+            totalCount = pagingService.countProductsByKeyword(keyword);
             totalPages = (int) Math.ceil((double) totalCount / size);
 
             if (page < 1) {
@@ -99,7 +105,7 @@ public class ProductController {
             int offset = (page - 1) * size;
             products = productService.findProductsByKeywordPaging(offset, size,keyword);
         } else {
-            totalCount = productService.countAllProducts();
+            totalCount = pagingService.countAllProducts();
             totalPages = (int) Math.ceil((double) totalCount / size);
 
             if (page < 1) {
