@@ -46,6 +46,7 @@
 
 			<p></p>
 			<div class="row">
+				<!--				상품 이미지 출력-->
 				<div th:each="item : ${items}" class="col-md-4 py-2 ">
 					<div class="row justify-content-center">
 						<img th:src="${item?.img1}" width="300" height="300" alt="Item Image 1">
@@ -68,6 +69,7 @@
 					</div>
 
 				</div>
+				<!--				상품 설명 출력-->
 				<div th:each="item : ${items}" class="col-md-6">
 					<table>
 						<tbody>
@@ -78,15 +80,16 @@
 
 									<p style="font-size: 30px;"><strong>상품 이름:</strong> <span class="px-3"
 											th:text="${item?.productName}">상품명이 없습니다.</span></p>
-									<p style="font-size: 30px;"><strong>상품 가격:</strong> <span class="px-3"
-											th:text="${item?.productPrice}"></span>원</p>
 									<p style="font-size: 30px;"><strong>상품 상태:</strong> <span class="px-3"
 											th:text="${item?.productCondition}">미정</span></p>
+									<p style="font-size: 30px;"><strong>상품 가격:</strong> <span class="px-3"
+											th:text="${item?.productPrice}"></span>원</p>
 									<p style="font-size: 30px;"><strong>상품 설명:</strong> <span class="px-3"
 											th:text="${item?.productDescription}">설명 없음</span></p>
 
 									<br>
 									<hr>
+									
 									<div class="row">
 										<div class="col-md-3 px-3">
 											<!-- 장바구니 아이콘 -->
@@ -98,6 +101,7 @@
 											</form>
 										</div>
 										<div class="col-md-3 px-3">
+											<!-- 돌아가기 아이콘 -->
 											<form action="javascript:history.back()">
 												<button type="submit" class="back-button"
 													style="width: 100px; height: 80px;">돌아가기</button>
