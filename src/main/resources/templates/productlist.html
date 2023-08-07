@@ -47,11 +47,11 @@
 					<div class="d-flex justify-content-end px-1">
 						<form th:action="@{/productlist}" method="get" class="d-flex">
 							<button type="submit" name="Sequence" id="nameBtn" class="btn btn-outline-dark"
-								th:value="${isAscending == '3' ? '2' : '3'}"
-								th:text="${isAscending == '3' ? '등록순▲' : '등록순▼'}">등록순▼</button>
+								th:value="${Sequence == '3' ? '2' : '3'}"
+								th:text="${Sequence == '3' ? '등록순▲' : '등록순▼'}">등록순▼</button>
 							<button type="submit" name="Sequence" id="priceBtn" class="btn btn-outline-dark"
-								th:value="${isAscending == '0' ? '1' : '0'}"
-								th:text="${isAscending == '0' ? '가격순▲' : '가격순▼'}">가격순▼</button>
+								th:value="${Sequence == '0' ? '1' : '0'}"
+								th:text="${Sequence == '0' ? '가격순▲' : '가격순▼'}">가격순▼</button>
 						</form>
 
 
