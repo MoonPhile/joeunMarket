@@ -38,10 +38,11 @@ public class PaymentController {
 
     @GetMapping("/payment/validate/")
     @ResponseBody
-    public String payValidate(String imp_uid,String merchant_uid,int amount){
+    public String payValidate(PaymentInfo paymentInfo, int amount){
         System.out.println("페이먼트 검증 컨트롤러 진입");
-        System.out.println("imp_uid: "+ imp_uid);
-        System.out.println("merchant_uid: "+merchant_uid);
+        System.out.println("페이먼트 아이디 "+paymentInfo.getPaymentId());
+        System.out.println("오더아이디 "+paymentInfo.getOrderId());
+        System.out.println("유저아이디 "+paymentInfo.getUserId());
         System.out.println("paid_amount: "+ amount);
 
         return "";
