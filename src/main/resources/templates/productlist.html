@@ -11,10 +11,17 @@
 	<link href="/css/custom.css" rel="stylesheet">
 	<style>
 		.container {
-			border: 4px solid #f2f2f2;
+			border: 4px solid rgb(192, 192, 192);
+			padding: 10px;
+			border-radius: 3px;
+		}
+
+		.product {
+			border: 4px solid rgb(0, 0, 0);
 			padding: 10px;
 			border-radius: 5px;
 		}
+
 
 		.info-label {
 			margin-right: 20px;
@@ -25,26 +32,30 @@
 <body>
 	<!-- Top Bar -->
 	<nav th:replace="~{navbar :: navbarFragment}"></nav>
-
+	<header class="bg-dark py-4">
+		<div class="text-center text-white">
+			<h1>상품 목록</h1>
+		</div>
+	</header>
 
 	<!-- Item List -->
 	<section class="py-5">
-		<div class="container px-4 px-lg-5">
-			<h1>상품 목록</h1>
+		<div class="container product px-4 px-lg-5">
 			<div class="">
-
-				<div class="col-12 text-center mb-4">
+				<br>
+				<div class="containercol-12 text-center mb-4">
 					<h3>상품 리스트</h3>
-					<button class="btn btn-outline-dark">카테고리 1</button>
-					<button class="btn btn-outline-dark">카테고리 2</button>
-					<button class="btn btn-outline-dark">카테고리 3</button>
-					<button class="btn btn-outline-dark">카테고리 4</button>
+					<p></p>
+					<button class="btn btn-outline-dark px-5">카테고리 1</button>
+					<button class="btn btn-outline-dark px-5">카테고리 2</button>
+					<button class="btn btn-outline-dark px-5">카테고리 3</button>
+					<button class="btn btn-outline-dark px-5">카테고리 4</button>
 				</div>
 
 				<!-- 상품 리스트 반복 -->
 				<section class="py-3">
 
-					<div class="d-flex justify-content-end px-1">
+					<div class="d-flex justify-content-end px-5">
 						<form th:action="@{/productlist}" method="get" class="d-flex">
 							<button type="submit" name="Sequence" id="nameBtn" class="btn btn-outline-dark"
 								th:value="${Sequence == '3' ? '2' : '3'}"
@@ -58,7 +69,8 @@
 					</div>
 
 			</div>
-			<div class="container px-4 px-lg-5">
+			<br>
+			<div class=" px-4 px-lg-5">
 				<div class="row">
 					<!-- Use th:each to iterate over the list of items -->
 					<div th:each="item : ${items}" class=" col-md-6 mb-4">
@@ -77,8 +89,8 @@
 									<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
 								</div>
 							</div>
-							<div class="row justify-content-end px-3">
-								<form th:action="@{/ordershow}" method="get" class="d-flex">
+							<div class="row justify-content-end px-5">
+								<form th:action="@{/ordershow}" method="get" class="d-flex px-2 py-2">
 									<input type="hidden" name="order" th:value="${item?.productId}">
 									<button type="submit" class="btn btn-outline-dark">상세정보</button>
 								</form>
@@ -89,15 +101,15 @@
 								</form>
 							</div>
 						</div>
-						<div class="container">
+						<div class="container px-5">
 							<p class="card-text mb-2"><strong class="info-label">이름:</strong> <span
 									th:text="${item?.productName}"></span></p>
 							<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
 									th:text="${item?.productCondition}"></span></p>
-							<p class="card-text mb-2"><strong class="info-label">설명:</strong> <span
-									th:text="${item?.productDescription}"></span></p>
 							<p class="card-text mb-2"><strong class="info-label">가격:</strong> <span
 									th:text="${item?.productPrice}"></span>원</p>
+							<p class="card-text mb-2"><strong class="info-label">설명:</strong> <span
+									th:text="${item?.productDescription}"></span></p>
 						</div>
 					</div>
 				</div>
@@ -134,8 +146,11 @@
 		</ul>
 	</div>
 	<!-- Footer -->
-	<footer class="my-5 pt-5 text-muted text-center text-small">
-		<p class="mb-1">&copy; 조은 - 2023년 07월 쇼핑몰 프로젝트</p>
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; joeun team</p>
+		</div>
 	</footer>
 
 	<!-- Bootstrap core JS -->
