@@ -31,7 +31,7 @@
 	<section class="py-5">
 		<div class="container px-4 px-lg-5">
 			<h1>상품 목록</h1>
-			<div class="row">
+			<div class="">
 
 				<div class="col-12 text-center mb-4">
 					<h3>상품 리스트</h3>
@@ -42,15 +42,19 @@
 				</div>
 
 				<!-- 상품 리스트 반복 -->
-				<section class="py-5">
+				<section class="py-3">
 
 					<div class="d-flex justify-content-end px-1">
 						<form th:action="@{/productlist}" method="get" class="d-flex">
-							<button type="submit" name="Sequence" class="btn btn-outline-dark">이름순▼</button>
+							<button type="submit" name="Sequence" id="nameBtn" class="btn btn-outline-dark"
+								th:value="${isAscending == '3' ? '2' : '3'}"
+								th:text="${isAscending == '3' ? '등록순▲' : '등록순▼'}">등록순▼</button>
+							<button type="submit" name="Sequence" id="priceBtn" class="btn btn-outline-dark"
+								th:value="${isAscending == '0' ? '1' : '0'}"
+								th:text="${isAscending == '0' ? '가격순▲' : '가격순▼'}">가격순▼</button>
 						</form>
-						<form th:action="@{/productlist}" method="get" class="d-flex">
-							<button type="submit" name="Sequence" value="0" class="btn btn-outline-dark">가격순▼</button>
-						</form>
+
+
 					</div>
 
 			</div>
@@ -59,26 +63,28 @@
 					<!-- Use th:each to iterate over the list of items -->
 					<div th:each="item : ${items}" class=" col-md-6 mb-4">
 						<div class="container">
-							<div class="col-md-3">
-								<img th:src="${item?.img1}" width="300" height="300" alt="Item Image 1">
+							<div class="row justify-content-center">
+								<img th:src="${item?.img1}" width="360" height="300" alt="Item Image 1">
 							</div>
-							<div class="row">
-								<div class="col-md-3">
-									<img th:src="${item?.img2}" width="100" height="100" alt="Item Image 2">
+							<div class="row justify-content-center px-3">
+								<div class="">
+									<img th:src="${item?.img2}" width="120" height="100" alt="Item Image 2">
 								</div>
-								<div class="col-md-3">
-									<img th:src="${item?.img3}" width="100" height="100" alt="Item Image 3">
+								<div class="">
+									<img th:src="${item?.img3}" width="120" height="100" alt="Item Image 3">
 								</div>
-								<div class="col-md-2">
-									<img th:src="${item?.img4}" width="100" height="100" alt="Item Image 4">
+								<div class="">
+									<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
 								</div>
+							</div>
+							<div class="row justify-content-end px-3">
 								<form th:action="@{/ordershow}" method="get" class="d-flex">
 									<input type="hidden" name="order" th:value="${item?.productId}">
 									<button type="submit" class="btn btn-outline-dark">상세정보</button>
 								</form>
 								<form th:action="@{/ordershow}" method="get">
 									<a th:href="@{/ordershow(order=${item?.productId})}">
-										<img src="/jpg/carttest.png" alt="장바구니 이미지" width="20" height="20">
+										<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
 									</a>
 								</form>
 							</div>
@@ -100,18 +106,29 @@
 	<div class="pagination d-flex justify-content-center">
 		<ul class="pagination">
 
+			<!-- 이전 페이지 버튼 -->
 			<li th:if="${currentPage > 1}">
-				<a th:href="@{/productlist(do=productlist, page=${currentPage - 1})}"> ◀&nbsp;</a>
+				<!-- 이전 페이지 번호를 클릭하면 현재 페이지보다 1 작은 페이지로 이동하고, 기존의 Sequence 값을 유지 -->
+				<a
+					th:href="@{/productlist(do='productlist', page=${currentPage - 1}, Sequence=${Sequence})}">◀&nbsp;</a>
 			</li>
+
+			<!-- 페이지 번호 버튼들 -->
 			<li th:each="page : ${#numbers.sequence(1, totalPages)}">
 				<span th:if="${page == currentPage}">
+					<!-- 현재 페이지는 강조하여 표시 -->
 					<strong th:text="${page}" style="margin-right: 10px;"></strong>
 				</span>
-				<a th:if="${page != currentPage}" th:href="@{/productlist(do='productlist', page=${page})}"
-					th:text="${page}" style="margin-right: 10px;"></a>
+				<!-- 기존의 페이지 버튼 생성 링크에 Sequence 파라미터를 추가 -->
+				<a th:if="${page != currentPage}"
+					th:href="@{/productlist(do='productlist', page=${page}, Sequence=${Sequence})}" th:text="${page}"
+					style="margin-right: 10px;"></a>
 			</li>
+
+			<!-- 다음 페이지 버튼 -->
 			<li th:if="${currentPage < totalPages}">
-				<a th:href="@{/productlist(do=productlist, page=${currentPage + 1})}"> ▶ </a>
+				<!-- 다음 페이지 번호를 클릭하면 현재 페이지보다 1 큰 페이지로 이동하고, 기존의 Sequence 값을 유지 -->
+				<a th:href="@{/productlist(do='productlist', page=${currentPage + 1}, Sequence=${Sequence})}">▶</a>
 			</li>
 
 		</ul>

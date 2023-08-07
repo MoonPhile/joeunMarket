@@ -100,7 +100,7 @@ public class ProductController {
 		if (keyword != null && !keyword.isEmpty()) {
 			totalCount = pagingService.countProductsByKeyword(keyword);
 			totalPages = (int) Math.ceil((double) totalCount / size);
-
+			String isAscending;
 			if (page < 1) {
 				page = 1;
 			} else if (page > totalPages) {
@@ -108,10 +108,21 @@ public class ProductController {
 			}
 
 			int offset = (page - 1) * size;
-			if (Sequence != null && !Sequence.isEmpty()) {
-				products = productService.findProductsByKeywordPrice(offset, size, keyword);
+			if ("0".equals(Sequence)) {
+				products = productService.findProductsByKeywordPrice(offset, size, keyword);  //기격순▼
+				model.addAttribute("isAscending", "1");
+			} else if("1".equals(Sequence)){
+				products = productService.findProductsByKeywordhighPaging(offset, size, keyword); // 가격순 ▲
+				model.addAttribute("isAscending", "1");
+			} else if("2".equals(Sequence)) {
+				products = productService.findProductsByKeywordhighPaging(offset, size, keyword); //등록순▲
+				model.addAttribute("isAscending", "2");
+			}else if("3".equals(Sequence)) {
+				products = productService.findProductsByKeywordPaging(offset, size, keyword); // 등록순▼
+				model.addAttribute("isAscending", "3");
 			} else {
 				products = productService.findProductsByKeywordPaging(offset, size, keyword);
+				model.addAttribute("isAscending", "3");
 			}
 		} else {
 			totalCount = pagingService.countAllProducts();
@@ -124,10 +135,21 @@ public class ProductController {
 			}
 
 			int offset = (page - 1) * size;
-			if (Sequence != null && !Sequence.isEmpty()) {
-				products = productService.findAllProductsPrice(offset, size);
-			} else {
+			if ("0".equals(Sequence)) {
+				products = productService.findAllProductsPrice(offset, size); //기격순▼
+				model.addAttribute("isAscending", "0");
+			} else if("1".equals(Sequence)){
+				products = productService.findAllProductshighPrice(offset, size); // 가격순 ▲
+				model.addAttribute("isAscending", "1");
+			} else if("2".equals(Sequence)) {
+				products = productService.findAllProductshighPaging(offset, size); //등록순▲
+				model.addAttribute("isAscending", "2");
+			}else if("3".equals(Sequence)) {
+				products = productService.findAllProductsPaging(offset, size); // 등록순▼
+				model.addAttribute("isAscending", "3");
+			}else {
 				products = productService.findAllProductsPaging(offset, size);
+				model.addAttribute("isAscending", "3");
 			}
 		}
 
@@ -135,7 +157,8 @@ public class ProductController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("keyword", keyword); // 검색어를 다시 뷰로 전달
-
+		model.addAttribute("Sequence", Sequence);
+	
 		return "productlist";
     }
     

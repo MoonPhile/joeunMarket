@@ -73,6 +73,22 @@ public class ProductService {
 	public List<ProductDto> findAllProductsPrice(int offset, int size) {
         return productMapper.findAllProductsPrice(offset, size);
     }
+	
+	public List<ProductDto> findProductsByKeywordhighPaging(int offset, int size, String keyword) {
+        return productMapper.findProductsByKeywordhighPaging(offset, size, keyword);
+    }
+
+	public List<ProductDto> findAllProductshighPaging(int offset, int size) {
+        return productMapper.findAllProductshighPaging(offset, size);
+    }
+	public List<ProductDto> findProductsByKeywordhighPrice(int offset, int size, String keyword) {
+        return productMapper.findProductsByKeywordhighPrice(offset, size, keyword);
+    }
+
+	public List<ProductDto> findAllProductshighPrice(int offset, int size) {
+        return productMapper.findAllProductshighPrice(offset, size);
+    }
+	
 
 
 	public List<Integer> findAllProductId(){

@@ -49,11 +49,29 @@
 		product
 		LIMIT #{param2} OFFSET #{param1}
 	</select>
+	<!-- 상품 높은순 전체 조회 -->
+	<select id="findAllProductshighPaging">
+		SELECT *
+		FROM
+		product
+		order by product_id DESC
+		LIMIT #{param2} OFFSET #{param1}
+	</select>
+	
 	<!-- 상품 전체 가격순 조회 -->
 	<select id="findAllProductsPrice">
 		SELECT *
 		FROM
 		product order by product_price
+		LIMIT #{param2} OFFSET #{param1}
+	</select>
+	
+	<!-- 상품 전체 높은 가격순 조회 -->
+	<select id="findAllProductshighPrice">
+		SELECT *
+		FROM
+		product 
+		order by product_price DESC
 		LIMIT #{param2} OFFSET #{param1}
 	</select>
 	
@@ -64,6 +82,18 @@
 		product
 		WHERE
 		product_name LIKE CONCAT('%', #{keyword}, '%')
+		order by product_id
+		LIMIT #{offset}, #{size} 
+	</select>
+	
+	<!-- 상품 높은순 검색 조회 -->
+	<select id="findProductsByKeywordhighPaging">
+		SELECT *
+		FROM
+		product
+		WHERE
+		product_name LIKE CONCAT('%', #{keyword}, '%')
+		order by product_id DESC
 		LIMIT #{offset}, #{size} 
 	</select>
 	
@@ -74,7 +104,7 @@
 		WHERE product_id = #{order}
 	</select>
 	
-		<!-- 상품 검색 가격순 조회 -->
+	<!-- 상품 검색 가격순 조회 -->
 	<select id="findProductsByKeywordPrice">
 		SELECT *
 		FROM
@@ -82,6 +112,17 @@
 		WHERE
 		product_name LIKE CONCAT('%', #{keyword}, '%')
 		order by product_price
+		LIMIT #{offset}, #{size}
+	</select>
+	
+	<!-- 상품 검색 높은 가격순 조회 -->
+	<select id="findProductsByKeywordhighPrice">
+		SELECT *
+		FROM
+		product
+		WHERE
+		product_name LIKE CONCAT('%', #{keyword}, '%')
+		order by product_price DESC
 		LIMIT #{offset}, #{size}
 	</select>
 
