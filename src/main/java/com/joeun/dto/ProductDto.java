@@ -13,6 +13,7 @@ public class ProductDto {
     private int productId;
     private String productName;
     private String productCondition;
+    private String productDescription;
     private int productPrice;
     private String img1;
     private String img2;
