@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주문 페이지</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-4">상품 정보</h2>
+            <p>상품명: <span th:text="${productDto.productName}"></span></p>
+            <p>상품 가격: <span th:text="${productDto.productPrice}"></span></p>
+            <img th:src="${productDto.img1}" alt="Product Image" class="img-fluid mb-3">
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-4">주문 정보 입력</h2>
+            <form action="/completeOrder" method="post">
+                <input type="hidden" name="productId" th:value="${productDto.productId}">
+                <div class="form-group">
+                <div class="form-group">
+                    <label for="username">받으시는 분 성함</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">핸드폰번호:</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">주소:</label>
+                    <input type="text" id="address" name="address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>결제방법:</label><br>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="kakaoPay" name="paymentMethod" value="카카오 결제" class="form-check-input" required>
+                        <label for="kakaoPay" class="form-check-label">카카오 결제</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="cardPayment" name="paymentMethod" value="카드 결제" class="form-check-input" required>
+                        <label for="cardPayment" class="form-check-label">카드 결제</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">주문 완료</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

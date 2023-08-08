@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class ProductDto {
@@ -12,11 +14,14 @@ public class ProductDto {
     private String productName;
     private String productCondition;
     private int productPrice;
-    private String productDescription;
     private String img1;
     private String img2;
     private String img3;
     private String img4;
     private int productCategoryId;
+
+    //order 관련
+    private int ProductOrderUserId;
+    private Date ProductOrderDate;
 
 }
