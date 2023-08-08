@@ -12,6 +12,7 @@ public class PaymentService {
     private final PaymentMapper paymentMapper;
 
     public void insertPayment(Payment payment) {
+        System.out.println("인서트 페이먼트 실행");
         paymentMapper.insertPayment(payment);
     }
 

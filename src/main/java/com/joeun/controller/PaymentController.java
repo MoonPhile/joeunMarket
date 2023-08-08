@@ -31,14 +31,15 @@ public class PaymentController {
         return "/test/portOne";
     }
 
-    @GetMapping("/payment/validate/")
-    @ResponseBody
-    public String payValidate(Payment payment){
+    @PostMapping("/payment/validate")
+    public String payValidate(@RequestBody Payment payment) {
         System.out.println("페이먼트 검증 컨트롤러 진입");
-        System.out.println("페이먼트 아이디 "+ payment.getPaymentId());
-        System.out.println("오더아이디 "+ payment.getOrderId());
-        System.out.println("유저아이디 "+ payment.getUserId());
-        System.out.println("paid_amount: "+ payment.getPaymentPrice());
+        System.out.println("paymentId(AI) " + payment.getPaymentId());
+        System.out.println("userId " + payment.getUserId());
+        System.out.println("orderId " + payment.getOrderId());
+        System.out.println("paymentPrice: " + payment.getPaymentPrice());
+        System.out.println("Date: NOW()");
+        System.out.println("impUid: " + payment.getImpUid());
         //검증 로직 구현 필요
 
         paymentService.insertPayment(payment);

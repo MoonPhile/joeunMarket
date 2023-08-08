@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.joeun.mapper.PaymentMapper">
+
     <insert id="insertPayment" parameterType="com.joeun.dto.Payment">
-        insert into payment
-        values (
-                #{userId},
+        insert into payment (user_id, order_id, payment_price, payment_date, imp_uid)
+        values (#{userId},
                 #{orderId},
-                #{paymentPrcie},
+                #{paymentPrice},
                 NOW(),
-                #{impUid}
-               )
+                #{impUid})
     </insert>
+
 </mapper>
