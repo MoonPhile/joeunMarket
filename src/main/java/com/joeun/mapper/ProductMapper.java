@@ -22,6 +22,7 @@ public interface ProductMapper {
 	void addCategory(ProductCategoryDto category);
 
 	List<ProductCategoryDto> findAllCategory();
+	List<ProductCategoryDto> findCategoryName(@Param("category") int category);
 
 	List<ProductDto> findAll();
 
@@ -31,10 +32,19 @@ public interface ProductMapper {
 	
 	List<ProductDto> findProductsByKeywordPaging(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
+	List<ProductDto> findAllProductshighPaging(@Param("offset") int offset, @Param("size") int size);
+	
+	List<ProductDto> findProductsByKeywordhighPaging(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
+	
 	List<ProductDto> findAllProductsPrice(@Param("offset") int offset, @Param("size") int size);
 	
 	List<ProductDto> findProductsByKeywordPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
+	List<ProductDto> findAllProductshighPrice(@Param("offset") int offset, @Param("size") int size);
+	
+	List<ProductDto> findProductsByKeywordhighPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
+	
+	List<ProductDto> findProductByCategoty(@Param("offset") int offset, @Param("size") int size,@Param("category") int category);
 
 
 	List<Integer> findAllProductId();
