@@ -2,10 +2,13 @@
 <meta charset="UTF-8">
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/basic">
+<head th:replace="header :: main-head"> </head>
+<body th:replace="body :: main-body"> </body>
+
+
 <th:block layout:fragment="title">
     <title>리스트 페이지</title>
 </th:block>
-
 <th:block layout:fragment="content">
     <div class="page_tits">
         <h3>게시판 관리</h3>
@@ -51,6 +54,8 @@
                     <td class="tl"><a th:href="@{/view.do( id=${row.id} )}" th:text="${row.title}"></a></td>
                     <td th:text="${row.writer}"></td>
                     <td th:text="${#temporals.format( row.createdDate, 'yyyy-MM-dd HH:mm ' )}"></td>
+
+
                     <td th:text="${row.viewCnt}"></td>
                 </tr>
 
@@ -75,5 +80,8 @@
             </p>
         </section>
     </div> <!--/* .content */-->
+
+
+
 </th:block>
 </html>

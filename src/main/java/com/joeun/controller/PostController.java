@@ -31,6 +31,7 @@ public class PostController {
     // 신규 게시글 생성
     @PostMapping("/save.do")
     public String savePost(final PostRequest params) {
+
         postService.savePost(params);
         return "redirect:/list.do";
     }
