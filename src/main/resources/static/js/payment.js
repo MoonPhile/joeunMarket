@@ -1,6 +1,7 @@
 var IMP = window.IMP;
 IMP.init('imp65565347')
 
+//결제 요청 함수
 function requestPay() {
     //이하 각종 결제정보를 담는 변수 관리
     // var amount = document.getElementById('amount').value;
@@ -43,3 +44,5 @@ function requestPay() {
 
     });
 }
+
+//결제 취소 요청 함수 예정

@@ -5,8 +5,16 @@ import com.joeun.dto.Payment;
 import com.joeun.service.PaymentService;
 import com.joeun.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 
 
 @Controller
@@ -40,5 +48,29 @@ public class PaymentController {
 
         return "";
     }
+
+//    @GetMapping("/token")
+//    public ResponseEntity<String> getToken() throws IOException, JSONException {
+//
+//        final HttpURLConnection conn = getTokenConnection();
+//
+//        final JSONObject obj = getJsonObject();
+//
+//        sendRequest(conn, obj);
+//
+//        final int responseCode = getResponseCode(conn);
+//
+//        if (responseCode != 200) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//
+//        final BufferedReader br = new BufferedReader(
+//                new InputStreamReader(conn.getInputStream()));
+//
+//        final String accessToken = getResponse(br);
+//
+//        disconnect(conn, br);
+//        return ResponseEntity.ok(accessToken);
+//    }
 
 }
