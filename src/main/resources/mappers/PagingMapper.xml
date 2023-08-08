@@ -16,4 +16,12 @@
 		WHERE product_name LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 
+	<!-- 검색된 카테고리 상품 수 조회 -->
+	<select id="countProductscategory" resultType="int">
+		SELECT COUNT(*)
+		FROM product
+		WHERE product_category_id #{keyword}
+	</select>
+
+
 </mapper>

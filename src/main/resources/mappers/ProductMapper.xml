@@ -148,6 +148,7 @@
         select *
         from product
         where product_category_id = #{category}
+        LIMIT #{offset}, #{size}
     </select>
 
     <update id="updateProduct" parameterType="com.joeun.dto.ProductDto">

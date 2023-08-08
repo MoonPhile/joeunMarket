@@ -42,7 +42,7 @@ public interface ProductMapper {
 	
 	List<ProductDto> findProductsByKeywordhighPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
-	List<ProductDto> findProductByCategoty(@Param("category") int category);
+	List<ProductDto> findProductByCategoty(@Param("offset") int offset, @Param("size") int size,@Param("category") int category);
 
 
 	List<Integer> findAllProductId();

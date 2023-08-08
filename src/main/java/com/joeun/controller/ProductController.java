@@ -158,8 +158,24 @@ public class ProductController {
 	}
 
 	@GetMapping("/productcategorylist")
-	public String productcategorylist(@RequestParam(defaultValue = "1") int category, Model model) {
-		List<ProductDto> products = productService.findProductByCategoty(category);
+	public String productcategorylist(@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "1") int category, Model model) {
+		int totalCount;
+		int totalPages;
+		totalCount = pagingService.countAllProducts();
+		totalPages = (int) Math.ceil((double) totalCount / size);
+
+		if (page < 1) {
+			page = 1;
+		} else if (page > totalPages) {
+			page = totalPages;
+		}
+
+		int offset = (page - 1) * size;
+
+		List<ProductDto> products = productService.findProductByCategoty(offset, size,category);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("category", category);
 		model.addAttribute("items", products);
 		return "productcategorylist";

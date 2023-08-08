@@ -21,4 +21,9 @@ public class PagingService {
 	public int countProductsByKeyword(String keyword) {
 		return pagingMapper.countProductsByKeyword(keyword);
 	}
+	
+	public int countProductscategory(int category) {
+		return pagingMapper.countProductscategory(category);
+		
+	}
 }

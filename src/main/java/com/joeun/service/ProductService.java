@@ -148,9 +148,9 @@ public class ProductService {
 		return products;
 	}
 
-	public List<ProductDto> findProductByCategoty(int category) {
+	public List<ProductDto> findProductByCategoty(int offset, int size,int category) {
 		
-		List<ProductDto> products = productMapper.findProductByCategoty(category);
+		List<ProductDto> products = productMapper.findProductByCategoty(offset, size,category);
 		if (products == null) {
 			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
 		}
