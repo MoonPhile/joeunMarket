@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
@@ -25,10 +26,9 @@ public class OrderController {
     }
 
     @GetMapping("/order")
-    public String showOrderPage(Model model) {
+    public String showOrderPage(@RequestParam(defaultValue = "1") int productId,Model model) {
 
         // 출력 확인용
-        int productId = 1;
 
         ProductDto productDto = productService.getProductInfo(productId); // 상품 정보 가져오기
 

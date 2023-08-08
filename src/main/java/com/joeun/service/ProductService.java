@@ -153,7 +153,9 @@ public class ProductService {
 	}
 
 	public List<ProductDto> findProductByCategoty(int offset, int size,int category) {
-		
+		if (offset < 0) {
+			offset = 1; // 음수 offset을 0으로 대체
+		}
 		List<ProductDto> products = productMapper.findProductByCategoty(offset, size,category);
 		if (products == null) {
 			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
