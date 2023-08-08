@@ -18,42 +18,42 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductService {
 
-	private final ProductMapper productMapper;
+    private final ProductMapper productMapper;
 
-	public void addProduct(ProductDto product) {
-		productMapper.addProduct(product);
-	}
+    public void addProduct(ProductDto product) {
+        productMapper.addProduct(product);
+    }
 
-	public void addCategory(ProductCategoryDto category) {
-		productMapper.addCategory(category);
-	}
+    public void addCategory(ProductCategoryDto category) {
+        productMapper.addCategory(category);
+    }
 
-	public List<ProductDto> findAllProduct() {
-		return productMapper.findAllProduct();
-	}
+    public List<ProductDto> findAllProduct() {
+        return productMapper.findAllProduct();
+    }
 
-	public List<ProductCategoryDto> findAllCategory() {
-		return productMapper.findAllCategory();
-	}
-	
-	public List<ProductCategoryDto> findCategoryName(int category) {
-		return productMapper.findCategoryName(category);
-	}
-	
-	public String uploadFile(MultipartFile file) {
-		System.out.println("이미지 업로드");
-		if (file.isEmpty()) {
-			return "NULL";
-		}
-		String origName = file.getOriginalFilename();
-		String savedPath = "C:/images/" + origName;
-		File dest = new File(savedPath);
-		try {
-			file.transferTo(dest);
-			return savedPath;
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+    public List<ProductCategoryDto> findAllCategory() {
+        return productMapper.findAllCategory();
+    }
+
+    public List<ProductCategoryDto> findCategoryName(int category) {
+        return productMapper.findCategoryName(category);
+    }
+
+    public String uploadFile(MultipartFile file) {
+        System.out.println("이미지 업로드");
+        if (file.isEmpty()) {
+            return "NULL";
+        }
+        String origName = file.getOriginalFilename();
+        String savedPath = "C:/images/" + origName;
+        File dest = new File(savedPath);
+        try {
+            file.transferTo(dest);
+            return savedPath;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 //        try{
 //            byte[] bytes = file.getBytes();
 //            Path path = Paths.get(savedPath+origName);
@@ -61,124 +61,129 @@ public class ProductService {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-	}
+    }
 
-	public List<ProductDto> findProductsByKeywordPaging(int offset, int size, String keyword) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
+    public List<ProductDto> findProductsByKeywordPaging(int offset, int size, String keyword) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
 
-		List<ProductDto> products = productMapper.findProductsByKeywordPaging(offset, size, keyword);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+        List<ProductDto> products = productMapper.findProductsByKeywordPaging(offset, size, keyword);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findAllProductsPaging(int offset, int size) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products =  productMapper.findAllProductsPaging(offset, size);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findAllProductsPaging(int offset, int size) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findAllProductsPaging(offset, size);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findProductsByKeywordPrice(int offset, int size, String keyword) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products = productMapper.findProductsByKeywordPrice(offset, size, keyword);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findProductsByKeywordPrice(int offset, int size, String keyword) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findProductsByKeywordPrice(offset, size, keyword);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findAllProductsPrice(int offset, int size) { 
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products =  productMapper.findAllProductsPrice(offset, size);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findAllProductsPrice(int offset, int size) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findAllProductsPrice(offset, size);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findProductsByKeywordhighPaging(int offset, int size, String keyword) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products =  productMapper.findProductsByKeywordhighPaging(offset, size, keyword);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findProductsByKeywordhighPaging(int offset, int size, String keyword) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findProductsByKeywordhighPaging(offset, size, keyword);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findAllProductshighPaging(int offset, int size) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products = productMapper.findAllProductshighPaging(offset, size);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findAllProductshighPaging(int offset, int size) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findAllProductshighPaging(offset, size);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findProductsByKeywordhighPrice(int offset, int size, String keyword) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products = productMapper.findProductsByKeywordhighPrice(offset, size, keyword);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findProductsByKeywordhighPrice(int offset, int size, String keyword) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findProductsByKeywordhighPrice(offset, size, keyword);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findAllProductshighPrice(int offset, int size) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products = productMapper.findAllProductshighPrice(offset, size);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
+    public List<ProductDto> findAllProductshighPrice(int offset, int size) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findAllProductshighPrice(offset, size);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public List<ProductDto> findProductByCategoty(int offset, int size,int category) {
-		
-		List<ProductDto> products = productMapper.findProductByCategoty(offset, size,category);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
-	
-	public List<Integer> findAllProductId() {
-		return productMapper.findAllProductId();
-	}
+    public List<ProductDto> findProductByCategoty(int offset, int size, int category) {
 
-	public ProductDto findProductById(int productId) {
-		return productMapper.findProductById(productId);
-	}
+        List<ProductDto> products = productMapper.findProductByCategoty(offset, size, category);
+        if (products == null) {
+            return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+        }
+        return products;
+    }
 
-	public void updateProduct(ProductDto product) {
-		productMapper.updateProduct(product);
-	}
+    public List<Integer> findAllProductId() {
+        return productMapper.findAllProductId();
+    }
 
-	public List<ProductDto> orderproduct(String order) {
-		return productMapper.orderproduct(order);
+    public ProductDto findProductById(int productId) {
+        return productMapper.findProductById(productId);
+    }
 
-	}
-	// order 관련
-	public ProductDto getProductInfo(int productId) {
-		return productMapper.getProductInfo(productId);
-	}
+    public void updateProduct(ProductDto product) {
+        productMapper.updateProduct(product);
+    }
+
+    public List<ProductDto> orderproduct(String order) {
+        return productMapper.orderproduct(order);
+
+    }
+
+    // order 관련
+    public ProductDto getProductInfo(int productId) {
+        return productMapper.getProductInfo(productId);
+    }
+
+    public int getPriceById(int id) {
+        return productMapper.getPriceById(id);
+    }
 }

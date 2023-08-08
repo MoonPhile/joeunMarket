@@ -13,7 +13,12 @@ public class PaymentService {
 
     public void insertPayment(Payment payment) {
         System.out.println("인서트 페이먼트 실행");
-        paymentMapper.insertPayment(payment);
+        try {
+            paymentMapper.insertPayment(payment);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

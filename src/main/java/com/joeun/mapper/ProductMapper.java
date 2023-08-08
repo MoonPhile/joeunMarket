@@ -58,5 +58,12 @@ public interface ProductMapper {
 // order 관련
 
 	ProductDto getProductInfo(int productId);
+
+	/**
+	 * 결제 할 때 가격 비교용
+	 * @param id -productId
+	 * @return 가격
+	 */
+	int getPriceById(int id);
 }
 
