@@ -2,6 +2,7 @@ package com.joeun.controller;
 
 import com.joeun.dto.Payment;
 //import com.joeun.service.PaymentService;
+import com.joeun.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 public class PaymentController {
+
+    private final PaymentService paymentService;
     //토큰 발급을 위해 아임포트에서 제공해주는 rest api 사용
 //    private final IamportClient iamportClientApi;
 //
@@ -30,12 +33,15 @@ public class PaymentController {
 
     @GetMapping("/payment/validate/")
     @ResponseBody
-    public String payValidate(Payment payment, int amount){
+    public String payValidate(Payment payment){
         System.out.println("페이먼트 검증 컨트롤러 진입");
         System.out.println("페이먼트 아이디 "+ payment.getPaymentId());
         System.out.println("오더아이디 "+ payment.getOrderId());
         System.out.println("유저아이디 "+ payment.getUserId());
-        System.out.println("paid_amount: "+ amount);
+        System.out.println("paid_amount: "+ payment.getPaymentPrice());
+        //검증 로직 구현 필요
+
+        paymentService.insertPayment(payment);
 
         return "";
     }
