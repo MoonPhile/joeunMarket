@@ -22,7 +22,8 @@
                     <a class="nav-link" th:href="@{/order}">장바구니</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin.do}">관리자페이지</a>
+<!--                    관리자 로그인 시에만 보이게 수정 8/8 16:24 (진석) -->
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/admin.do}">관리자페이지</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">

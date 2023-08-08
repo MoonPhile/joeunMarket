@@ -5,6 +5,7 @@ import com.joeun.dto.ProductDto;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class OrderController {
         this.productService = productService;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
     public String showOrderPage(@RequestParam(defaultValue = "1") int productId,Model model) {
 
@@ -42,7 +44,9 @@ public class OrderController {
         return "order";
     }
 
-    // 상품 상세 정보 가져온 후, 주문 페이지로 전달.
+    // 상품 상세 정보 가져온 후, 주문 페이지로 전달. (윤서)
+    // 이 버튼을 누를시 로그인 시에만 가능하게 변경. 8/8 16:23 (진석)
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/order/{productId}")
     public String getOrderPage(@PathVariable int productId, Model model) {
         ProductDto product = productService.getProductInfo(productId);
