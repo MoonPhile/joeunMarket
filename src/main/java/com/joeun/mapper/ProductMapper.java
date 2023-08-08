@@ -44,5 +44,7 @@ public interface ProductMapper {
 
 	void updateProduct(ProductDto product);
 
+	// order 관련
+	ProductDto getProductInfo(int productId);
 }
 

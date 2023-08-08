@@ -89,6 +89,10 @@ public class ProductService {
 
 	public List<ProductDto> orderproduct(String order) {
 		return productMapper.orderproduct(order);
-		 
+
+	}
+	// order 관련
+	public ProductDto getProductInfo(int productId) {
+		return productMapper.getProductInfo(productId);
 	}
 }
