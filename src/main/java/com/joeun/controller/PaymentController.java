@@ -1,18 +1,10 @@
 package com.joeun.controller;
 
-import com.joeun.dto.PaymentInfo;
+import com.joeun.dto.Payment;
 //import com.joeun.service.PaymentService;
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Payment;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
-import java.util.Map;
 
 
 @Controller
@@ -38,11 +30,11 @@ public class PaymentController {
 
     @GetMapping("/payment/validate/")
     @ResponseBody
-    public String payValidate(PaymentInfo paymentInfo, int amount){
+    public String payValidate(Payment payment, int amount){
         System.out.println("페이먼트 검증 컨트롤러 진입");
-        System.out.println("페이먼트 아이디 "+paymentInfo.getPaymentId());
-        System.out.println("오더아이디 "+paymentInfo.getOrderId());
-        System.out.println("유저아이디 "+paymentInfo.getUserId());
+        System.out.println("페이먼트 아이디 "+ payment.getPaymentId());
+        System.out.println("오더아이디 "+ payment.getOrderId());
+        System.out.println("유저아이디 "+ payment.getUserId());
         System.out.println("paid_amount: "+ amount);
 
         return "";

@@ -17,12 +17,12 @@
                 pg: "kakaopay",
                 merchant_uid: uid,   // 주문번호
                 // merchant_uid: "ORD20180131-0000011",   // 주문번호
-                name: nameinput,
-                amount: amount,                         // 숫자 타입
-                buyer_email: "lunatic1702@gmail.com",
-                buyer_name: "조은마켓 기술지원팀",
-                buyer_tel: "010-6608-3897",
-                buyer_addr: "경기도 구리시",
+                name: nameinput,                      //상품 이름
+                amount: amount,                         // Number 타입 결제 금액
+                buyer_email: "lunatic1702@gmail.com",   //메일
+                buyer_name: "조은마켓 기술지원팀",       //
+                buyer_tel: "010-6608-3897",         //전화번호
+                buyer_addr: "경기도 구리시",      //주소
             }, function (rsp) { // callback
                 //결제 값이 요청 값과 같은지 검증합니다
                 console.log(rsp)
@@ -34,7 +34,7 @@
                   method: "GET",
                   contentType: "application/json",
                   data:{
-                    paymentId: rsp.imp_uid,            // 결제 고유번호
+                    impUid: rsp.imp_uid,            // 결제 고유번호
                     orderId: rsp.merchant_uid,   // 주문번호
                     amount: rsp.paid_amount     // 결제 금액
                   },
