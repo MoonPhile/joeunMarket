@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.joeun.dto.EmailMessage;
-import com.joeun.service.AdminService;
-import com.joeun.service.MailService;
-
-import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
