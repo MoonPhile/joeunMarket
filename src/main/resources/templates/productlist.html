@@ -80,6 +80,9 @@
 			<!-- 상품 리스트 반복 -->
 			<div class=" px-4 px-lg-5">
 				<div class="row">
+					<ul class="pagination" th:if="${totalPages == 0}">
+						<p>검색된 상품이 존재하지 않습니다.</p>
+					</ul>
 					<!-- Use th:each to iterate over the list of items -->
 					<div th:each="item : ${items}" class=" col-md-6 mb-4">
 						<div class="container">
@@ -126,7 +129,7 @@
 			</div>
 	</section>
 	<div class="pagination d-flex justify-content-center">
-		<ul class="pagination">
+		<ul class="pagination" th:if="${totalPages > 0}">
 
 			<!-- 이전 페이지 버튼 -->
 			<li th:if="${currentPage > 1}">

@@ -64,6 +64,9 @@
 			<div class=" px-4 px-lg-5">
 				<div class="row">
 					<!-- Use th:each to iterate over the list of items -->
+					<ul class="pagination" th:if="${totalPages == 0}">
+						<p>검색된 상품이 존재하지 않습니다.</p>
+					</ul>
 					<div th:each="item : ${items}" class=" col-md-6 mb-4">
 						<div th:each="categoryList : ${categoryList}">
 							<div class="container">
@@ -113,7 +116,7 @@
 			</div>
 	</section>
 	<div class="pagination d-flex justify-content-center">
-		<ul class="pagination">
+		<ul class="pagination" th:if="${totalPages > 0}">
 
 			<li th:if="${currentPage > 1}">
 				<a th:href="@{/productcategorylist(do=productcategorylist, page=${currentPage - 1})}"> ◀</a>
