@@ -44,13 +44,13 @@
 			<div class="">
 				<br>
 				<a class="btn btn-outline-dark px-5" th:href="@{/productlist}">←전체상품 보러가기</a>
-				<div class="containercol-12 text-center mb-4">
-					<h3>카테고리 <span th:text="${category}"></span> 상품 리스트</h3>
+				<div th:each="categoryList : ${categoryList}" class="containercol-12 text-center mb-4">
+					<h3><span th:text="${categoryList?.productCategoryName}"></span> 상품 리스트</h3>
 					<p></p>
-					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=1)}">카테고리 1</a>
-					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=2)}">카테고리 2</a>
-					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=9)}">카테고리 9</a>
-					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=1)}">카테고리 1</a>
+					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=1)}">테스트카테고리</a>
+					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=2)}">ㅎㅇ</a>
+					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=9)}">ㄹㄹ </a>
+					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=4)}">ㅁㅁ</a>
 				</div>
 			</div>
 			<br>
@@ -59,46 +59,48 @@
 				<div class="row">
 					<!-- Use th:each to iterate over the list of items -->
 					<div th:each="item : ${items}" class=" col-md-6 mb-4">
-						<div class="container">
-							<p></p>
-							<div class="row justify-content-center">
-								<img th:src="${item?.img1}" width="360" height="300" alt="Item Image 1">
-							</div>
-							<div class="row justify-content-center px-3">
-								<div class="">
-									<img th:src="${item?.img2}" width="120" height="100" alt="Item Image 2">
+						<div th:each="categoryList : ${categoryList}">
+							<div class="container">
+								<p></p>
+								<div class="row justify-content-center">
+									<img th:src="${item?.img1}" width="360" height="300" alt="Item Image 1">
 								</div>
-								<div class="">
-									<img th:src="${item?.img3}" width="120" height="100" alt="Item Image 3">
+								<div class="row justify-content-center px-3">
+									<div class="">
+										<img th:src="${item?.img2}" width="120" height="100" alt="Item Image 2">
+									</div>
+									<div class="">
+										<img th:src="${item?.img3}" width="120" height="100" alt="Item Image 3">
+									</div>
+									<div class="">
+										<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
+									</div>
 								</div>
-								<div class="">
-									<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
+								<p></p>
+								<div class="row justify-content-end px-5">
+									<form th:action="@{/ordershow}" method="get" class="d-flex px-2 py-2">
+										<input type="hidden" name="order" th:value="${item?.productId}">
+										<button type="submit" class="btn btn-outline-dark">상세정보</button>
+									</form>
+									<form th:action="@{/ordershow}" method="get">
+										<a th:href="@{/ordershow(order=${item?.productId})}">
+											<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
+										</a>
+									</form>
 								</div>
 							</div>
-							<p></p>
-							<div class="row justify-content-end px-5">
-								<form th:action="@{/ordershow}" method="get" class="d-flex px-2 py-2">
-									<input type="hidden" name="order" th:value="${item?.productId}">
-									<button type="submit" class="btn btn-outline-dark">상세정보</button>
-								</form>
-								<form th:action="@{/ordershow}" method="get">
-									<a th:href="@{/ordershow(order=${item?.productId})}">
-										<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
-									</a>
-								</form>
+							<div class="container px-5">
+								<p class="card-text mb-2"><strong class="info-label">이름:</strong> <span
+										th:text="${item?.productName}"></span></p>
+								<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
+										th:text="${item?.productCondition}"></span></p>
+								<p class="card-text mb-2"><strong class="info-label">가격:</strong> <span
+										th:text="${item?.productPrice}"></span>원</p>
+								<p class="card-text mb-2"><strong class="info-label">설명:</strong> <span
+										th:text="${item?.productDescription}"></span></p>
+								<p class="card-text mb-2"><strong class="info-label">카테고리:</strong> <span
+										th:text="${categoryList?.productCategoryName}"></span></p>
 							</div>
-						</div>
-						<div class="container px-5">
-							<p class="card-text mb-2"><strong class="info-label">이름:</strong> <span
-									th:text="${item?.productName}"></span></p>
-							<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
-									th:text="${item?.productCondition}"></span></p>
-							<p class="card-text mb-2"><strong class="info-label">가격:</strong> <span
-									th:text="${item?.productPrice}"></span>원</p>
-							<p class="card-text mb-2"><strong class="info-label">설명:</strong> <span
-									th:text="${item?.productDescription}"></span></p>
-									<p class="card-text mb-2"><strong class="info-label">카테고리:</strong> <span
-									th:text="${item?.productCategoryId}"></span></p>
 						</div>
 					</div>
 				</div>
@@ -114,13 +116,14 @@
 				<span th:if="${page == currentPage}">
 					<strong th:text="${page}" style="margin-right: 10px;"></strong>
 				</span>
-				<a th:if="${page != currentPage}" th:href="@{/productcategorylist(do='productcategorylist', page=${page})}"
-					th:text="${page}" style="margin-right: 10px;"></a>
+				<a th:if="${page != currentPage}"
+					th:href="@{/productcategorylist(do='productcategorylist', page=${page})}" th:text="${page}"
+					style="margin-right: 10px;"></a>
 			</li>
 			<li th:if="${currentPage < totalPages}">
 				<a th:href="@{/productcategorylist(do=productcategorylist, page=${currentPage + 1})}"> ▶ </a>
 			</li>
-
+		</ul>
 	</div>
 	<!-- Footer -->
 	<!-- Footer-->

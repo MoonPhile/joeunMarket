@@ -162,7 +162,7 @@ public class ProductController {
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "1") int category, Model model) {
 		int totalCount;
 		int totalPages;
-		totalCount = pagingService.countAllProducts();
+		totalCount = pagingService.countProductscategory(category);
 		totalPages = (int) Math.ceil((double) totalCount / size);
 
 		if (page < 1) {
@@ -174,6 +174,8 @@ public class ProductController {
 		int offset = (page - 1) * size;
 
 		List<ProductDto> products = productService.findProductByCategoty(offset, size,category);
+		List<ProductCategoryDto> categoryList = productService.findCategoryName(category);
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("category", category);

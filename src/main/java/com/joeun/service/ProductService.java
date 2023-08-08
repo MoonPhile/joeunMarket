@@ -35,7 +35,11 @@ public class ProductService {
 	public List<ProductCategoryDto> findAllCategory() {
 		return productMapper.findAllCategory();
 	}
-
+	
+	public List<ProductCategoryDto> findCategoryName(int category) {
+		return productMapper.findCategoryName(category);
+	}
+	
 	public String uploadFile(MultipartFile file) {
 		System.out.println("이미지 업로드");
 		if (file.isEmpty()) {

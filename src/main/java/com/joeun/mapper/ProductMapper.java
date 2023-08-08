@@ -21,6 +21,7 @@ public interface ProductMapper {
 	void addCategory(ProductCategoryDto category);
 
 	List<ProductCategoryDto> findAllCategory();
+	List<ProductCategoryDto> findCategoryName(@Param("category") int category);
 
 	List<ProductDto> findAll();
 

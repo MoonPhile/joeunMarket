@@ -20,7 +20,7 @@
 	<select id="countProductscategory" resultType="int">
 		SELECT COUNT(*)
 		FROM product
-		WHERE product_category_id #{keyword}
+		WHERE product_category_id =#{category}
 	</select>
 
 
