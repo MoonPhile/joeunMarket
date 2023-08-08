@@ -19,5 +19,10 @@ public class ShopController {
         return "user/main";
     }
 
-
+    // 주문 내역 조회 페이지
+    @GetMapping("/hist")
+    public String orderHistory() {
+        return "order_list";
+    }
 }
+
