@@ -86,4 +86,11 @@ public class ProductService {
 	public void updateProduct(ProductDto product){
 		productMapper.updateProduct(product);
 	}
+
+	// order 관련
+	public ProductDto getProductInfo(int productId) {
+		return productMapper.getProductInfo(productId);
+	}
+
+
 }
