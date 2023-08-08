@@ -148,6 +148,15 @@ public class ProductService {
 		return products;
 	}
 
+	public List<ProductDto> findProductByCategoty(int category) {
+		
+		List<ProductDto> products = productMapper.findProductByCategoty(category);
+		if (products == null) {
+			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
+		}
+		return products;
+	}
+	
 	public List<Integer> findAllProductId() {
 		return productMapper.findAllProductId();
 	}

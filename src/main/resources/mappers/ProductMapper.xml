@@ -143,6 +143,12 @@
         from product
         where product_id = #{productId}
     </select>
+    
+     <select id="findProductByCategoty" resultType="com.joeun.dto.ProductDto">
+        select *
+        from product
+        where product_category_id = #{category}
+    </select>
 
     <update id="updateProduct" parameterType="com.joeun.dto.ProductDto">
         UPDATE product

@@ -43,32 +43,15 @@
 		<div class="container product px-4 px-lg-5">
 			<div class="">
 				<br>
+				<a class="btn btn-outline-dark px-5" th:href="@{/productlist}">←전체상품 보러가기</a>
 				<div class="containercol-12 text-center mb-4">
-					<h3>상품 리스트</h3>
+					<h3>카테고리 <span th:text="${category}"></span> 상품 리스트</h3>
 					<p></p>
 					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=1)}">카테고리 1</a>
 					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=2)}">카테고리 2</a>
 					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=9)}">카테고리 9</a>
 					<a class="btn btn-outline-dark px-5" th:href="@{/productcategorylist(category=1)}">카테고리 1</a>
 				</div>
-
-
-				<section class="py-3">
-					<!-- 상품 정렬 버튼  -->
-					<div class="d-flex justify-content-end px-5">
-						<form th:action="@{/productlist}" method="get" class="d-flex">
-							<input type="hidden" name="keyword" th:value="${keyword}">
-							<button type="submit" name="Sequence" id="nameBtn" class="btn btn-outline-dark"
-								th:value="${Sequence == '3' ? '2' : '3'}"
-								th:text="${Sequence == '3' ? '등록순▲' : '등록순▼'}">등록순▼</button>
-							<button type="submit" name="Sequence" id="priceBtn" class="btn btn-outline-dark"
-								th:value="${Sequence == '0' ? '1' : '0'}"
-								th:text="${Sequence == '0' ? '가격순▲' : '가격순▼'}">가격순▼</button>
-						</form>
-
-
-					</div>
-
 			</div>
 			<br>
 			<!-- 상품 리스트 반복 -->
@@ -119,36 +102,7 @@
 				</div>
 			</div>
 	</section>
-	<div class="pagination d-flex justify-content-center">
-		<ul class="pagination">
 
-			<!-- 이전 페이지 버튼 -->
-			<li th:if="${currentPage > 1}">
-				<!-- 이전 페이지 번호를 클릭하면 현재 페이지보다 1 작은 페이지로 이동하고, 기존의 Sequence 값을 유지 -->
-				<a
-					th:href="@{/productlist(do='productlist', page=${currentPage - 1}, Sequence=${Sequence})}">◀&nbsp;</a>
-			</li>
-
-			<!-- 페이지 번호 버튼들 -->
-			<li th:each="page : ${#numbers.sequence(1, totalPages)}">
-				<span th:if="${page == currentPage}">
-					<!-- 현재 페이지는 강조하여 표시 -->
-					<strong th:text="${page}" style="margin-right: 10px;"></strong>
-				</span>
-				<!-- 기존의 페이지 버튼 생성 링크에 Sequence 파라미터를 추가 -->
-				<a th:if="${page != currentPage}"
-					th:href="@{/productlist(do='productlist', page=${page}, Sequence=${Sequence})}" th:text="${page}"
-					style="margin-right: 10px;"></a>
-			</li>
-
-			<!-- 다음 페이지 버튼 -->
-			<li th:if="${currentPage < totalPages}">
-				<!-- 다음 페이지 번호를 클릭하면 현재 페이지보다 1 큰 페이지로 이동하고, 기존의 Sequence 값을 유지 -->
-				<a th:href="@{/productlist(do='productlist', page=${currentPage + 1}, Sequence=${Sequence})}">▶</a>
-			</li>
-
-		</ul>
-	</div>
 	<!-- Footer -->
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">
