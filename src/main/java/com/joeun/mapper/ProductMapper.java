@@ -8,6 +8,7 @@ import com.joeun.dto.ProductCategoryDto;
 import com.joeun.dto.ProductDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface ProductMapper {
@@ -54,5 +55,8 @@ public interface ProductMapper {
 
 	void updateProduct(ProductDto product);
 
+// order 관련
+
+	ProductDto getProductInfo(int productId);
 }
 

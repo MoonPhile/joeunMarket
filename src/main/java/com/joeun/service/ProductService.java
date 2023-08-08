@@ -177,4 +177,8 @@ public class ProductService {
 		return productMapper.orderproduct(order);
 
 	}
+	// order 관련
+	public ProductDto getProductInfo(int productId) {
+		return productMapper.getProductInfo(productId);
+	}
 }
