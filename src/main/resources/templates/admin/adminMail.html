@@ -9,43 +9,108 @@
 <body>
 메일 보내기
 <div>
-    <select id="toList" name="toList" multiple>
-        <option th:each="user :${users}" th:value="${user.getUserEmail()}" th:utext="${user.getUserEmail()}"></option>
-    </select>
-    <textarea id="subject" placeholder="제목을 입력해주세요" ></textarea>
-    <textarea id="message" placeholder="내용을 입력해주세요" ></textarea>
+
+    <div>
+        <div>
+            <p><select id="selectLeft" size="10" multiple>
+                <option th:each="user :${users}" th:value="${user.getUserEmail()}"
+                        th:utext="${user.getUserEmail()}"></option>
+            </select> <select id="toList" size="10" multiple></select>
+        </div>
+    </div>
+    <div>
+
+        <p><button id="moveRight">→</button>
+        <button id="moveAllRight">allR</button>
+        <p><button id="moveLeft">←</button>
+        <button id="moveAllLeft">allL</button>
+    </div>
+
+    <!--    <select id="toList" name="toList" multiple>-->
+    <!--        <option th:each="user :${users}" th:value="${user.getUserEmail()}" th:utext="${user.getUserEmail()}"></option>-->
+    <!--    </select>-->
+    <textarea id="subject" placeholder="제목을 입력해주세요"></textarea>
+    <textarea id="message" placeholder="내용을 입력해주세요"></textarea>
     <button onclick="send()">이메일 보내기</button>
+</div>
+<div>
+    <h3>사용법</h3>
+    <p>왼쪽 select 에서 메일을 보낼 대상을 선택해줍니다.
+    그 후 ->버튼을 누르거나 allR을 눌러 개별사용자 및 전체 사용자를 대상으로합니다.
+    그리고 제목 및 내용 입력 후 버튼 누르면 발송됩니다.
+    실제로 매일이 발송되니 장난 및 무의미한 테스트 금지로 현재 기능은 비활성화 되어있습니다.
+    누군가 이 메세지를 본다면 예쁘게 꾸며주세요</p>
 </div>
 
 
 <script>
-    function send(){
-        const selectedEmails = Array.from(document.querySelectorAll('#toList option:checked'))
+    function send() {
+        // const selectedEmails = Array.from(document.querySelectorAll('#toList option:checked'))
+        const selectedEmails = Array.from(document.querySelectorAll('#toList option'))
             .map(option => option.value).join(',');
         const subject = document.getElementById("subject").value;
         const message = document.getElementById("message").value;
         console.log(selectedEmails);
         console.log(subject);
         console.log(message);
-
-        $.ajax({
-            url:"/adminMailSend",
-            type:"POST",
-            data: {
-                toList : selectedEmails,
-                subject : subject,
-                message : message
-            },
-            success:function (){
-                alert("메일 전송에 성공했습니다")
-            },
-            error:function (){
-                alert("비동기 통신 실패")
-            }
-
-            }
-        )
+        //아래 주석을 해제하면 메일 발송 기능이 정상적으로 활성화 됩니다.
+        // $.ajax({
+        //         url: "/adminMailSend",
+        //         type: "POST",
+        //         data: {
+        //             toList: selectedEmails,
+        //             subject: subject,
+        //             message: message
+        //         },
+        //         success: function () {
+        //             alert("메일 전송에 성공했습니다")
+        //         },
+        //         error: function () {
+        //             alert("비동기 통신 실패")
+        //         }
+        //
+        //     }
+        // )
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectLeft = document.getElementById("selectLeft");
+        const selectRight = document.getElementById("toList");
+        const moveRightButton = document.getElementById("moveRight");
+        const moveLeftButton = document.getElementById("moveLeft");
+        const moveAllRightButton = document.getElementById("moveAllRight");
+        const moveAllLeftButton = document.getElementById("moveAllLeft");
+
+        moveRightButton.addEventListener("click", function () {
+            moveSelectedOptions(selectLeft, selectRight);
+        });
+
+        moveLeftButton.addEventListener("click", function () {
+            moveSelectedOptions(selectRight, selectLeft);
+        });
+        moveAllRightButton.addEventListener("click", function () {
+            moveAllOptions(selectLeft, selectRight);
+        });
+
+        moveAllLeftButton.addEventListener("click", function () {
+            moveAllOptions(selectRight, selectLeft);
+        });
+
+        function moveSelectedOptions(sourceSelect, targetSelect) {
+            const selectedOptions = [...sourceSelect.selectedOptions];
+            selectedOptions.forEach(option => {
+                targetSelect.appendChild(option);
+            });
+        }
+
+        function moveAllOptions(sourceSelect, targetSelect) {
+            const allOptions = [...sourceSelect.options];
+            allOptions.forEach(option => {
+                targetSelect.appendChild(option);
+            });
+        }
+    });
+
 </script>
 </body>
 </html>

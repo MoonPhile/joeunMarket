@@ -7,4 +7,5 @@ public interface PagingMapper {
 	
 	int countAllProducts();
 	int countProductsByKeyword(String keyword);
+	int countProductscategory(int category);
 }
