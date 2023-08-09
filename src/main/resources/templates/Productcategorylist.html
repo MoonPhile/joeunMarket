@@ -66,7 +66,7 @@
 					<div class="row">
 						<!-- Use th:each to iterate over the list of items -->
 						<ul class="pagination" th:if="${totalPages == 0}">
-							<p>검색된 상품이 존재하지 않습니다.</p>
+							<p>등럭된 상품이 존재하지 않습니다.</p>
 						</ul>
 						<div th:each="item : ${items}" class=" col-md-6 mb-4">
 							<div th:each="categoryList : ${categoryList}">
@@ -92,10 +92,14 @@
 											<input type="hidden" name="order" th:value="${item?.productId}">
 											<button type="submit" class="btn btn-secondary">상세정보</button>
 										</form>
-										<form th:action="@{/ordershow}" method="get">
-											<a th:href="@{/ordershow(order=${item?.productId})}">
-												<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
-											</a>
+										<form th:action="@{/order}" method="get"
+											onsubmit="return confirm('상품을 구매하시겠습니까?')">
+											<button type="submit"
+												style="border: none; background: none; padding: 0; cursor: pointer;">
+												<a th:href="@{/order(productId=${item?.productId})}">
+													<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
+												</a>
+											</button>
 										</form>
 									</div>
 								</div>
