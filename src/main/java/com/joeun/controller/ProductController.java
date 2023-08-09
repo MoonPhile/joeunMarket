@@ -15,13 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.joeun.dto.ProductCategoryDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.mapper.ProductMapper;
-import com.joeun.service.ProductService;
-
-import lombok.RequiredArgsConstructor;
-
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
@@ -173,7 +166,7 @@ public class ProductController {
 
 		int offset = (page - 1) * size;
 
-		List<ProductDto> products = productService.findProductByCategoty(offset, size,category);
+		List<ProductDto> products = productService.findProductByCategory(offset, size,category);
 		List<ProductCategoryDto> categoryList = productService.findCategoryName(category);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", page);

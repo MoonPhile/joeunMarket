@@ -151,7 +151,7 @@
         where product_id = #{productId}
     </select>
     
-     <select id="findProductByCategoty" resultType="com.joeun.dto.ProductDto">
+     <select id="findProductByCategory" resultType="com.joeun.dto.ProductDto">
         select *
         from product
         where product_category_id = #{category}
@@ -174,5 +174,9 @@
 
     <select id="getProductInfo" resultType="com.joeun.dto.ProductDto">
         SELECT * FROM product WHERE product_id = #{productId}
+    </select>
+
+    <select id="getPriceById" resultType="int">
+        select product_price from product where product_id = #{id}
     </select>
 </mapper>
