@@ -13,8 +13,8 @@
 <p>주문이 성공적으로 처리되었습니다.</p>
 <div>
     <input type="hidden" th:value="${order.ordersId}" id="ordersId">
-    <input type="hidden" th:value="${order.ordersUserId}" id="userId">
-    <input type="hidden" th:value="${order.ordersProductId}" id="productId">
+    <input type="hidden" th:value="${order.userId}" id="userId">
+    <input type="hidden" th:value="${order.productId}" id="productId">
 <!--    <input type="hidden" th:value="${price}" id="price">-->
     <input type="hidden" th:value="${product.productPrice}" id="price">
     <input type="hidden" th:value="${product.productName}" id="productName">
