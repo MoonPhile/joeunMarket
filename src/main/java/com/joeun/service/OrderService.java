@@ -17,8 +17,8 @@ public class OrderService {
 
     public void placeOrder(OrderDto orderDto) {
         OrderDto orders = new OrderDto();
-        orders.setOrdersUserId(orderDto.getOrdersUserId());
-        orders.setOrdersProductId(orderDto.getOrdersProductId());
+        orders.setUserId(orderDto.getUserId());
+        orders.setProductId(orderDto.getProductId());
         orders.setOrderDate(new Date());
 
         // OrderDto를 사용하여 Mapper를 통해 데이터베이스에 주문 정보 저장
@@ -34,5 +34,6 @@ public class OrderService {
         return orderMapper.findOrderById(productId,userId);
     }
 }
+
 
 
