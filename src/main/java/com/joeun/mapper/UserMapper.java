@@ -11,4 +11,8 @@ public interface UserMapper {
 
     Optional<User> selectById(String userUseId);
 
+    User getUserById(Long id);
+
+    void updateUser(User user);
+
 }
