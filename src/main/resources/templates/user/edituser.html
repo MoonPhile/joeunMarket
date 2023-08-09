@@ -15,17 +15,17 @@
 
         <div class="mb-3">
             <label for="address" class="form-label">주소:</label>
-            <input type="text" class="form-control" id="address" name="userAddress" required>
+            <input type="text" class="form-control" id="address" name="userAddress" th:value="${user.userAddress}" required>
         </div>
 
         <div class="mb-3">
             <label for="phone" class="form-label">번호:</label>
-            <input type="text" class="form-control" id="phone" name="userPhone" required>
+            <input type="text" class="form-control" id="phone" name="userPhone" th:value="${user.userPhone}" required>
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">이메일:</label>
-            <input type="email" class="form-control" id="email" name="userEmail" required>
+            <input type="email" class="form-control" id="email" name="userEmail" th:value="${user.userEmail}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">변경</button>

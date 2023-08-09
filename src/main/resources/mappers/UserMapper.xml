@@ -11,7 +11,7 @@
     </select>
 
     <select id="getUserById" resultType="com.joeun.dto.User">
-        SELECT * FROM user WHERE user_id = #{userId}
+        SELECT * FROM user WHERE user_use_id = #{userUseId}
     </select>
 
     <update id="updateUser">
