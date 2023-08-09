@@ -47,36 +47,25 @@ public class PaymentController {
 
         paymentService.insertPayment(payment);
     }catch (Exception e){
+        e.printStackTrace();
         //결제 실패할경우
 //        String accessToken = paymentService.getAccessToken();
 //        paymentService.payCancel(accessToken,imp_uid);
     }
-
+        //결제 완료 후 돌아갈 페이지
         return "";
     }
 
-//    @GetMapping("/token")
-//    public ResponseEntity<String> getToken() throws IOException, JSONException {
-//
-//        final HttpURLConnection conn = getTokenConnection();
-//
-//        final JSONObject obj = getJsonObject();
-//
-//        sendRequest(conn, obj);
-//
-//        final int responseCode = getResponseCode(conn);
-//
-//        if (responseCode != 200) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//
-//        final BufferedReader br = new BufferedReader(
-//                new InputStreamReader(conn.getInputStream()));
-//
-//        final String accessToken = getResponse(br);
-//
-//        disconnect(conn, br);
-//        return ResponseEntity.ok(accessToken);
-//    }
+    @PostMapping("/payment/payCancel")
+    public String doPayCancel(@RequestBody Payment payment){
+        System.out.println("결제 취소 진행");
+        String accessToken = paymentService.getAccessToken();
+        String impUid = payment.getImpUid();
+        int paymentId = payment.getPaymentId();
+        paymentService.payCancel(accessToken,impUid);
+        paymentService.deletePayment(paymentId);
+
+        return "";
+    }
 
 }
