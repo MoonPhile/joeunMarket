@@ -11,8 +11,8 @@ public class OrderDto {
 
     /* 만들어 낼 값 */
     private int ordersId;
-    private int ordersUserId;
-    private int ordersProductId;
+    private int orderUser;
+    private int orderProduct;
     private Date ordersDate;
 
     public void setOrderDate(Date date) {
