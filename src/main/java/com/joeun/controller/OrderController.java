@@ -66,8 +66,8 @@ public class OrderController {
         String currentUserId = userDetails.getUsername();
 
         // 로그인한 유저 정보를 이용하여 주문 정보 설정
-        order.setOrdersUserId(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
-        order.setOrdersProductId(productId); // 상품 아이디 설정
+        order.setUser_id(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
+        order.setProduct_id(productId); // 상품 아이디 설정
         order.setOrderDate(new Date()); // 주문 날짜 설정
 
         // 주문 정보 저장
