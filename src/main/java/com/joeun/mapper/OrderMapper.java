@@ -10,9 +10,8 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
-
     void saveOrder(OrderDto orderDto);
-
     List<OrderDto> getAllOrders();
+    List<OrderDto> getOrdersWithProductInfoByUserId(@Param("userId") int userId);
 
 }

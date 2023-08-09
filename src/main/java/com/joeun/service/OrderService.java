@@ -27,11 +27,15 @@ public class OrderService {
         orderMapper.saveOrder(orders);
     }
 
+
     public List<OrderDto> getAllOrders() {
         return orderMapper.getAllOrders();
     }
 
-
+    // 주문 출력
+    public List<OrderDto> getOrdersWithProductInfoByUserId(int userId) {
+        return orderMapper.getOrdersWithProductInfoByUserId(userId);
+    }
 }
 
 

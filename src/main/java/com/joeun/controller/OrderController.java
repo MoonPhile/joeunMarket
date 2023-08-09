@@ -34,6 +34,7 @@ public class OrderController {
         this.userMapper = userMapper;
     }
 
+    //  주문 페이지 product 정보 출력
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
     public String showOrderPage(@RequestParam(defaultValue = "1") int productId, Model model) {
@@ -74,8 +75,22 @@ public class OrderController {
         // 주문 정보 저장
         orderService.placeOrder(order);
 
-        // 다음 작업을 수행하거나 필요한 뷰를 반환합니다.
+        // 다음 작업을 수행하거나 필요한 뷰를 반환.
         return "order_complete";
+    }
+
+    // 주문 내역 리스트 출력
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/order-history")
+    public String showOrderHistoryPage(Authentication authentication, Model model) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserId = userDetails.getUsername();
+        int userId = Integer.parseInt(currentUserId);
+
+        List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(userId);
+        model.addAttribute("orderHistory", orderHistory);
+
+        return "order_history";
     }
 
 

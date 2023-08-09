@@ -20,6 +20,8 @@ public class OrderDto {
     }
 
     // product 관련
-    private String productInfo;
+    private String productName;
+    private String productDescription;
+    private int productPrice;
 
 }

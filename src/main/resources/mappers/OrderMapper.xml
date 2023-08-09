@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.joeun.mapper.OrderMapper">
 
+    <!-- -->
     <insert id="saveOrder" parameterType="com.joeun.dto.OrderDto">
         INSERT INTO orders (user_id, product_id, orders_date)
         VALUES (#{userId}, #{productId}, #{ordersDate})
@@ -9,6 +10,15 @@
 
     <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
         SELECT * FROM orders
+    </select>
+
+    <!-- 주문 정보 출력 -->
+    <select id="getOrdersWithProductInfoByUserId" resultType="com.joeun.dto.OrderDto">
+        SELECT o.orders_id, o.user_id, o.product_id, o.orders_date,
+        p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice
+        FROM orders o
+        JOIN product p ON o.product_id = p.product_id
+        WHERE user_id = #{userId}
     </select>
 
 </mapper>
