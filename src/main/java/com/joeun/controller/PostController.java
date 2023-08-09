@@ -20,7 +20,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
-    private final PostFileService fileService;
+    private final PostFileService postFileService;
     private final PostFileUtils fileUtils;
 
     // 게시글 작성 페이지
@@ -35,10 +35,10 @@ public class PostController {
 
     // 신규 게시글 생성
     @PostMapping("/save.do")
-    public String savePost(final PostRequest params) {
+    public String savePost(final PostRequest params,Model model) {
         Long id = postService.savePost(params);
         List<PostFileRequest> files = fileUtils.uploadFiles(params.getFiles());
-        fileService.saveFiles(id, files);
+        postFileService.saveFiles(id, files);
         return "redirect:/list.do";
 
     }

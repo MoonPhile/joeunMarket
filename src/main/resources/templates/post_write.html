@@ -128,7 +128,7 @@
         form.noticeYn.value = form.isNotice.checked;
         form.action = [[ ${post == null} ]] ? '/save.do' : '/update.do';
         form.submit();
-        /*]]>*/
+
     }
             // 파일 선택
     function selectFile(element) {
@@ -182,6 +182,7 @@
         }
         element.parentElement.remove();
     }
+        /*]]>*/
     </script>
 </th:block>
 </html>

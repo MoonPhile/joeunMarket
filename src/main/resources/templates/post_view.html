@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/header">
 <th:block layout:fragment="title">
+    <head th:replace="header :: main-head"> </head>
     <title>상세 페이지</title>
 </th:block>
 
@@ -35,6 +36,11 @@
                     <th scope="row">내용</th>
                     <td colspan="3">[[ ${post.content} ]]</td>
                 </tr>
+                <tr>
+                    <th scope="row">첨부파일</th>
+                    <td id="files" colspan="3">
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <p class="btn_set">
@@ -49,6 +55,12 @@
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         /*<![CDATA[*/
+
+            window.onload = () => {
+                findAllFile();
+
+                findAllComment();
+            }
 
             // 게시글 삭제
             function deletePost() {
@@ -69,8 +81,29 @@
                 document.getElementById('deleteForm').submit();
             }
 
-        /*]]>*/
+    // 전체 파일 조회
+    function findAllFile() {
 
+        // 1. API 호출
+        const postId = [[ ${post.id}]];
+        const response = getJson(`/${postId}/files`);
+
+        // 2. 로직 종료
+        if ( !response.length ) {
+            return false;
+        }
+
+        // 3. 파일 영역 추가
+        let fileHtml = '<div class="file_down"><div class="cont">';
+        response.forEach(row => {
+            fileHtml += `<a href="javascript:alert('준비 중입니다.');"><span class="icons"><i class="fas fa-folder-open"></i></span>${row.originalName}</a>`;
+        })
+        fileHtml += '</div></div>';
+
+        // 4. 파일 HTML 렌더링
+        document.getElementById('files').innerHTML = fileHtml;
+    }
+        /*]]>*/
     </script>
 </th:block>
 </html>
