@@ -8,6 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -50,6 +52,20 @@ public class UserController {
             return "login_form";
         }
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit")
+    public String showEditForm() {
+//        User users = userService.getUserById(id);
+//        model.addAttribute("member", users);
+//        model.addAttribute("loggedInUser", user); // 로그인한 사용자 정보 추가
+        return "edituser";
+    }
+
+    @PostMapping("/edit")
+    public String editUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/";
     }
 
