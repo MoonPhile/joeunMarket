@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
-//    void insertOrder(OrderDto orderDto);
+
     void saveOrder(OrderDto orderDto);
 
     List<OrderDto> getAllOrders();

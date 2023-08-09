@@ -4,7 +4,7 @@
 
     <insert id="saveOrder" parameterType="com.joeun.dto.OrderDto">
         INSERT INTO orders (user_id, product_id, orders_date)
-        VALUES (#{ordersUserId}, #{ordersProductId}, #{ordersDate})
+        VALUES (#{userId}, #{productId}, #{ordersDate})
     </insert>
 
     <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
