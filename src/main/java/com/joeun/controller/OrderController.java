@@ -72,7 +72,10 @@ public class OrderController {
 
         // 주문 정보 저장
         orderService.placeOrder(order);
-
+        OrderDto orderDto = orderService.findOrderById(productId,Integer.parseInt(currentUserId));
+        ProductDto product = productService.findProductById(productId);
+        model.addAttribute("order",orderDto);
+        model.addAttribute("product",product);
         // 다음 작업을 수행하거나 필요한 뷰를 반환합니다.
         return "order_complete";
     }
