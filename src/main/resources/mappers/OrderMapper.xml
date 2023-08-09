@@ -10,4 +10,9 @@
     <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
         SELECT * FROM orders
     </select>
+
+    <select id="findOrderById" resultType="com.joeun.dto.OrderDto">
+        select orders_id, user_id as ordersUserId, product_id as ordersProductId,orders_date
+            from orders where product_id = #{productId} and user_id = #{userId}
+    </select>
 </mapper>
