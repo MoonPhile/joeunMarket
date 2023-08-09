@@ -67,8 +67,8 @@ public class OrderController {
         String currentUserId = userDetails.getUsername();
 
         // 로그인한 유저 정보를 이용하여 주문 정보 설정
-        order.setOrderUser(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
-        order.setOrderProduct(productId); // 상품 아이디 설정
+        order.setUserId(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
+        order.setProductId(productId); // 상품 아이디 설정
         order.setOrderDate(new Date()); // 주문 날짜 설정
 
         // 주문 정보 저장
@@ -77,17 +77,6 @@ public class OrderController {
         // 다음 작업을 수행하거나 필요한 뷰를 반환합니다.
         return "order_complete";
     }
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/order-history")
-    public String showOrderHistoryPage(Authentication authentication, Model model) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String currentUserId = userDetails.getUsername();
-        int userId = Integer.parseInt(currentUserId);
 
-        List<OrderDto> orderHistory = orderService.getOrdersByUserId(userId);
-        model.addAttribute("orderHistory", orderHistory);
-
-        return "order_history";
-    }
 
 }

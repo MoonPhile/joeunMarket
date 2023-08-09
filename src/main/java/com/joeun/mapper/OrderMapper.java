@@ -15,6 +15,4 @@ public interface OrderMapper {
 
     List<OrderDto> getAllOrders();
 
-//    List<OrderDto> getOrdersByUserId(@Param("userId") int userId);
-
 }
