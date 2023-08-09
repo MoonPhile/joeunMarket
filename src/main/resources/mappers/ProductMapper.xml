@@ -151,7 +151,7 @@
         where product_id = #{productId}
     </select>
     
-     <select id="findProductByCategoty" resultType="com.joeun.dto.ProductDto">
+     <select id="findProductByCategory" resultType="com.joeun.dto.ProductDto">
         select *
         from product
         where product_category_id = #{category}

@@ -43,8 +43,14 @@ public class PaymentController {
         //product의 가격과 payment의 price가 같을경우 결제 진행 및 insert
         //다를 경우엔 결제 취소
         //결제전에 검증하고 취소할수있으면 좋은데 방법 생각해봐야함
+    try {
 
         paymentService.insertPayment(payment);
+    }catch (Exception e){
+        //결제 실패할경우
+//        String accessToken = paymentService.getAccessToken();
+//        paymentService.payCancel(accessToken,imp_uid);
+    }
 
         return "";
     }

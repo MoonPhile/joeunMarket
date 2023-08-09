@@ -152,27 +152,18 @@ public class ProductService {
         return products;
     }
 
-	public List<ProductDto> findProductByCategoty(int offset, int size,int category) {
-		if (offset < 0) {
-			offset = 1; // 음수 offset을 0으로 대체
-		}
-		List<ProductDto> products = productMapper.findProductByCategoty(offset, size,category);
-		if (products == null) {
-			return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
-		}
-		return products;
-	}
-	
-	public List<Integer> findAllProductId() {
-		return productMapper.findAllProductId();
-	}
-
-        List<ProductDto> products = productMapper.findProductByCategoty(offset, size, category);
+    public List<ProductDto> findProductByCategory(int offset, int size, int category) {
+        if (offset < 0) {
+            offset = 1; // 음수 offset을 0으로 대체
+        }
+        List<ProductDto> products = productMapper.findProductByCategory(offset, size, category);
         if (products == null) {
             return Collections.emptyList(); // 검색 결과가 없을 때 빈 리스트 반환
         }
         return products;
     }
+
+
 
     public List<Integer> findAllProductId() {
         return productMapper.findAllProductId();
