@@ -30,7 +30,7 @@ public class PostController {
             PostResponse post = postService.findPostById(id);
             model.addAttribute("post", post);
         }
-        return "write";
+        return "post_write";
     }
 
     // 신규 게시글 생성
@@ -54,7 +54,7 @@ public class PostController {
     public String openPostView(@RequestParam final Long id, Model model) {
         PostResponse post = postService.findPostById(id);
         model.addAttribute("post", post);
-        return "view";
+        return "post_view";
     }
     // 기존 게시글 수정
     @PostMapping("/update.do")
