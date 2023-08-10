@@ -79,6 +79,49 @@ public class PaymentService {
         return access_token;
     }
 
+//    public String getAccessTokenKakao() {
+//        String reqUrl = "https://api.iamport.kr/users/getToken";
+//        String access_token = "";
+//        try {
+//            URL url = new URL(reqUrl);
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Content-Type", "application/json");
+//            conn.setDoOutput(true);
+//
+//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+//            Map<String, Object> map = new HashMap<>();
+//
+//            //수정필요
+//            map.put("imp_key", "4733323784021880");
+//            map.put("imp_secret", "UtVnQlGvSCIICvs7ykwQGNz6V2lthPQsq2jPMvjBeqzt1EHr1CgyO2l8Ulw5wIwivnc8fbkmfFgUdp6F");
+//
+//            JSONParser jsonParser = new JSONParser();
+//            JSONObject reqJson = new JSONObject(map);
+//            System.out.println("reqJson.toString() = " + reqJson.toString());
+//            bw.write(reqJson.toJSONString());
+//            bw.flush();
+//
+//            int responseCode = conn.getResponseCode();
+//            System.out.println("responseCode = " + responseCode);
+//
+//            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//            StringBuilder result = new StringBuilder();
+//            String line = "";
+//            while ((line = br.readLine()) != null) {
+//                result.append(line);
+//            }
+//            JSONObject obj = (JSONObject) jsonParser.parse(result.toString());
+//            JSONObject responseObj = (JSONObject) obj.get("response");
+//            access_token = responseObj.get("access_token").toString();
+//            System.out.println("access_token = " + access_token);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return access_token;
+//    }
+
+
     public void payCancel(String accessToken, String imp_uid) {
         String reqUrl = "https://api.iamport.kr/payments/cancel";
         try {
@@ -117,5 +160,6 @@ public class PaymentService {
     public void deletePayment(int paymentId) {
         paymentMapper.deletePayment(paymentId);
     }
+
 
 }
