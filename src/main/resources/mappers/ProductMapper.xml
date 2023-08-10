@@ -201,6 +201,11 @@
 		select *
 		from product
 		where product_category_id = #{category}
+		 AND NOT EXISTS (
+          SELECT 1
+          FROM orders
+          WHERE orders.product_id = product.product_id
+      )
 		LIMIT #{offset}, #{size}
 	</select>
 
