@@ -43,24 +43,20 @@
 		<div class="container product px-4 px-lg-5">
 			<div class="">
 				<br>
-				<div class=" containercol-12 text-center mb-4">
+				<div class="container col-12 text-center mb-4">
 					<h3>전체 상품 리스트</h3>
 					<p></p>
 					<a class="btn btn-primary btn-lg px-4" th:href="@{/productlist}">전체상품</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=1)}">테스트카테고리</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=2)}">도서</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=3)}">가전</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=4)}">의류</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=5)}">완구</a>
-					<p></p>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=6)}">잡화</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=7)}">주방용품 </a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=8)}">문구</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=9)}">가구</a>
-					<a class="btn btn-secondary btn-lg px-4" th:href="@{/productcategorylist(category=10)}">중고</a>
+
+					<!-- 자동으로 생성된 카테고리 버튼들 -->
+					<div class="d-flex flex-wrap px-5 py-2"> <!-- 가로로 정렬하고 넘치면 줄바꿈 -->
+						<div th:each="category : ${categoryList}" class="mb-2">
+							<a class="btn btn-secondary btn-lg px-4 mx-1"
+								th:href="@{/productcategorylist(category=${category.productCategoryId})}"
+								th:text="${category.productCategoryName}"></a>
+						</div>
+					</div>
 				</div>
-
-
 				<section class="py-3">
 					<!-- 상품 정렬 버튼  -->
 					<div class="d-flex justify-content-end px-5">
