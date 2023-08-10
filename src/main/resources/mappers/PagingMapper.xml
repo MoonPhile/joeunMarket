@@ -7,6 +7,10 @@
 		SELECT COUNT(*)
 		FROM
 		product
+		WHERE product_id NOT IN (
+		SELECT product_id
+		FROM orders
+		)
 	</select>
 
 	<!-- 검색된 상품 수 조회 -->
@@ -14,6 +18,12 @@
 		SELECT COUNT(*)
 		FROM product
 		WHERE product_name LIKE CONCAT('%', #{keyword}, '%')
+		AND
+		NOT EXISTS (
+		SELECT 1
+		FROM orders
+		WHERE orders.product_id = product.product_id
+		)
 	</select>
 
 	<!-- 검색된 카테고리 상품 수 조회 -->
@@ -21,6 +31,11 @@
 		SELECT COUNT(*)
 		FROM product
 		WHERE product_category_id =#{category}
+		AND NOT EXISTS (
+		SELECT 1
+		FROM orders
+		WHERE orders.product_id = product.product_id
+		)
 	</select>
 
 
