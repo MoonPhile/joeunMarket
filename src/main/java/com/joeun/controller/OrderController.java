@@ -5,6 +5,7 @@ import com.joeun.dto.ProductDto;
 import com.joeun.dto.User;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -22,17 +23,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
-    @Autowired
-    public OrderController(OrderService orderService, ProductService productService, UserMapper userMapper) {
-        this.orderService = orderService;
-        this.productService = productService;
-        this.userMapper = userMapper;
-    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")

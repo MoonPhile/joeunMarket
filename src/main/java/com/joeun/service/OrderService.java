@@ -14,6 +14,7 @@ import java.util.List;
 public class OrderService {
     private final OrderMapper orderMapper;
 
+    //Autowired -> @RequiredArgsConstructor 대체 했습니다.
 
     public void placeOrder(OrderDto orderDto) {
         OrderDto orders = new OrderDto();

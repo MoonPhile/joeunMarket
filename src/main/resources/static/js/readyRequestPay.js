@@ -39,6 +39,7 @@ function requestPay() {
                     orderId: rsp.merchant_uid,   // 주문번호
                     paymentPrice: rsp.paid_amount,     // 결제 금액
                     userId: userId,      //유저 아이디(구매자)
+                    productId:productId //
                 }),
             }).done(function (data) {
                 // 가맹점 서버 결제 API 성공시 로직
