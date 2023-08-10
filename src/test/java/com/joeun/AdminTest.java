@@ -64,4 +64,11 @@ public class AdminTest {
 
         paymentService.insertPayment(payment);
     }
+
+    @Test
+    void payCancel(){
+        String accessToken = paymentService.getAccessToken();
+        String imp_uid = "imp_464112159962";
+        paymentService.payCancel(accessToken,imp_uid);
+    }
 }

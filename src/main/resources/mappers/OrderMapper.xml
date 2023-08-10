@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.joeun.mapper.OrderMapper">
 
-    <insert id="insertOrder" parameterType="com.joeun.dto.OrderDto">
-        INSERT INTO orders (order_user_id, order_product_id, order_date)
-        VALUES (#{orderUserId}, #{orderProductId}, #{orderDate})
+    <insert id="saveOrder" parameterType="com.joeun.dto.OrderDto">
+        INSERT INTO orders (user_id, product_id, orders_date)
+        VALUES (#{userId}, #{productId}, #{ordersDate})
     </insert>
 
     <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
         SELECT * FROM orders
     </select>
 
-    <!-- 추가적인 SQL 쿼리 정의 -->
+    <select id="findOrderById" resultType="com.joeun.dto.OrderDto">
+        select orders_id, user_id as ordersUserId, product_id as ordersProductId,orders_date
+            from orders where product_id = #{productId} and user_id = #{userId}
+    </select>
 </mapper>
