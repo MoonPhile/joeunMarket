@@ -43,94 +43,100 @@
 		<div class="container product px-4 px-lg-5">
 			<div class="">
 				<br>
-				<a class="btn btn-outline-dark px-5" th:href="@{/productlist}">←전체상품 보러가기</a>
-				<div th:each="categoryList : ${categoryList}" class="containercol-12 text-center mb-4">
-					<h3><span th:text="${categoryList?.productCategoryName}"></span> 상품 리스트</h3>
+
+
+				<div th:each="categoryName : ${categoryName}" class="container col-12 text-center mb-4">
+					<h3><span th:text="${categoryName?.productCategoryName}"></span> 상품 리스트</h3>
 					<p></p>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=1)}">테스트카테고리</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=2)}">도서</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=3)}">가전</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=4)}">의류</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=5)}">완구</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=6)}">잡화</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=7)}">주방용품 </a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=8)}">문구</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=9)}">가구</a>
-					<a class="btn btn-outline-dark px-6" th:href="@{/productcategorylist(category=10)}">중고</a>
+					<a class="btn btn-primary btn-lg px-4" th:href="@{/productlist}">전체상품</a>
+
+					<!-- 자동으로 생성된 카테고리 버튼들 -->
+					<div class="d-flex flex-wrap px-5 py-2"> <!-- 가로로 정렬하고 넘치면 줄바꿈 -->
+						<div th:each="category : ${categoryList}" class="mb-2">
+							<a class="btn btn-secondary btn-lg px-4 mx-1"
+								th:href="@{/productcategorylist(category=${category.productCategoryId})}"
+								th:text="${category.productCategoryName}"></a>
+						</div>
+					</div>
 				</div>
-			</div>
-			<br>
-			<!-- 상품 리스트 반복 -->
-			<div class=" px-4 px-lg-5">
-				<div class="row">
-					<!-- Use th:each to iterate over the list of items -->
-					<div th:each="item : ${items}" class=" col-md-6 mb-4">
-						<div th:each="categoryList : ${categoryList}">
-							<div class="container">
-								<p></p>
-								<div class="row justify-content-center">
-									<img th:src="${item?.img1}" width="360" height="300" alt="Item Image 1">
-								</div>
-								<div class="row justify-content-center px-3">
-									<div class="">
-										<img th:src="${item?.img2}" width="120" height="100" alt="Item Image 2">
+				<br>
+				<!-- 상품 리스트 반복 -->
+				<div class=" px-4 px-lg-5">
+					<div class="row">
+						<!-- Use th:each to iterate over the list of items -->
+						<ul class="pagination" th:if="${totalPages == 0}">
+							<p>등럭된 상품이 존재하지 않습니다.</p>
+						</ul>
+						<div th:each="item : ${items}" class=" col-md-6 mb-4">
+							<div th:each="categoryName : ${categoryName}">
+								<div class="container">
+									<p></p>
+									<div class="row justify-content-center">
+										<img th:src="${item?.img1}" width="360" height="300" alt="Item Image 1">
 									</div>
-									<div class="">
-										<img th:src="${item?.img3}" width="120" height="100" alt="Item Image 3">
+									<div class="row justify-content-center px-3">
+										<div class="">
+											<img th:src="${item?.img2}" width="120" height="100" alt="Item Image 2">
+										</div>
+										<div class="">
+											<img th:src="${item?.img3}" width="120" height="100" alt="Item Image 3">
+										</div>
+										<div class="">
+											<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
+										</div>
 									</div>
-									<div class="">
-										<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
+									<p></p>
+									<div class="row justify-content-end px-5">
+										<form th:action="@{/ordershow}" method="get" class="d-flex px-2">
+											<input type="hidden" name="order" th:value="${item?.productId}">
+											<button type="submit" class="btn btn-secondary">상세정보</button>
+										</form>
+										<form th:action="@{/order}" method="get"
+											onsubmit="return confirm('상품을 구매하시겠습니까?')">
+											<button type="submit"
+												style="border: none; background: none; padding: 0; cursor: pointer;">
+												<a th:href="@{/order(productId=${item?.productId})}">
+													<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
+												</a>
+											</button>
+										</form>
 									</div>
 								</div>
-								<p></p>
-								<div class="row justify-content-end px-5">
-									<form th:action="@{/ordershow}" method="get" class="d-flex px-2 py-2">
-										<input type="hidden" name="order" th:value="${item?.productId}">
-										<button type="submit" class="btn btn-outline-dark">상세정보</button>
-									</form>
-									<form th:action="@{/ordershow}" method="get">
-										<a th:href="@{/ordershow(order=${item?.productId})}">
-											<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
-										</a>
-									</form>
+								<div class="container px-5">
+									<p class="card-text mb-2"><strong class="info-label">이름:</strong> <span
+											th:text="${item?.productName}"></span></p>
+									<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
+											th:text="${item?.productCondition}"></span></p>
+									<p class="card-text mb-2"><strong class="info-label">가격:</strong> <span
+											th:text="${item?.productPrice}"></span>원</p>
+									<p class="card-text mb-2"><strong class="info-label">설명:</strong> <span
+											th:text="${item?.productDescription}"></span></p>
 								</div>
-							</div>
-							<div class="container px-5">
-								<p class="card-text mb-2"><strong class="info-label">이름:</strong> <span
-										th:text="${item?.productName}"></span></p>
-								<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
-										th:text="${item?.productCondition}"></span></p>
-								<p class="card-text mb-2"><strong class="info-label">가격:</strong> <span
-										th:text="${item?.productPrice}"></span>원</p>
-								<p class="card-text mb-2"><strong class="info-label">설명:</strong> <span
-										th:text="${item?.productDescription}"></span></p>
-								<p class="card-text mb-2"><strong class="info-label">카테고리:</strong> <span
-										th:text="${categoryList?.productCategoryName}"></span></p>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-	</section>
-	<div class="pagination d-flex justify-content-center">
-		<ul class="pagination">
+				<div class="pagination d-flex justify-content-center">
+					<ul class="pagination" th:if="${totalPages > 0}">
 
-			<li th:if="${currentPage > 1}">
-				<a th:href="@{/productcategorylist(do=productcategorylist, page=${currentPage - 1})}"> ◀</a>
-			</li>
-			<li th:each="page : ${#numbers.sequence(1, totalPages)}">
-				<span th:if="${page == currentPage}">
-					<strong th:text="${page}" style="margin-right: 10px;"></strong>
-				</span>
-				<a th:if="${page != currentPage}"
-					th:href="@{/productcategorylist(do='productcategorylist', page=${page})}" th:text="${page}"
-					style="margin-right: 10px;"></a>
-			</li>
-			<li th:if="${currentPage < totalPages}">
-				<a th:href="@{/productcategorylist(do=productcategorylist, page=${currentPage + 1})}"> ▶ </a>
-			</li>
-		</ul>
-	</div>
+						<li th:if="${currentPage > 1}">
+							<a th:href="@{/productcategorylist(do=productcategorylist, page=${currentPage - 1})}"> ◀</a>
+						</li>
+						<li th:each="page : ${#numbers.sequence(1, totalPages)}">
+							<span th:if="${page == currentPage}">
+								<strong th:text="${page}" style="margin-right: 10px;"></strong>
+							</span>
+							<a th:if="${page != currentPage}"
+								th:href="@{/productcategorylist(do='productcategorylist', page=${page})}"
+								th:text="${page}" style="margin-right: 10px;"></a>
+						</li>
+						<li th:if="${currentPage < totalPages}">
+							<a th:href="@{/productcategorylist(do=productcategorylist, page=${currentPage + 1})}"> ▶
+							</a>
+						</li>
+					</ul>
+				</div>
+	</section>
 	<!-- Footer -->
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">

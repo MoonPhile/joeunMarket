@@ -85,7 +85,7 @@ public class ProductController {
 		int totalCount;
 		int totalPages;
 		List<ProductDto> products;
-
+		List<ProductCategoryDto> categoryList = productService.findAllCategory();
 		// 검색어가 있는 경우와 없는 경우를 구분하여 처리
 		if (keyword != null && !keyword.isEmpty()) {
 			totalCount = pagingService.countProductsByKeyword(keyword);
@@ -142,6 +142,7 @@ public class ProductController {
 			}
 		}
 
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("items", products);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
@@ -167,8 +168,10 @@ public class ProductController {
 		int offset = (page - 1) * size;
 
 		List<ProductDto> products = productService.findProductByCategory(offset, size,category);
-		List<ProductCategoryDto> categoryList = productService.findCategoryName(category);
+		List<ProductCategoryDto> categoryList = productService.findAllCategory();
+		List<ProductCategoryDto> categoryName = productService.findCategoryName(category);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("category", category);

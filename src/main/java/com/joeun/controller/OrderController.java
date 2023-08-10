@@ -6,6 +6,7 @@ import com.joeun.dto.User;
 import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
