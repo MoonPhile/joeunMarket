@@ -2,10 +2,14 @@ package com.joeun.controller;
 
 import com.joeun.dto.OrderDto;
 import com.joeun.dto.ProductDto;
+import com.joeun.dto.User;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,31 +17,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.joeun.mapper.UserMapper;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
-    @Autowired
-    public OrderController(OrderService orderService, ProductService productService) {
-        this.orderService = orderService;
-        this.productService = productService;
-    }
+    private final UserMapper userMapper;
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
-    public String showOrderPage(@RequestParam(defaultValue = "1") int productId,Model model) {
-
+    public String showOrderPage(@RequestParam(defaultValue = "1") int productId, Model model) {
         // 출력 확인용
-
         ProductDto productDto = productService.getProductInfo(productId); // 상품 정보 가져오기
-
-        // 주문 정보에 필요한 추가 정보 설정
-        productDto.setProductOrderUserId(1);
-        productDto.setProductOrderDate(new Date());
-
         // 모델에 ProductDto 객체 추가
         model.addAttribute("productDto", productDto);
 
@@ -56,8 +53,29 @@ public class OrderController {
 
     // 주문 완료
     @PostMapping("/completeOrder")
-    public String completeOrder(@ModelAttribute OrderDto order) {
+    public String completeOrder(@ModelAttribute OrderDto order,
+                                @RequestParam(defaultValue = "1") int productId,
+                                Authentication authentication,
+                                Model model) {
+
+        // 현재 로그인된 사용자의 아이디
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserId = userDetails.getUsername();
+
+        // 로그인한 유저 정보를 이용하여 주문 정보 설정
+        order.setUserId(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
+        order.setProductId(productId); // 상품 아이디 설정
+        order.setOrderDate(new Date()); // 주문 날짜 설정
+
+        // 주문 정보 저장
         orderService.placeOrder(order);
+        OrderDto orderDto = orderService.findOrderById(productId,Integer.parseInt(currentUserId));
+        ProductDto product = productService.findProductById(productId);
+        model.addAttribute("order",orderDto);
+        model.addAttribute("product",product);
+        // 다음 작업을 수행하거나 필요한 뷰를 반환합니다.
         return "order_complete";
     }
+
+
 }

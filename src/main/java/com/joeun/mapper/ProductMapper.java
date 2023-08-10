@@ -6,9 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.joeun.dto.ProductCategoryDto;
 import com.joeun.dto.ProductDto;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface ProductMapper {
@@ -44,7 +42,7 @@ public interface ProductMapper {
 	
 	List<ProductDto> findProductsByKeywordhighPrice(@Param("offset") int offset, @Param("size") int size, @Param("keyword") String keyword);
 	
-	List<ProductDto> findProductByCategoty(@Param("offset") int offset, @Param("size") int size,@Param("category") int category);
+	List<ProductDto> findProductByCategory(@Param("offset") int offset, @Param("size") int size, @Param("category") int category);
 
 
 	List<Integer> findAllProductId();
@@ -58,5 +56,12 @@ public interface ProductMapper {
 // order 관련
 
 	ProductDto getProductInfo(int productId);
+
+	/**
+	 * 결제 할 때 가격 비교용
+	 * @param id -productId
+	 * @return 가격
+	 */
+	int getPriceById(int id);
 }
 
