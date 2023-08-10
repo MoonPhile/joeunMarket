@@ -65,7 +65,7 @@ public class ProductService {
 
     public List<ProductDto> findProductsByKeywordPaging(int offset, int size, String keyword) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
 
         List<ProductDto> products = productMapper.findProductsByKeywordPaging(offset, size, keyword);
@@ -77,7 +77,7 @@ public class ProductService {
 
     public List<ProductDto> findAllProductsPaging(int offset, int size) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findAllProductsPaging(offset, size);
         if (products == null) {
@@ -88,7 +88,7 @@ public class ProductService {
 
     public List<ProductDto> findProductsByKeywordPrice(int offset, int size, String keyword) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findProductsByKeywordPrice(offset, size, keyword);
         if (products == null) {
@@ -99,7 +99,7 @@ public class ProductService {
 
     public List<ProductDto> findAllProductsPrice(int offset, int size) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findAllProductsPrice(offset, size);
         if (products == null) {
@@ -110,7 +110,7 @@ public class ProductService {
 
     public List<ProductDto> findProductsByKeywordhighPaging(int offset, int size, String keyword) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findProductsByKeywordhighPaging(offset, size, keyword);
         if (products == null) {
@@ -121,7 +121,7 @@ public class ProductService {
 
     public List<ProductDto> findAllProductshighPaging(int offset, int size) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findAllProductshighPaging(offset, size);
         if (products == null) {
@@ -132,7 +132,7 @@ public class ProductService {
 
     public List<ProductDto> findProductsByKeywordhighPrice(int offset, int size, String keyword) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findProductsByKeywordhighPrice(offset, size, keyword);
         if (products == null) {
@@ -143,7 +143,7 @@ public class ProductService {
 
     public List<ProductDto> findAllProductshighPrice(int offset, int size) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findAllProductshighPrice(offset, size);
         if (products == null) {
@@ -154,7 +154,7 @@ public class ProductService {
 
     public List<ProductDto> findProductByCategory(int offset, int size, int category) {
         if (offset < 0) {
-            offset = 1; // 음수 offset을 0으로 대체
+            offset = 0; // 음수 offset을 0으로 대체
         }
         List<ProductDto> products = productMapper.findProductByCategory(offset, size, category);
         if (products == null) {
