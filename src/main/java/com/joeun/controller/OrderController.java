@@ -3,6 +3,7 @@ package com.joeun.controller;
 import com.joeun.dto.OrderDto;
 import com.joeun.dto.ProductDto;
 import com.joeun.dto.User;
+import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.joeun.mapper.UserMapper;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +30,16 @@ import java.util.Optional;
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
-    private final UserMapper userMapper;
+    private UserMapper userMapper;
+    private OrderMapper orderMapper;
 
+    @Autowired
+    public OrderController(OrderService orderService, ProductService productService, UserMapper userMapper, OrderMapper orderMapper) {
+        this.orderService = orderService;
+        this.productService = productService;
+        this.userMapper = userMapper;
+        this.orderMapper = orderMapper;
+    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
@@ -54,6 +65,9 @@ public class OrderController {
     // 주문 완료
     @PostMapping("/completeOrder")
     public String completeOrder(@ModelAttribute OrderDto order,
+                                @RequestParam String ordersName,
+                                @RequestParam String ordersPhone,
+                                @RequestParam String ordersAddress,
                                 @RequestParam(defaultValue = "1") int productId,
                                 Authentication authentication,
                                 Model model) {
@@ -67,15 +81,25 @@ public class OrderController {
         order.setProductId(productId); // 상품 아이디 설정
         order.setOrderDate(new Date()); // 주문 날짜 설정
 
-        // 주문 정보 저장
-        orderService.placeOrder(order);
-        OrderDto orderDto = orderService.findOrderById(productId,Integer.parseInt(currentUserId));
-        ProductDto product = productService.findProductById(productId);
-        model.addAttribute("order",orderDto);
-        model.addAttribute("product",product);
-        // 다음 작업을 수행하거나 필요한 뷰를 반환합니다.
+        orderService.placeOrder(order, ordersName, ordersPhone, ordersAddress);
+
+        model.addAttribute("message", "주문이 완료되었습니다.");
+
         return "order_complete";
     }
 
+    // 주문 내역
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/order-history")
+    public String showOrderHistoryPage(Authentication authentication, Model model) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String currentUserId = userDetails.getUsername();
+        int userId = Integer.parseInt(currentUserId);
+
+        List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(userId);
+        model.addAttribute("orderHistory", orderHistory);
+
+        return "order_history";
+    }
 
 }
