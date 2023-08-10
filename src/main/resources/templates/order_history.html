@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Order History</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5 mb-4">Your Order History</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">상품 이름</th>
+            <th scope="col">상품 설명</th>
+            <th scope="col">상품 가격</th>
+            <th scope="col">주문 날짜</th>
+            <th scope="col">주문 상세 보기</th>
+            <!-- Add more columns as needed -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orderHistory}">
+            <td th:text="${order.productName}"></td>
+            <td th:text="${order.productDescription}"></td>
+            <td th:text="${order.productPrice}"></td>
+            <td th:text="${order.ordersDate}"></td>
+            <td>
+                <button class="btn btn-primary" th:attr="data-toggle='modal', data-target='#orderModal' + ${order.ordersId}">주문 상세 보기</button>
+            </td>
+            <!-- Add more columns as needed -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Modal -->
+<div th:each="order : ${orderHistory}">
+    <div class="modal fade" th:id="'orderModal' + ${order.ordersId}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">주문 상세 보기</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>주문자 이름: <span th:text="${order.ordersName}"></span></p>
+                    <p>주문자 핸드폰 번호: <span th:text="${order.ordersPhone}"></span></p>
+                    <p>배송지 정보: <span th:text="${order.ordersAddress}"></span></p>
+                    <p>상품 이름: <span th:text="${order.productName}"></span></p>
+                    <p>상품 설명: <span th:text="${order.productDescription}"></span></p>
+                    <p>상품 가격: <span th:text="${order.productPrice}"></span></p>
+                    <p>주문 날짜: <span th:text="${order.ordersDate}"></span></p>
+                    <!-- Add more order details as needed -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#cancelOrderModal' + ${order.ordersId}">주문 취소</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 주문 취소 모달 -->
+<div th:each="order : ${orderHistory}">
+    <div class="modal fade" th:id="'cancelOrderModal' + ${order.ordersId}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">주문 취소</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>주문을 취소하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="cancelOrder(${order.ordersId})">주문 취소하기</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function cancelOrder(orderId) {
+        if (confirm("주문을 취소하시겠습니까?")) {
+            $.ajax({
+                url: '/cancelOrder', // 취소 작업을 처리하는 컨트롤러 엔드포인트 경로
+                type: 'POST',
+                data: { orderId: orderId },
+                success: function (response) {
+                    alert('주문이 취소되었습니다.');
+                    location.reload();
+                },
+                error: function () {
+                    alert('주문 취소 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
