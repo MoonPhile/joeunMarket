@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class User {
 
-    private String userId;
+    private Long userId;
     private String userUseId;
     private String userPw;
     private String userAddress;
