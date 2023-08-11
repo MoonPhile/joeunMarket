@@ -1,15 +1,22 @@
 package com.joeun.mapper;
 
+
 import com.joeun.dto.OrderDto;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface OrderMapper {
-    void insertOrder(OrderDto order);
 
-    List<OrderDto> getAllOrders(); // 주문 목록을 조회하는 메서드
+    void saveOrder(OrderDto orderDto);
 
-    // 추가적인 메서드 정의
+    List<OrderDto> getAllOrders();
+
+//    List<OrderDto> getOrdersByUserId(@Param("userId") int userId);
+
+    List<OrderDto> getOrdersWithProductInfoByUserId(@Param("userUseId") String userUseId);
+
 }

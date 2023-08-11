@@ -15,13 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.joeun.dto.ProductCategoryDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.mapper.ProductMapper;
-import com.joeun.service.ProductService;
-
-import lombok.RequiredArgsConstructor;
-
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
@@ -92,7 +85,7 @@ public class ProductController {
 		int totalCount;
 		int totalPages;
 		List<ProductDto> products;
-
+		List<ProductCategoryDto> categoryList = productService.findAllCategory();
 		// 검색어가 있는 경우와 없는 경우를 구분하여 처리
 		if (keyword != null && !keyword.isEmpty()) {
 			totalCount = pagingService.countProductsByKeyword(keyword);
@@ -149,6 +142,7 @@ public class ProductController {
 			}
 		}
 
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("items", products);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
@@ -173,9 +167,11 @@ public class ProductController {
 
 		int offset = (page - 1) * size;
 
-		List<ProductDto> products = productService.findProductByCategoty(offset, size,category);
-		List<ProductCategoryDto> categoryList = productService.findCategoryName(category);
+		List<ProductDto> products = productService.findProductByCategory(offset, size,category);
+		List<ProductCategoryDto> categoryList = productService.findAllCategory();
+		List<ProductCategoryDto> categoryName = productService.findCategoryName(category);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("category", category);
