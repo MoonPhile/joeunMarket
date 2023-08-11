@@ -83,12 +83,10 @@
 			<div class="paging">
 				<a th:if="${currentPage > 1}" th:href="@{/list.do(do=list.do, page=${currentPage - 1})}"
 					class="page_bt prev">◀</a>
-
 				<p th:each="page : ${#numbers.sequence(1, totalPages)}">
 					<a th:if="${page == currentPage}" th:href="@{/list.do(do='list.do', page=${page})}" th:text="${page}"></a>
 					<a th:if="${page != currentPage}" th:href="@{/list.do(do='list.do', page=${page})}" th:text="${page}"></a>
 				</p>
-
 				<a th:if="${currentPage < totalPages}" th:href="@{/list.do(do=list.do, page=${currentPage + 1})}"
 					class="page_bt next">▶</a>
 			</div>
