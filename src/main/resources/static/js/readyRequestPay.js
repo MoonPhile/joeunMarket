@@ -12,9 +12,10 @@ function requestPay() {
     var orderId = document.getElementById('ordersId').value;
     var productId = document.getElementById('productId').value;
     var productName = document.getElementById('productName').value;
-
+    //카카오, 토스인지 구분할 수 있게 받아와야합니다
+    var payCategory = "kakaopay";
     IMP.request_pay({
-        pg: "kakaopay",
+        pg: payCategory,
         merchant_uid: orderId,   // 주문번호
         // merchant_uid: "ORD20180131-0000011",   // 주문번호
         name: productName,                      //상품 이름
