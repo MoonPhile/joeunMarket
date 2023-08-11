@@ -48,7 +48,7 @@ public class PostController {
 		List<PostFileRequest> files = fileUtils.uploadFiles(params.getFiles());
 		postFileService.saveFiles(id, files);
 		return "redirect:/list.do";
-
+	}
     // 기존 게시글 수정
     @PostMapping("/update.do")
     public String updatePost(final PostRequest params, Model model) {
@@ -107,12 +107,6 @@ public class PostController {
 		return "post_view";
 	}
 
-	// 기존 게시글 수정
-	@PostMapping("/update.do")
-	public String updatePost(final PostRequest params) {
-		postService.updatePost(params);
-		return "redirect:/list.do";
-	}
 
 	// 게시글 삭제
 	@PostMapping("/delete.do")
