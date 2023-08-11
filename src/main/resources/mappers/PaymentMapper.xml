@@ -12,4 +12,16 @@
                 #{impUid})
     </insert>
 
+    <delete id="deletePayment" parameterType="int">
+        delete from payment where payment_id = #{id}
+    </delete>
+
+    <select id="findPaymentById" parameterType="int">
+        select * from payment where payment_id = #{id}
+    </select>
+
+    <select id="findAllPayment" resultType="com.joeun.dto.Payment">
+        select * from payment
+    </select>
+
 </mapper>
