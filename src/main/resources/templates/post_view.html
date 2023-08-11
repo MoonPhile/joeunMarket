@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/header">
+<th:block layout:fragment="title">
+    <head th:replace="post_header :: main-head"> </head>
+    <title>상세 페이지</title>
+</th:block>
+
+<th:block layout:fragment="content">
+
+    <div class="content">
+        <section>
+            <table class="tb tb_row">
+                <colgroup>
+                    <col style="width:10%;"/><col style="width:23%;"/><col style="width:10%;"/><col style="width:23%;"/>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th scope="row">글 유형</th>
+                    <td th:text="${post.noticeYn == false ? '일반' : '공지'}"></td>
+
+                    <th scope="row">등록일</th>
+                    <td th:text="${#temporals.format( post.createdDate, 'yyyy-MM-dd HH:mm' )}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">제목</th>
+                    <td>[[ ${post.title} ]]</td>
+
+                    <th scope="row">조회</th>
+                    <td colspan="3">[[ ${post.viewCnt} ]]</td>
+                </tr>
+                <tr>
+                    <th scope="row">이름</th>
+                    <td colspan="3">[[ ${post.writer} ]]</td>
+                </tr>
+                <tr>
+                    <th scope="row">내용</th>
+                    <td colspan="3">[[ ${post.content} ]]</td>
+                </tr>
+                <tr>
+                    <th scope="row">첨부파일</th>
+                    <td id="files" colspan="3">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="btn_set">
+                <a th:href="@{/write.do( id=${post.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
+                <button type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
+                <a th:href="@{/list.do}" class="btns btn_bdr3 btn_mid">뒤로</a>
+            </p>
+        </section>
+    </div> <!--/* .content */-->
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+            window.onload = () => {
+                findAllFile();
+
+                findAllComment();
+            }
+
+            // 게시글 삭제
+            function deletePost() {
+                const id = [[ ${post.id} ]];
+
+                if ( !confirm(id + '번 게시글을 삭제할까요?') ) {
+                    return false;
+                }
+
+                const formHtml = `
+                    <form id="deleteForm" action="/delete.do" method="post">
+                        <input type="hidden" id="id" name="id" value="${id}" />
+                    </form>
+                `;
+                const doc = new DOMParser().parseFromString(formHtml, 'text/html');
+                const form = doc.body.firstChild;
+                document.body.append(form);
+                document.getElementById('deleteForm').submit();
+            }
+
+    // 전체 파일 조회
+    function findAllFile() {
+
+        // 1. API 호출
+        const postId = [[ ${post.id}]];
+        const response = getJson(`/${postId}/files`);
+
+        // 2. 로직 종료
+        if ( !response.length ) {
+            return false;
+        }
+
+        // 3. 파일 영역 추가
+        let fileHtml = '<div class="file_down"><div class="cont">';
+        response.forEach(row => {
+            fileHtml += `<a href="javascript:alert('준비 중입니다.');"><span class="icons"><i class="fas fa-folder-open"></i></span>${row.originalName}</a>`;
+        })
+        fileHtml += '</div></div>';
+
+        // 4. 파일 HTML 렌더링
+        document.getElementById('files').innerHTML = fileHtml;
+    }
+        /*]]>*/
+    </script>
+</th:block>
+</html>

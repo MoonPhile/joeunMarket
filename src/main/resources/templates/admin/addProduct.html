@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/adminProduct.js"></script>
+    <title>상품등록을 해봐요</title>
+</head>
+<body>
+<div>
+    <form id="addProductForm" method="post" action="/addProduct" enctype="multipart/form-data">
+        <p>상품 ID: <input type="text" name="productId">
+        <p>상품 이름: <input type="text" name="productName">
+        <p>상품 상태: <input type="text" name="productCondition">
+        <p>상품 가격: <input type="text" name="productPrice">
+        <p>상품 설명:</p><textarea name="productDescription"></textarea>
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>상품 이미지: <input type="file" name="imgs" class="image-input">
+        <p>이미지는 최대 4개까지 설정 가능합니다.
+        <p>상품 카테고리:<select name="productCategoryId">
+            <option th:each="category : ${categoryList}" th:value="${category.productCategoryId}"
+                    th:utext="${category.productCategoryName}"></option>
+        </select>
+        <p>
+            <button type="button" id="addProduct" onclick="check(this)">등록하기</button>
+    </form>
+</div>
+
+</body>
+</html>

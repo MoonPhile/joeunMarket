@@ -1,8 +1,8 @@
 package com.joeun.config;
 
-
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
+@RequiredArgsConstructor
 public class DatabaseConfig {
 
     @Autowired
@@ -52,5 +53,10 @@ public class DatabaseConfig {
     public org.apache.ibatis.session.Configuration mybatisConfig() {
         return new org.apache.ibatis.session.Configuration();
     }
+
+
+
+
+
 
 }
