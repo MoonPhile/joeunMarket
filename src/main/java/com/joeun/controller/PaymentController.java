@@ -39,7 +39,7 @@ public class PaymentController {
         System.out.println("Date: NOW()");
         System.out.println("impUid: " + payment.getImpUid());
         //검증 로직 구현 필요
-        int price = productService.getPriceById(productId);
+//        int price = productService.getPriceById(productId);
         //product의 가격과 payment의 price가 같을경우 결제 진행 및 insert
         //다를 경우엔 결제 취소
         //결제전에 검증하고 취소할수있으면 좋은데 방법 생각해봐야함
