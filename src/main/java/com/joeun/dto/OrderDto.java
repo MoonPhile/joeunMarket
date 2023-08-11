@@ -13,7 +13,7 @@ public class OrderDto {
 
     /* 만들어 낼 값 */
     private int ordersId;
-    private int userId;
+    private String userUseId;
     private int productId;
     private Date ordersDate;
 
@@ -34,5 +34,6 @@ public class OrderDto {
     private String productName;
     private String productDescription;
     private int productPrice;
+
 
 }

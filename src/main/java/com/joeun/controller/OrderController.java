@@ -6,7 +6,6 @@ import com.joeun.dto.User;
 import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
@@ -77,7 +75,7 @@ public class OrderController {
         String currentUserId = userDetails.getUsername();
 
         // 로그인한 유저 정보를 이용하여 주문 정보 설정
-        order.setUserId(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
+        order.setUserUseId(currentUserId); // 사용자 아이디 설정
         order.setProductId(productId); // 상품 아이디 설정
         order.setOrderDate(new Date()); // 주문 날짜 설정
 
@@ -94,9 +92,8 @@ public class OrderController {
     public String showOrderHistoryPage(Authentication authentication, Model model) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserId = userDetails.getUsername();
-        int userId = Integer.parseInt(currentUserId);
 
-        List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(userId);
+        List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(currentUserId);
         model.addAttribute("orderHistory", orderHistory);
 
         return "order_history";
