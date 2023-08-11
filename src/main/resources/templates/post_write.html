@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/basic">
-<head th:replace="header :: main-head"> </head>
+<head th:replace="post_header :: main-head"> </head>
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
@@ -25,11 +25,17 @@
 
                 <!--/* 서버로 전달할 공지글 여부 */-->
                 <input type="hidden" id="noticeYn" name="noticeYn" />
+
+                <!--/* 삭제 처리할 파일 번호 */-->
+                <input type="hidden" id="removeFileIds" name="removeFileIds" />
+
+
                 <table class="tb tb_row">
                     <colgroup>
                         <col style="width:15%;" /><col style="width:35%;" /><col style="width:15%;" /><col style="width:35%;" />
                     </colgroup>
-                    <tbody>
+
+
                     <tr>
                         <th scope="row">공지글</th>
                         <td><span class="chkbox"><input type="checkbox" id="isNotice" name="isNotice" class="chk" /><i></i><label for="isNotice"> 설정</label></span></td>
@@ -84,8 +90,44 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
 
-            window.onload = () => {
-            renderPostInfo();
+               window.onload = () => {
+        renderPostInfo();
+
+        findAllFile();
+    }
+
+
+    // 전체 파일 조회
+    function findAllFile() {
+
+        // 1. 신규 등록/수정 체크
+        const post = [[ ${post}]];
+        if ( !post ) {
+            return false;
+        }
+
+        // 2. API 호출
+        const response = getJson(`/[[ ${post}]]/files`);
+
+        // 3. 로직 종료
+        if ( !response.length ) {
+            return false;
+        }
+
+        // 4. 업로드 영역 추가
+        for (let i = 0, len = (response.length - 1); i < len; i++) {
+            addFile();
+        }
+
+        // 5. 파일 선택 & 삭제 이벤트 재선언 & 파일명 세팅
+        const filenameInputs = document.querySelectorAll('.file_list input[type="text"]');
+        filenameInputs.forEach((input, i) => {
+            const fileInput = input.nextElementSibling.firstElementChild;
+            const fileRemoveBtn = input.parentElement.nextElementSibling;
+            fileInput.setAttribute('onchange', `selectFile(this, ${response[i].id})`);
+            fileRemoveBtn.setAttribute('onclick', `removeFile(this, ${response[i].id})`);
+            input.value = response[i].originalName;
+        })
     }
 
 
@@ -126,12 +168,28 @@
 
         document.getElementById('saveBtn').disabled = true;
         form.noticeYn.value = form.isNotice.checked;
+        form.removeFileIds.value = removeFileId.getAll().join();
         form.action = [[ ${post == null} ]] ? '/save.do' : '/update.do';
         form.submit();
 
     }
+        // 파일 삭제 처리용 익명 함수
+    const removeFileId = (function() {
+        const ids = [];
+        return {
+            add(id) {
+                if (ids.includes(id)) {
+                    return false;
+                }
+                ids.push(id);
+            },
+            getAll() {
+                return ids;
+            }
+        }
+    }());
             // 파일 선택
-    function selectFile(element) {
+    function selectFile(element,id) {
 
         const file = element.files[0];
         const filename = element.closest('.file_input').firstElementChild;
@@ -153,6 +211,10 @@
 
         // 3. 파일명 지정
         filename.value = file.name;
+        //4 삭제할 파일 id 추가
+        if(id){
+        removeFileId.add(id);
+        }
     }
 
 
@@ -173,7 +235,13 @@
 
 
     // 파일 삭제
-    function removeFile(element) {
+    function removeFile(element,id) {
+
+    //삭제할 파일 id 추가
+    if(id){
+    removeFileId.add(id);
+    }
+    // 파일 영역 초기화 & 삭제
         const fileAddBtn = element.nextElementSibling;
         if (fileAddBtn) {
             const inputs = element.previousElementSibling.querySelectorAll('input');
