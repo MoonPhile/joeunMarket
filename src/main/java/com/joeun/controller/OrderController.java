@@ -6,6 +6,7 @@ import com.joeun.dto.User;
 import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
+import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +31,7 @@ import java.util.Optional;
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
+    private final UserService userService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
@@ -75,9 +77,11 @@ public class OrderController {
         //방금 저장된 order 정보를 불러옵니다.
         OrderDto orderDto = orderService.findOrderById(currentUserId,productId);
         ProductDto product = productService.findProductById(productId);
+        int userId = userService.getUserIntId(currentUserId);
         model.addAttribute("order",orderDto);
         model.addAttribute("product",product);
         model.addAttribute("paymentMethod",paymentMethod);
+        model.addAttribute("userId",userId);
         model.addAttribute("message", "주문이 완료되었습니다.");
 
         return "order_complete";

@@ -19,4 +19,8 @@
         SET user_pw = #{userPw}, user_address = #{userAddress}, user_phone = #{userPhone}, user_email = #{userEmail}
         WHERE user_use_id = #{userUseId}
     </update>
+
+    <select id="getUserIntId" resultType="int">
+        select user_id from user where user_use_id = #{userUseId}
+    </select>
 </mapper>
