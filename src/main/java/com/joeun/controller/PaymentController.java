@@ -16,11 +16,6 @@ public class PaymentController {
     private final PaymentService paymentService;
     private final ProductService productService;
 
-    @GetMapping("/portOne.do")
-    public String goToTestPay() {
-        return "/test/portOne";
-    }
-
     @PostMapping("/payment/validate")
     public String payValidate(@RequestBody Payment payment) {
         System.out.println("페이먼트 검증 컨트롤러 진입");
@@ -53,15 +48,17 @@ public class PaymentController {
     }
 
     @PostMapping("/payment/payCancel")
-    public String doPayCancel(@RequestBody Payment payment) {
+    @ResponseBody
+    public String doPayCancel(@RequestParam int orderId) {
         System.out.println("결제 취소 진행");
         String accessToken = paymentService.getAccessToken();
+        Payment payment = paymentService.findPaymentByOrderId(orderId);
         String impUid = payment.getImpUid();
         int paymentId = payment.getPaymentId();
         paymentService.payCancel(accessToken, impUid);
         paymentService.deletePayment(paymentId);
 
-        return "";
+        return "redirect: order-history";
     }
 
     @GetMapping("/tossPay.do")
