@@ -4,6 +4,8 @@ import com.joeun.dto.PostRequest;
 import com.joeun.dto.PostResponse;
 import com.joeun.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -60,8 +62,8 @@ public class PostService{
      * 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    public List<PostResponse> findAllPost() {
-        return postMapper.findAll();
+    public List<PostResponse> findAllPost(@Param("offset") int offset, @Param("size") int size) {
+        return postMapper.findAll(offset,size);
     }
 
 }
