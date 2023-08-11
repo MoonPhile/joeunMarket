@@ -77,4 +77,20 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="file_cc" parameterType="list" resultType="com.joeun.dto.PostFileRequest">
+        SELECT
+        <include refid="fileColumns" />
+        FROM
+        tb_file
+        WHERE
+        delete_yn = 0
+        AND id IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY
+        id
+
+    </select>
 </mapper>
