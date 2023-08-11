@@ -95,9 +95,8 @@
 											onsubmit="return confirm('상품을 구매하시겠습니까?')">
 											<button type="submit"
 												style="border: none; background: none; padding: 0; cursor: pointer;">
-												<a th:href="@{/order(productId=${item?.productId})}">
-													<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
-												</a>
+												<input type="hidden" name="productId" th:value="${item?.productId}" />
+												<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
 											</button>
 										</form>
 									</div>
