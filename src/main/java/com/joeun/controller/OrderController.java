@@ -9,16 +9,14 @@ import com.joeun.service.ProductService;
 import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.joeun.mapper.UserMapper;
 
 import java.time.LocalDateTime;
@@ -100,4 +98,18 @@ public class OrderController {
         return "order_history";
     }
 
+    // 주문 취소
+    @PostMapping("/cancelOrder")
+    @ResponseBody
+    public ResponseEntity<String> cancelOrder(@RequestParam("ordersId") int ordersId) {
+        try {
+            LocalDateTime cancelTime = LocalDateTime.now(); // 현재 시간 가져오기
+            orderMapper.cancelOrder(ordersId, "취소", cancelTime);
+            return ResponseEntity.ok("주문이 취소되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 취소 중 오류가 발생했습니다.");
+        }
+    }
 }
+
+

@@ -26,4 +26,13 @@
         select * from orders where product_id = #{productId} and user_use_id = #{userId}
     </select>
 
+    <!-- 주문 취소 -->
+    <!-- OrderMapper.xml -->
+        <!-- 주문 상태 업데이트를 위한 SQL 쿼리 정의 -->
+    <update id="cancelOrder">
+        UPDATE orders
+        SET ordersStatus = #{ordersStatus},
+        ordersCanceltimes = #{cancelTime}
+        WHERE ordersId = #{ordersId}
+    </update>
 </mapper>
