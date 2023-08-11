@@ -21,17 +21,19 @@ public class OrderService {
         this.orderMapper = orderMapper;
     }
 
-    public void placeOrder(OrderDto orderDto,String ordersName, String ordersPhone, String ordersAddress) {
-        orderDto.setUserUseId(orderDto.getUserUseId()); // 이 부분 삭제해주세요
-        orderDto.setProductId(orderDto.getProductId());
-        orderDto.setOrderDate(new Date());
-
-        orderDto.setOrdersName(ordersName);
-        orderDto.setOrdersPhone(ordersPhone);
-        orderDto.setOrdersAddress(ordersAddress);
+    public void placeOrder(OrderDto orderDto) {
+//        ,String ordersName, String ordersPhone, String ordersAddress 삭제
+//        orderDto.setUserUseId(orderDto.getUserUseId()); // 이 부분 삭제해주세요
+//        orderDto.setProductId(orderDto.getProductId());
+//        orderDto.setOrderDate(new Date());
+//
+//        orderDto.setOrdersName(ordersName);
+//        orderDto.setOrdersPhone(ordersPhone);
+//        orderDto.setOrdersAddress(ordersAddress);
 
         orderMapper.saveOrder(orderDto);
     }
+
 
     public List<OrderDto> getAllOrders() {
         return orderMapper.getAllOrders();
@@ -40,6 +42,10 @@ public class OrderService {
     // 주문 출력
     public List<OrderDto> getOrdersWithProductInfoByUserId(String userId) {
         return orderMapper.getOrdersWithProductInfoByUserId(userId);
+    }
+
+    public OrderDto findOrderById(String userId,int productId){
+        return orderMapper.findOrderById(userId,productId);
     }
 }
 

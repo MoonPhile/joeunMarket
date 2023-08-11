@@ -19,4 +19,5 @@ public interface OrderMapper {
 
     List<OrderDto> getOrdersWithProductInfoByUserId(@Param("userUseId") String userUseId);
 
+    OrderDto findOrderById(@Param("userId") String userId,@Param("productId") int productId);
 }

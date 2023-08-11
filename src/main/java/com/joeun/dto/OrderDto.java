@@ -35,5 +35,21 @@ public class OrderDto {
     private String productDescription;
     private int productPrice;
 
-
+    @Override
+    public String toString() {
+        return "OrderDto{" +
+                "ordersId=" + ordersId +
+                ", userUseId='" + userUseId + '\'' +
+                ", productId=" + productId +
+                ", ordersDate=" + ordersDate +
+                ", ordersName='" + ordersName + '\'' +
+                ", ordersPhone='" + ordersPhone + '\'' +
+                ", ordersAddress='" + ordersAddress + '\'' +
+                ", ordersStatus='" + ordersStatus + '\'' +
+                ", ordersCanceltimes=" + ordersCanceltimes +
+                ", productName='" + productName + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", productPrice=" + productPrice +
+                '}';
+    }
 }

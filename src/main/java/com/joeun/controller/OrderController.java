@@ -6,6 +6,7 @@ import com.joeun.dto.User;
 import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -25,19 +26,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
-    private UserMapper userMapper;
-    private OrderMapper orderMapper;
-
-    @Autowired
-    public OrderController(OrderService orderService, ProductService productService, UserMapper userMapper, OrderMapper orderMapper) {
-        this.orderService = orderService;
-        this.productService = productService;
-        this.userMapper = userMapper;
-        this.orderMapper = orderMapper;
-    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
@@ -63,13 +55,11 @@ public class OrderController {
     // 주문 완료
     @PostMapping("/completeOrder")
     public String completeOrder(@ModelAttribute OrderDto order,
-                                @RequestParam String ordersName,
-                                @RequestParam String ordersPhone,
-                                @RequestParam String ordersAddress,
                                 @RequestParam(defaultValue = "1") int productId,
                                 Authentication authentication,
+                                String paymentMethod,
                                 Model model) {
-
+        System.out.println(paymentMethod);
         // 현재 로그인된 사용자의 아이디
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserId = userDetails.getUsername();
@@ -79,8 +69,15 @@ public class OrderController {
         order.setProductId(productId); // 상품 아이디 설정
         order.setOrderDate(new Date()); // 주문 날짜 설정
 
-        orderService.placeOrder(order, ordersName, ordersPhone, ordersAddress);
+        System.out.println("order toString\n"+order.toString());
 
+        orderService.placeOrder(order);
+        //방금 저장된 order 정보를 불러옵니다.
+        OrderDto orderDto = orderService.findOrderById(currentUserId,productId);
+        ProductDto product = productService.findProductById(productId);
+        model.addAttribute("order",orderDto);
+        model.addAttribute("product",product);
+        model.addAttribute("paymentMethod",paymentMethod);
         model.addAttribute("message", "주문이 완료되었습니다.");
 
         return "order_complete";

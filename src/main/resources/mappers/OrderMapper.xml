@@ -22,4 +22,8 @@
         WHERE user_use_id = #{userUseId}
     </select>
 
+    <select id="findOrderById" resultType="com.joeun.dto.OrderDto">
+        select * from orders where product_id = #{productId} and user_use_id = #{userId}
+    </select>
+
 </mapper>
