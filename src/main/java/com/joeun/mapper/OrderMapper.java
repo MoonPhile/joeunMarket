@@ -10,13 +10,13 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper {
+
     void saveOrder(OrderDto orderDto);
+
     List<OrderDto> getAllOrders();
-    List<OrderDto> getOrdersWithProductInfoByUserId(@Param("userId") int userId);
-    void cancelOrder(@Param("orderId") int orderId, @Param("cancelReason") String cancelReason);
 
-    OrderDto getOrderById(@Param("orderId") int orderId);
+//    List<OrderDto> getOrdersByUserId(@Param("userId") int userId);
 
-    void updateOrder(OrderDto orderDto);
+    List<OrderDto> getOrdersWithProductInfoByUserId(@Param("userUseId") String userUseId);
 
 }
