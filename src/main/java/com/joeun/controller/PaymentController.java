@@ -5,16 +5,8 @@ import com.joeun.dto.Payment;
 import com.joeun.service.PaymentService;
 import com.joeun.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 
 
 @Controller
@@ -70,6 +62,11 @@ public class PaymentController {
         paymentService.deletePayment(paymentId);
 
         return "";
+    }
+
+    @GetMapping("/tossPay.do")
+    public String goToToss(){
+        return "/test/tossPayTest";
     }
 
 }
