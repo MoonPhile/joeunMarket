@@ -31,8 +31,8 @@
         <!-- 주문 상태 업데이트를 위한 SQL 쿼리 정의 -->
     <update id="cancelOrder">
         UPDATE orders
-        SET ordersStatus = #{ordersStatus},
-        ordersCanceltimes = #{cancelTime}
-        WHERE ordersId = #{ordersId}
+        SET orders_status = #{ordersStatus},
+        orders_canceltimes = #{ordersCanceltimes}
+        WHERE orders_id = #{ordersId}
     </update>
 </mapper>

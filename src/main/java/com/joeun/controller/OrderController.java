@@ -99,17 +99,17 @@ public class OrderController {
     }
 
     // 주문 취소
-    @PostMapping("/cancelOrder")
-    @ResponseBody
-    public ResponseEntity<String> cancelOrder(@RequestParam("ordersId") int ordersId) {
-        try {
-            LocalDateTime cancelTime = LocalDateTime.now(); // 현재 시간 가져오기
-            orderMapper.cancelOrder(ordersId, "취소", cancelTime);
-            return ResponseEntity.ok("주문이 취소되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 취소 중 오류가 발생했습니다.");
-        }
-    }
+//    @PostMapping("/cancelOrder")
+//    @ResponseBody
+//    public ResponseEntity<String> cancelOrder(@RequestParam("ordersId") int ordersId) {
+//        try {
+//            LocalDateTime cancelTime = LocalDateTime.now(); // 현재 시간 가져오기
+//            orderMapper.cancelOrder(ordersId, "취소", cancelTime);
+//            return ResponseEntity.ok("주문이 취소되었습니다.");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 취소 중 오류가 발생했습니다.");
+//        }
+//    }
 }
 
 
