@@ -81,7 +81,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#cancelOrderModal' + ${order.ordersId}"
-                            th:data-order-id="${order.ordersId}" th:data-order-canceltimes="${order.ordersCanceltimes}">주문 취소</button>
+                            th:data-order-id="${order.ordersId}" th:data-order-canceltimes="${order.ordersCanceltimes}" th:value="${order.ordersId}"
+                    onclick="cancelPay(value)">주문 취소</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                 </div>
             </div>
@@ -93,24 +94,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-    function cancelOrder(orderId) {
-        if (confirm("주문을 취소하시겠습니까?")) {
-            $.ajax({
-                url: '/cancelOrder', // 취소 작업을 처리하는 컨트롤러 엔드포인트 경로
-                type: 'POST',
-                data: { orderId: orderId },
-                success: function (response) {
-                    alert('주문이 취소되었습니다.');
-                    location.reload();
-                },
-                error: function () {
-                    alert('주문 취소 중 오류가 발생했습니다.');
-                }
-            });
-        }
-    }
-</script>
+<script src="/js/paycancel.js"></script>
 </body>
 </html>

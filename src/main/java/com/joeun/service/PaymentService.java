@@ -161,5 +161,9 @@ public class PaymentService {
         paymentMapper.deletePayment(paymentId);
     }
 
+    public Payment findPaymentByOrderId(int orderId){
+        return paymentMapper.findPaymentByOrderId(orderId);
+    }
+
 
 }
