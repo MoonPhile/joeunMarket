@@ -71,23 +71,17 @@
 			</table>
 
 			<!--/* 페이지네이션 */-->
-			<div class="pagination d-flex justify-content-center">
-				<ul class="pagination">
+			<div class="paging">
+				<a th:if="${currentPage > 1}" th:href="@{/list.do(do=list.do, page=${currentPage - 1})}"
+					class="page_bt prev">◀</a>
 
-					<li th:if="${currentPage > 1}">
-						<a th:href="@{/list.do(do=list.do, page=${currentPage - 1})}"> ◀</a>
-					</li>
-					<li th:each="page : ${#numbers.sequence(1, totalPages)}">
-						<span th:if="${page == currentPage}">
-							<strong th:text="${page}" style="margin-right: 10px;"></strong>
-						</span>
-						<a th:if="${page != currentPage}" th:href="@{/list.do(do='list.do', page=${page})}"
-							th:text="${page}" style="margin-right: 10px;"></a>
-					</li>
-					<li th:if="${currentPage < totalPages}">
-						<a th:href="@{/list.do(do=list.do, page=${currentPage + 1})}"> ▶ </a>
-					</li>
+				<p th:each="page : ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${page == currentPage}" th:text="${page}"></a>
+					<a th:if="${page != currentPage}" th:href="@{/list.do(do='list.do', page=${page})}" th:text="${page}"></a>
+				</p>
 
+				<a th:if="${currentPage < totalPages}" th:href="@{/list.do(do=list.do, page=${currentPage + 1})}"
+					class="page_bt next">▶</a>
 			</div>
 
 			<!--/* 버튼 */-->
