@@ -15,4 +15,6 @@ public interface UserMapper {
 
     void updateUser(User user);
 
+    int getUserIntId(String userUseId);
+
 }

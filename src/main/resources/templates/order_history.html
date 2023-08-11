@@ -80,7 +80,8 @@
                     <p>주문을 취소하시겠습니까?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="cancelOrder(${order.ordersId})">주문 취소하기</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#cancelOrderModal' + ${order.ordersId}"
+                            th:data-order-id="${order.ordersId}" th:data-order-canceltimes="${order.ordersCanceltimes}">주문 취소</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                 </div>
             </div>

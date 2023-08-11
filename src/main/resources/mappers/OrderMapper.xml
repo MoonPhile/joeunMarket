@@ -22,4 +22,17 @@
         WHERE user_use_id = #{userUseId}
     </select>
 
+    <select id="findOrderById" resultType="com.joeun.dto.OrderDto">
+        select * from orders where product_id = #{productId} and user_use_id = #{userId}
+    </select>
+
+    <!-- 주문 취소 -->
+    <!-- OrderMapper.xml -->
+        <!-- 주문 상태 업데이트를 위한 SQL 쿼리 정의 -->
+    <update id="cancelOrder">
+        UPDATE orders
+        SET orders_status = #{ordersStatus},
+        orders_canceltimes = #{ordersCanceltimes}
+        WHERE orders_id = #{ordersId}
+    </update>
 </mapper>

@@ -22,7 +22,7 @@ public class PaymentController {
     }
 
     @PostMapping("/payment/validate")
-    public String payValidate(@RequestBody Payment payment, int productId) {
+    public String payValidate(@RequestBody Payment payment) {
         System.out.println("페이먼트 검증 컨트롤러 진입");
         System.out.println("paymentId(AI) " + payment.getPaymentId());
         System.out.println("userId " + payment.getUserId());
