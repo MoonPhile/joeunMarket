@@ -2,7 +2,6 @@ package com.joeun.service;
 
 import com.joeun.dto.PostFileRequest;
 import com.joeun.dto.PostFileResponse;
-import com.joeun.mapper.PostFileMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
