@@ -79,8 +79,8 @@
         WHERE
             delete_yn = 0
         ORDER BY
-            id DESC
-        LIMIT #{pagination.limitStart}, #{recordSize}
+        id DESC
+        LIMIT #{offset}, #{size}
     </select>
  <!-- 게시글 수 카운팅 -->
     <select id="count" parameterType="com.joeun.dto.SearchDto" resultType="int">
@@ -91,5 +91,7 @@
             tb_post
         WHERE
             delete_yn = 0
+
     </select>
+
 </mapper>

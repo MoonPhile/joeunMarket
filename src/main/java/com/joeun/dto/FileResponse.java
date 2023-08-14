@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
     @Getter
-    public class PostFileResponse {
+    public class FileResponse {
 
         private Long id;                      // 파일 번호 (PK)
         private Long postId;                  // 게시글 번호 (FK)

@@ -1,8 +1,9 @@
 package com.joeun.service;
 
-
-import com.joeun.dto.PostFileRequest;
-import com.joeun.dto.PostFileResponse;
+import com.joeun.dto.FileRequest;
+import com.joeun.dto.FileResponse;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -10,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class PostFileUtils {
+public class FileUtils {
 
     private final String uploadPath = Paths.get("C:", "develop", "upload-files").toString();
 
@@ -27,8 +30,8 @@ public class PostFileUtils {
      * @param multipartFiles - 파일 객체 List
      * @return DB에 저장할 파일 정보 List
      */
-    public List<PostFileRequest> uploadFiles(final List<MultipartFile> multipartFiles) {
-        List<PostFileRequest> files = new ArrayList<>();
+    public List<FileRequest> uploadFiles(final List<MultipartFile> multipartFiles) {
+        List<FileRequest> files = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if (multipartFile.isEmpty()) {
                 continue;
@@ -43,7 +46,7 @@ public class PostFileUtils {
      * @param multipartFile - 파일 객체
      * @return DB에 저장할 파일 정보
      */
-    public PostFileRequest uploadFile(final MultipartFile multipartFile) {
+    public FileRequest uploadFile(final MultipartFile multipartFile) {
 
         if (multipartFile.isEmpty()) {
             return null;
@@ -60,7 +63,7 @@ public class PostFileUtils {
             throw new RuntimeException(e);
         }
 
-        return PostFileRequest.builder()
+        return FileRequest.builder()
                 .originalName(multipartFile.getOriginalFilename())
                 .saveName(saveName)
                 .size(multipartFile.getSize())
@@ -107,17 +110,15 @@ public class PostFileUtils {
         }
         return dir.getPath();
     }
-
-
     /**
      * 파일 삭제 (from Disk)
      * @param files - 삭제할 파일 정보 List
      */
-    public void deleteFiles(final List<PostFileResponse> files) {
+    public void deleteFiles(final List<FileResponse> files) {
         if (CollectionUtils.isEmpty(files)) {
             return;
         }
-        for (PostFileResponse file : files) {
+        for (FileResponse file : files) {
             String uploadedDate = file.getCreatedDate().toLocalDate().format(DateTimeFormatter.ofPattern("yyMMdd"));
             deleteFile(uploadedDate, file.getSaveName());
         }
@@ -143,5 +144,23 @@ public class PostFileUtils {
             file.delete();
         }
     }
-
+    /**
+     * 다운로드할 첨부파일(리소스) 조회 (as Resource)
+     * @param file - 첨부파일 상세정보
+     * @return 첨부파일(리소스)
+     */
+    public Resource readFileAsResource(final FileResponse file) {
+        String uploadedDate = file.getCreatedDate().toLocalDate().format(DateTimeFormatter.ofPattern("yyMMdd"));
+        String filename = file.getSaveName();
+        Path filePath = Paths.get(uploadPath, uploadedDate, filename);
+        try {
+            Resource resource = new UrlResource(filePath.toUri());
+            if (resource.exists() == false || resource.isFile() == false) {
+                throw new RuntimeException("file not found : " + filePath.toString());
+            }
+            return resource;
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("file not found : " + filePath.toString());
+        }
+    }
 }
