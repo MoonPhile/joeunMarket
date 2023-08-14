@@ -25,4 +25,5 @@ public interface OrderMapper {
 
     List<ProductDto> getAllProducts();
 
+    void updateOrder(int ordersId);
 }

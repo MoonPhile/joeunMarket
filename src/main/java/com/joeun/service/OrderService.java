@@ -43,7 +43,10 @@ public class OrderService {
         return orderMapper.findOrderById(userId, productId);
     }
 
-
+    public void updateOrders(int ordersId){
+        System.out.println("오더 정보 변경");
+        orderMapper.updateOrder(ordersId);
+    }
 
 
     }

@@ -30,4 +30,8 @@
         select * from orders where product_id = #{productId} and user_use_id = #{userId}
     </select>
 
+    <update id="updateOrder" parameterType="int">
+        update orders set orders_status = 'Canceled', orders_canceltimes = now() where orders_id = #{ordersId}
+    </update>
+
 </mapper>
