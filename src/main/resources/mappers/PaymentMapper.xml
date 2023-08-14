@@ -24,4 +24,8 @@
         select * from payment
     </select>
 
+    <select id="findPaymentByOrderId" resultType="com.joeun.dto.Payment">
+        select * from payment where order_id = #{oderId}
+    </select>
+
 </mapper>

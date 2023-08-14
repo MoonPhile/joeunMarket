@@ -2,6 +2,7 @@ package com.joeun.controller;
 
 import com.joeun.dto.Payment;
 //import com.joeun.service.PaymentService;
+import com.joeun.service.OrderService;
 import com.joeun.service.PaymentService;
 import com.joeun.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +15,10 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     private final PaymentService paymentService;
-    private final ProductService productService;
-
-    @GetMapping("/portOne.do")
-    public String goToTestPay() {
-        return "/test/portOne";
-    }
+    private final OrderService orderService;
 
     @PostMapping("/payment/validate")
-    public String payValidate(@RequestBody Payment payment, int productId) {
+    public String payValidate(@RequestBody Payment payment) {
         System.out.println("페이먼트 검증 컨트롤러 진입");
         System.out.println("paymentId(AI) " + payment.getPaymentId());
         System.out.println("userId " + payment.getUserId());
@@ -31,7 +27,6 @@ public class PaymentController {
         System.out.println("Date: NOW()");
         System.out.println("impUid: " + payment.getImpUid());
         //검증 로직 구현 필요
-//        int price = productService.getPriceById(productId);
         //product의 가격과 payment의 price가 같을경우 결제 진행 및 insert
         //다를 경우엔 결제 취소
         //결제전에 검증하고 취소할수있으면 좋은데 방법 생각해봐야함
@@ -53,15 +48,17 @@ public class PaymentController {
     }
 
     @PostMapping("/payment/payCancel")
-    public String doPayCancel(@RequestBody Payment payment) {
+    @ResponseBody
+    public String doPayCancel(@RequestParam int orderId) {
         System.out.println("결제 취소 진행");
         String accessToken = paymentService.getAccessToken();
+        Payment payment = paymentService.findPaymentByOrderId(orderId);
         String impUid = payment.getImpUid();
         int paymentId = payment.getPaymentId();
-        paymentService.payCancel(accessToken, impUid);
-        paymentService.deletePayment(paymentId);
-
-        return "";
+        paymentService.payCancel(accessToken, impUid);  //실제 결제를 취소합니다
+        paymentService.deletePayment(paymentId);    //결제정보를 삭제합니다
+        orderService.updateOrders(orderId); //orders의 정보를 변경합니다
+        return "redirect: order-history";
     }
 
     @GetMapping("/tossPay.do")

@@ -8,8 +8,13 @@
         VALUES (#{userUseId}, #{productId}, #{ordersName}, #{ordersPhone}, #{ordersAddress}, #{ordersDate})
     </insert>
 
-    <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
-        SELECT * FROM orders
+    <select id="getAllOrders">
+        SELECT o.orders_id AS ordersId, o.user_use_id, o.product_id, o.orders_date,
+        o.orders_name AS ordersName, o.orders_phone AS ordersPhone, o.orders_address AS ordersAddress,
+        p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice,
+        o.orders_canceltimes AS ordersCanceltimes
+        FROM orders o
+        JOIN product p ON o.product_id = p.product_id
     </select>
 
     <!-- 주문 정보 출력 -->
@@ -20,6 +25,29 @@
         FROM orders o
         JOIN product p ON o.product_id = p.product_id
         WHERE user_use_id = #{userUseId}
+        AND o.orders_status IS NULL
+
     </select>
+
+    <!-- 주문 취소 정보 출력 -->
+    <select id="getCanceledwithProductInfoByUserId" resultType="com.joeun.dto.OrderDto">
+        SELECT o.orders_id, o.user_use_id, o.product_id, o.orders_date,
+        o.orders_name AS ordersName, o.orders_phone AS ordersPhone, o.orders_address AS ordersAddress,
+        p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice
+        FROM orders o
+        JOIN product p ON o.product_id = p.product_id
+        WHERE user_use_id = #{userUseId}
+		AND o.orders_status = 'Canceled'
+
+    </select>
+
+
+    <select id="findOrderById" resultType="com.joeun.dto.OrderDto">
+        select * from orders where product_id = #{productId} and user_use_id = #{userId}
+    </select>
+
+    <update id="updateOrder" parameterType="int">
+        update orders set orders_status = 'Canceled', orders_canceltimes = now() where orders_id = #{ordersId}
+    </update>
 
 </mapper>

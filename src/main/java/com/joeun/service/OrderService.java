@@ -1,11 +1,11 @@
 package com.joeun.service;
 
 import com.joeun.dto.OrderDto;
+import com.joeun.dto.ProductDto;
 import com.joeun.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -21,26 +21,40 @@ public class OrderService {
         this.orderMapper = orderMapper;
     }
 
-    public void placeOrder(OrderDto orderDto,String ordersName, String ordersPhone, String ordersAddress) {
-        orderDto.setUserUseId(orderDto.getUserUseId()); // 이 부분 삭제해주세요
-        orderDto.setProductId(orderDto.getProductId());
-        orderDto.setOrderDate(new Date());
-
-        orderDto.setOrdersName(ordersName);
-        orderDto.setOrdersPhone(ordersPhone);
-        orderDto.setOrdersAddress(ordersAddress);
-
+    public void placeOrder(OrderDto orderDto) {
         orderMapper.saveOrder(orderDto);
     }
 
+
     public List<OrderDto> getAllOrders() {
         return orderMapper.getAllOrders();
+    }
+
+    public List<ProductDto> getAllProducts(){
+        return orderMapper.getAllProducts();
     }
 
     // 주문 출력
     public List<OrderDto> getOrdersWithProductInfoByUserId(String userId) {
         return orderMapper.getOrdersWithProductInfoByUserId(userId);
     }
-}
+ // 주문 출력
+    public List<OrderDto> getCanceledwithProductInfoByUserId(String userId) {
+        return orderMapper.getCanceledwithProductInfoByUserId(userId);
+    }
+
+    public OrderDto findOrderById(String userId, int productId) {
+        return orderMapper.findOrderById(userId, productId);
+    }
+
+    public void updateOrders(int ordersId){
+        System.out.println("오더 정보 변경");
+        orderMapper.updateOrder(ordersId);
+    }
+
+
+    }
+
+
 
 

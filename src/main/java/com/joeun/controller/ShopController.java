@@ -13,16 +13,10 @@ public class ShopController {
         return "main";
     }
 
-    // 메인페이지 ( 로그인 유저 / 구현할게용 )
+    // 메인페이지
     @GetMapping("/main")
     public String main(){
         return "user/main";
-    }
-
-    // 주문 내역 조회 페이지
-    @GetMapping("/hist")
-    public String orderHistory() {
-        return "order_list";
     }
 }
 

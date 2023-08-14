@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.joeun;
 
 import com.joeun.mapper.PostMapper;
@@ -10,6 +11,28 @@ public class PostMapperTest {
     @Autowired
     PostMapper postMapper;
 
+=======
+//package com.joeun;
+//
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+//import com.joeun.dto.PostRequest;
+//import com.joeun.dto.PostResponse;
+//import com.joeun.mapper.PostMapper;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//import java.util.List;
+//
+//@SpringBootTest
+//public class PostMapperTest {
+//
+//    @Autowired
+//    PostMapper postMapper;
+//
+>>>>>>> develop
 //    @Test
 //    void save() {
 //        PostRequest params = new PostRequest();
@@ -64,7 +87,14 @@ public class PostMapperTest {
 //        postMapper.deleteById(1L);
 //        System.out.println("삭제 이후의 전체 게시글 개수는 : " + postMapper.findAll().size() + "개입니다.");
 //    }
+<<<<<<< HEAD
 
 
 
 }
+=======
+//
+//
+//
+//}
+>>>>>>> develop
