@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
     <title>주문 완료 페이지</title>
+    <style>
+
+        .product {
+            border: 4px solid rgb(0, 0, 0);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+
+        .info-label {
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
 <h2>주문이 완료되었습니다!</h2>
 <!-- 주문 정보나 확인 메시지 등을 추가할 수 있습니다. -->
 <p>주문이 성공적으로 처리되었습니다.</p>
@@ -21,13 +40,12 @@
     <input type="hidden" th:value="${order.ordersDate}" id="ordersDate">
     <input type="hidden" th:value="${order.ordersStatus}" id="ordersStatus">
     <input type="hidden" th:value="${order.ordersCanceltimes}" id="ordersCancelTime">
-<!--&lt;!&ndash;    <input type="hidden" th:value="${price}" id="price">&ndash;&gt;-->
+    <!--&lt;!&ndash;    <input type="hidden" th:value="${price}" id="price">&ndash;&gt;-->
     <input type="hidden" th:value="${product.productPrice}" id="price">
     <input type="hidden" th:value="${product.productName}" id="productName">
     <input type="hidden" th:value="${paymentMethod}" id="paymentMethod">
     <input type="hidden" th:value="${userId}" id="userId">
-
-
+    <a href="/order-history" id="checkOrderButton" class="btn btn-primary">주문 내역 확인하기</a>
 </div>
 <script src="/js/readyRequestPay.js"></script>
 </body>
