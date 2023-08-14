@@ -6,6 +6,7 @@ import com.joeun.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,12 +42,12 @@ public class CommentApiController {
     }
 
 
-//    // 기존 댓글 수정
-//    @PatchMapping("/{postId}/comments/{id}")
-//    public CommentResponse updateComment(@PathVariable final Long postId, @PathVariable final Long id, @RequestBody final CommentRequest params) {
-//        commentService.updateComment(params);
-//        return commentService.findCommentById(id);
-//    }
+    // 기존 댓글 수정
+    @PatchMapping("/{postId}/comments/{id}")
+    public CommentResponse updateComment(@PathVariable final Long postId, @PathVariable final Long id, @RequestBody final CommentRequest params) {
+        commentService.updateComment(params);
+        return commentService.findCommentById(id);
+    }
 
 
     // 댓글 삭제
