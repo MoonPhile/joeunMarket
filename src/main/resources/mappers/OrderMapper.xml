@@ -9,7 +9,11 @@
     </insert>
 
     <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
-        SELECT * FROM orders
+        SELECT o.orders_id AS orderId, o.user_use_id, o.product_id, o.orders_date,
+        o.orders_name AS ordersName, o.orders_phone AS ordersPhone, o.orders_address AS ordersAddress,
+        p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice
+        FROM orders o
+        JOIN product p ON o.product_id = p.product_id
     </select>
 
     <!-- 주문 정보 출력 -->
@@ -26,13 +30,8 @@
         select * from orders where product_id = #{productId} and user_use_id = #{userId}
     </select>
 
-    <!-- 주문 취소 -->
-    <!-- OrderMapper.xml -->
-        <!-- 주문 상태 업데이트를 위한 SQL 쿼리 정의 -->
-    <update id="cancelOrder">
-        UPDATE orders
-        SET orders_status = #{ordersStatus},
-        orders_canceltimes = #{ordersCanceltimes}
-        WHERE orders_id = #{ordersId}
+    <update id="updateOrder" parameterType="int">
+        update orders set orders_status = 'Canceled', orders_canceltimes = now() where orders_id = #{ordersId}
     </update>
+
 </mapper>

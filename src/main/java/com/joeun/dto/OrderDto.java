@@ -24,7 +24,7 @@ public class OrderDto {
 
     /* 취소처리 Dto 추가*/
     private String ordersStatus;
-    private LocalDateTime ordersCanceltimes;
+    private Date ordersCanceltimes;
 
     public void setOrderDate(Date date) {
         this.ordersDate = date;
@@ -52,4 +52,6 @@ public class OrderDto {
                 ", productPrice=" + productPrice +
                 '}';
     }
+
+
 }

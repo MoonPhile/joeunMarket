@@ -1,8 +1,6 @@
 package com.joeun.controller;
 
-import com.joeun.dto.OrderDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.dto.User;
+import com.joeun.dto.*;
 import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
@@ -19,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.joeun.mapper.UserMapper;
 
+import javax.persistence.criteria.Order;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -91,25 +90,21 @@ public class OrderController {
     public String showOrderHistoryPage(Authentication authentication, Model model) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserId = userDetails.getUsername();
-
         List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(currentUserId);
         model.addAttribute("orderHistory", orderHistory);
-
         return "order_history";
     }
 
-    // 주문 취소
-//    @PostMapping("/cancelOrder")
-//    @ResponseBody
-//    public ResponseEntity<String> cancelOrder(@RequestParam("ordersId") int ordersId) {
-//        try {
-//            LocalDateTime cancelTime = LocalDateTime.now(); // 현재 시간 가져오기
-//            orderMapper.cancelOrder(ordersId, "취소", cancelTime);
-//            return ResponseEntity.ok("주문이 취소되었습니다.");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 취소 중 오류가 발생했습니다.");
-//        }
-//    }
+    //어드민 주문 전체 조회
+    @GetMapping("/orderList.do")
+    public String getAllOrders(Model model){
+        List<OrderDto> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
+        return "/admin/adminOrders";
+    }
+
+
 }
+
 
 
