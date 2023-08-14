@@ -83,7 +83,7 @@
 									<p style="font-size: 30px;"><strong>상품 상태:</strong> <span class="px-3"
 											th:text="${item?.productCondition}">미정</span></p>
 									<p style="font-size: 30px;"><strong>상품 가격:</strong> <span class="px-3"
-											th:text="${item?.productPrice}"></span>원</p>
+											id="formattedPrice"></span>원</p>
 									<p style="font-size: 30px;"><strong>상품 설명:</strong> <span class="px-3"
 											th:text="${item?.productDescription}">설명 없음</span></p>
 
@@ -112,7 +112,20 @@
 										</div>
 									</div>
 								</div>
+								<script th:inline="javascript">
+									var itemPrice = /*[[${item?.productPrice}]]*/ 0; // 0은 기본값, 필요한 값으로 변경
 
+									/* 숫자를 가격 형식으로 변환하여 출력하는 함수 */
+									function formatPrice(price) {
+										return price.toLocaleString('en-US');
+									}
+
+									/* 페이지 로딩 시 실행하여 가격 값을 변환하여 출력 */
+									window.onload = function () {
+										var formattedPriceSpan = document.getElementById('formattedPrice');
+										formattedPriceSpan.textContent = formatPrice(itemPrice); // 가격을 포맷팅하여 출력
+									};
+								</script>
 								</td>
 							</tr>
 						</tbody>
