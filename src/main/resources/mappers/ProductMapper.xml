@@ -58,6 +58,7 @@
 		WHERE product_id NOT IN (
 		SELECT product_id
 		FROM orders
+		WHERE orders_status IS NULL
 		)
 		LIMIT #{param2} OFFSET #{param1}
 	</select>
@@ -69,6 +70,7 @@
 		WHERE product_id NOT IN (
 		SELECT product_id
 		FROM orders
+		WHERE orders_status IS NULL
 		)
 		order by product_id DESC
 		LIMIT
@@ -83,6 +85,7 @@
 		WHERE product_id NOT IN (
 		SELECT product_id
 		FROM orders
+		WHERE orders_status IS NULL
 		)
 		order by product_price
 		LIMIT
@@ -97,6 +100,7 @@
 		WHERE product_id NOT IN (
 		SELECT product_id
 		FROM orders
+		WHERE orders_status IS NULL
 		)
 		order by product_price DESC
 		LIMIT
@@ -115,6 +119,7 @@
           SELECT 1
           FROM orders
           WHERE orders.product_id = product.product_id
+          AND orders.orders_status IS NULL
       )
 		order by product_id
 		LIMIT #{offset}, #{size}
@@ -132,6 +137,7 @@
           SELECT 1
           FROM orders
           WHERE orders.product_id = product.product_id
+          AND orders.orders_status IS NULL
       )
 		order by product_id DESC
 		LIMIT #{offset}, #{size}
@@ -156,6 +162,7 @@
           SELECT 1
           FROM orders
           WHERE orders.product_id = product.product_id
+          AND orders.orders_status IS NULL
       )
 		order by product_price
 		LIMIT #{offset}, #{size}
@@ -170,6 +177,7 @@
           SELECT 1
           FROM orders
           WHERE orders.product_id = product.product_id
+          AND orders.orders_status IS NULL
       )
     ORDER BY product_price DESC
     LIMIT #{offset}, #{size}
@@ -205,6 +213,7 @@
           SELECT 1
           FROM orders
           WHERE orders.product_id = product.product_id
+           AND orders.orders_status IS NULL
       )
 		LIMIT #{offset}, #{size}
 	</select>

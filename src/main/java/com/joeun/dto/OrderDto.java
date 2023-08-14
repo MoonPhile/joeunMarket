@@ -24,7 +24,7 @@ public class OrderDto {
 
     /* 취소처리 Dto 추가*/
     private String ordersStatus;
-    private LocalDateTime ordersCanceltimes;
+    private Date ordersCanceltimes;
 
     public void setOrderDate(Date date) {
         this.ordersDate = date;
@@ -34,6 +34,24 @@ public class OrderDto {
     private String productName;
     private String productDescription;
     private int productPrice;
+
+    @Override
+    public String toString() {
+        return "OrderDto{" +
+                "ordersId=" + ordersId +
+                ", userUseId='" + userUseId + '\'' +
+                ", productId=" + productId +
+                ", ordersDate=" + ordersDate +
+                ", ordersName='" + ordersName + '\'' +
+                ", ordersPhone='" + ordersPhone + '\'' +
+                ", ordersAddress='" + ordersAddress + '\'' +
+                ", ordersStatus='" + ordersStatus + '\'' +
+                ", ordersCanceltimes=" + ordersCanceltimes +
+                ", productName='" + productName + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", productPrice=" + productPrice +
+                '}';
+    }
 
 
 }

@@ -12,8 +12,11 @@ function requestPay() {
     var orderId = document.getElementById('ordersId').value;
     var productId = document.getElementById('productId').value;
     var productName = document.getElementById('productName').value;
+    var buyerAddress = document.getElementById('ordersAddress').value;
+    var buyerTel = document.getElementById('ordersPhone').value;
+    var buyerName = document.getElementById('ordersName').value;
     //카카오, 토스인지 구분할 수 있게 받아와야합니다
-    var payCategory = "kakaopay";
+    var payCategory = document.getElementById('paymentMethod').value;
     IMP.request_pay({
         pg: payCategory,
         merchant_uid: orderId,   // 주문번호
@@ -21,9 +24,9 @@ function requestPay() {
         name: productName,                      //상품 이름
         amount: price,                         // Number 타입 결제 금액
         // buyer_email: "lunatic1702@gmail.com",   //메일
-        // buyer_name: "조은마켓 기술지원팀",       //
-        // buyer_tel: "010-6608-3897",         //전화번호
-        // buyer_addr: "경기도 구리시",      //주소
+        buyer_name: buyerName,       //
+        buyer_tel: buyerTel,         //전화번호
+         buyer_addr: buyerAddress,      //주소
     }, function (rsp) { // callback
         //결제 값이 요청 값과 같은지 검증합니다
         console.log(rsp)

@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <title>주문 페이지</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product {
+            border: 4px solid rgb(0, 0, 0);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .product-info {
+            border-left: 4px solid black;
+            padding-left: 12px;
+        }
+    </style>
 </head>
 <body>
-
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
@@ -34,12 +47,12 @@
                 <div class="form-group">
                     <label>결제방법:</label><br>
                     <div class="form-check form-check-inline">
-                        <input type="radio" id="kakaoPay" name="paymentMethod" value="카카오 결제" class="form-check-input" required>
+                        <input type="radio" id="kakaoPay" name="paymentMethod" value="kakaopay" class="form-check-input" required>
                         <label for="kakaoPay" class="form-check-label">카카오 결제</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" id="cardPayment" name="paymentMethod" value="토스 페이" class="form-check-input" required>
-                        <label for="cardPayment" class="form-check-label">토스 페이</label>
+                        <input type="radio" id="tossPay" name="paymentMethod" value="tosspay" class="form-check-input" required>
+                        <label for="tossPay" class="form-check-label">토스 페이</label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">주문 완료</button>
