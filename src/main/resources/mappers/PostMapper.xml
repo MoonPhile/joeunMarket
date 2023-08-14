@@ -71,15 +71,27 @@
 
 
     <!-- 게시글 리스트 조회 -->
-    <select id="findAll" resultType="com.joeun.dto.PostResponse">
+    <select id="findAll" parameterType="com.joeun.dto.SearchDto" resultType="com.joeun.dto.PostResponse">
         SELECT
         <include refid="postColumns" />
         FROM
-        tb_post
+            tb_post
         WHERE
-        delete_yn = 0
+            delete_yn = 0
         ORDER BY
         id DESC
+        LIMIT #{offset}, #{size}
+    </select>
+ <!-- 게시글 수 카운팅 -->
+    <select id="count" parameterType="com.joeun.dto.SearchDto" resultType="int">
+
+        SELECT
+            COUNT(*)
+        FROM
+            tb_post
+        WHERE
+            delete_yn = 0
+
     </select>
 
 </mapper>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<<<<<<< Updated upstream
+	layout:decorator="layout/basic">
+
+<head th:replace="post_header :: main-head"> </head>
+
+
+
+<th:block layout:fragment="title">
+	<title>리스트 페이지</title>
+</th:block>
+
+<th:block layout:fragment="content">
+
+	<div class="content">
+		<section>
+            <!--/* 검색 */-->
+            <div class="search_box">
+                <form id="searchForm" onsubmit="return false;" autocomplete="off">
+                    <div class="sch_group fl">
+                        <select id="searchType" name="searchType" title="검색 유형 선택">
+                            <option value="">전체 검색</option>
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="writer">작성자</option>
+                        </select>
+                        <input type="text" id="keyword" name="keyword" placeholder="키워드를 입력해 주세요." title="키워드 입력" />
+                        <button type="button" class="bt_search" onclick="movePage(1);"><i class="fas fa-search"></i><span class="skip_info">검색</span></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+					<h2>
+					 <a class="navbar-brand" href="/">조은마켓&nbsp;</a>
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인&nbsp;</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃&nbsp;</a>
+                    <a class="nav-link" th:href="@{/productlist}">상품목록&nbsp;</a>
+                    <a class="nav-link" th:href="@{/list.do}">리뷰게시판&nbsp;</a>
+                    <a class="nav-link" th:href="@{/order-history}">주문정보&nbsp;</a>
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/admin.do}">관리자페이지&nbsp;</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/edit}">정보 변경&nbsp;</a>
+					</h2>
+							<h4 class="board_title"> Q&A  <!--만들예정-->
+
+
+				</form>
+			</div>
+
+			<!--/* 리스트 */-->
+			<table class="tb tb_col">
+				<colgroup>
+					<col style="width:50px;" />
+					<col style="width:7.5%;" />
+					<col style="width:auto;" />
+					<col style="width:10%;" />
+					<col style="width:15%;" />
+					<col style="width:7.5%;" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col"><input type="checkbox" /></th>
+						<th scope="col">번호</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
+						<th scope="col">등록일</th>
+						<th scope="col">조회</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${not #lists.isEmpty( posts )}" th:each="row, status : ${posts}">
+						<td><input type="checkbox" /></td>
+						<td th:text="${row.id}"></td>
+						<td class="tl"><a th:href="@{/view.do( id=${row.id} )}" th:text="${row.title}"></a></td>
+						<td th:text="${row.writer}"></td>
+						<td th:text="${#temporals.format( row.createdDate, 'yyyy-MM-dd HH:mm ' )}"></td>
+						<td th:text="${row.viewCnt}"></td>
+					</tr>
+
+					<tr th:unless="${not #lists.isEmpty( posts )}">
+						<td colspan="5">
+							<div class="no_data_msg">검색된 결과가 없습니다.</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!--/* 페이지네이션 */-->
+			<div class="paging">
+				<a th:if="${currentPage > 1}" th:href="@{/list.do(do=list.do, page=${currentPage - 1})}"
+					class="page_bt prev">◀</a>
+				<p th:each="page : ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${page == currentPage}" th:href="@{/list.do(do='list.do', page=${page})}" th:text="${page}"></a>
+					<a th:if="${page != currentPage}" th:href="@{/list.do(do='list.do', page=${page})}" th:text="${page}"></a>
+				</p>
+				<a th:if="${currentPage < totalPages}" th:href="@{/list.do(do=list.do, page=${currentPage + 1})}"
+					class="page_bt next">▶</a>
+			</div>
+								<!--/* 버튼 */-->
+			<p class="btn_set tr">
+				<a th:href="@{/write.do}" class="btns btn_st3 btn_mid">글쓰기</a>
+			</p>
+		</section>
+	</div>
+    <!--/* .content */-->
+<!--    // 페이지 이동-->
+    <script>
+
+    </script>
+
+</th:block>

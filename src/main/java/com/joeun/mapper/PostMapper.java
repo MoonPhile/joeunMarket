@@ -1,8 +1,10 @@
 package com.joeun.mapper;
 
+import com.joeun.dto.SearchDto;
 import com.joeun.dto.PostRequest;
 import com.joeun.dto.PostResponse;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -39,12 +41,13 @@ public interface PostMapper {
      * 게시글 리스트 조회
      * @return 게시글 리스트
      */
-    List<PostResponse> findAll();
+    List<PostResponse> findAll(@Param("offset") int offset, @Param("size") int size);
 
     /**
      * 게시글 수 카운팅
      * @return 게시글 수
      */
-    int count();
+    int count(SearchDto params);
+
 
 }

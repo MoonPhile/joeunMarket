@@ -2,21 +2,24 @@ package com.joeun.service;
 
 import com.joeun.dto.PostRequest;
 import com.joeun.dto.PostResponse;
+import com.joeun.mapper.CommentMapper;
 import com.joeun.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PostService{
+public class PostService {
 
     private final PostMapper postMapper;
 
     /**
      * 게시글 저장
+     *
      * @param params - 게시글 정보
      * @return Generated PK
      */
@@ -28,6 +31,7 @@ public class PostService{
 
     /**
      * 게시글 상세정보 조회
+     *
      * @param id - PK
      * @return 게시글 상세정보
      */
@@ -37,6 +41,7 @@ public class PostService{
 
     /**
      * 게시글 수정
+     *
      * @param params - 게시글 정보
      * @return PK
      */
@@ -48,6 +53,7 @@ public class PostService{
 
     /**
      * 게시글 삭제
+     *
      * @param id - PK
      * @return PK
      */
@@ -58,10 +64,12 @@ public class PostService{
 
     /**
      * 게시글 리스트 조회
-     * @return 게시글 리스트
+     *
+     * @param params - search conditions
+     * @return list & pagination information
      */
-    public List<PostResponse> findAllPost() {
-        return postMapper.findAll();
+    public List<PostResponse> findAllPost(@Param("offset") int offset, @Param("size") int size) {
+        return postMapper.findAll(offset,size);
     }
 
 }
