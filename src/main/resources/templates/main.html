@@ -1,38 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Shop Homepage - 조은 마켓</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="../../../../../../startbootstrap-shop-homepage-gh-pages/assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav th:replace="~{navbar :: navbarFragment}" class="shadow"></nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">조은 마켓</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">테스트 메인 입니다.</p>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; joeun team</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Shop Homepage - 조은 마켓</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon"
+		href="../../../../../../startbootstrap-shop-homepage-gh-pages/assets/favicon.ico" />
+	<!-- Bootstrap icons-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<style>
+		.containermain {
+			display: flex;
+			justify-content: center;
+
+			height: 100vh;
+		}
+
+		.containercome {
+			display: flex;
+			justify-content: center;
+
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Navigation-->
+	<nav th:replace="~{navbar :: navbarFragment}" class="shadow"></nav>
+	<!-- Header-->
+	<header class="bg-dark py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-white">
+				<h3>중고 물품 구매하러 갈때는</h3>
+				<h1 class="display-4 fw-bolder">조은 마켓</h1>
+
+			</div>
+		</div>
+	</header>
+	<br>
+	<p></p>
+	<h1 class="text-center">합리적인 가격으로 중고 물품을 구매할 수 있는 곳!</h1>
+	<br>
+	<a th:href="@{/productlist}" class="containermain">
+		<img src="/jpg/MAINBANNER.png" alt="howtocome" width="1500">
+	</a>
+	<a th:href="@{/list.do}" class="containercome">
+		<img src="/jpg/rewiew.jpg" alt="howtocome" width="1500" height="500">
+	</a>
+	<br>
+	<h2 class="text-center px-5">매장 오시는길 </h2>
+	<a class="containercome px-5">
+		<img src="/jpg/howtocome.png" alt="howtocome" >
+	</a>
+	<br>
+	<!-- Section-->
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; joeun team</p>
+		</div>
+	</footer>
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+</body>
+
 </html>
