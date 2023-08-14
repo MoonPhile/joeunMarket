@@ -25,8 +25,7 @@ public class AdminController {
 
     @GetMapping("/admin.do")
     public String goToAdmin(Model model) {
-
-        model.addAttribute("data", "모델 테스트입니다");
+//        model.addAttribute("data", "모델 테스트입니다");
         return "/admin/adminMain";
     }
 

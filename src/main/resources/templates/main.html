@@ -19,7 +19,12 @@
 			display: flex;
 			justify-content: center;
 
-			height: 100vh;
+			width: 100vw;
+			overflow: hidden;
+			/* 가로 스크롤 막기 */
+			margin: 0 auto;
+			max-width: 90%;
+
 		}
 
 		.containercome {
@@ -48,15 +53,15 @@
 	<h1 class="text-center">합리적인 가격으로 중고 물품을 구매할 수 있는 곳!</h1>
 	<br>
 	<a th:href="@{/productlist}" class="containermain">
-		<img src="/jpg/MAINBANNER.png" alt="howtocome" width="1500">
+		<img src="/jpg/MAINBANNER.png" alt="howtocome" width="1200">
 	</a>
-	<a th:href="@{/list.do}" class="containercome">
-		<img src="/jpg/rewiew.jpg" alt="howtocome" width="1500" height="500">
+	<a th:href="@{/list.do}" class="containermain">
+		<img src="/jpg/rewiew.jpg" alt="howtocome" width="1000" height="500">
 	</a>
 	<br>
 	<h2 class="text-center px-5">매장 오시는길 </h2>
 	<a class="containercome px-5">
-		<img src="/jpg/howtocome.png" alt="howtocome" >
+		<img src="/jpg/howtocome.png" alt="howtocome">
 	</a>
 	<br>
 	<!-- Section-->
