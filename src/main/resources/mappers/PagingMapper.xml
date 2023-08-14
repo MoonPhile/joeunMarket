@@ -10,6 +10,7 @@
 		WHERE product_id NOT IN (
 		SELECT product_id
 		FROM orders
+		WHERE orders_status IS NULL
 		)
 	</select>
 
@@ -23,6 +24,7 @@
 		SELECT 1
 		FROM orders
 		WHERE orders.product_id = product.product_id
+		AND orders.orders_status IS NULL
 		)
 	</select>
 
@@ -35,6 +37,7 @@
 		SELECT 1
 		FROM orders
 		WHERE orders.product_id = product.product_id
+		AND orders.orders_status IS NULL
 		)
 	</select>
 
