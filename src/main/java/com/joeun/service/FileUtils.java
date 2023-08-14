@@ -1,10 +1,7 @@
 package com.joeun.service;
 
-
-import com.joeun.dto.PostFileRequest;
-import com.joeun.dto.PostFileResponse;
+import com.joeun.dto.FileRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class PostFileUtils {
+public class FileUtils {
 
     private final String uploadPath = Paths.get("C:", "develop", "upload-files").toString();
 
@@ -27,8 +24,8 @@ public class PostFileUtils {
      * @param multipartFiles - 파일 객체 List
      * @return DB에 저장할 파일 정보 List
      */
-    public List<PostFileRequest> uploadFiles(final List<MultipartFile> multipartFiles) {
-        List<PostFileRequest> files = new ArrayList<>();
+    public List<FileRequest> uploadFiles(final List<MultipartFile> multipartFiles) {
+        List<FileRequest> files = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if (multipartFile.isEmpty()) {
                 continue;
@@ -43,7 +40,7 @@ public class PostFileUtils {
      * @param multipartFile - 파일 객체
      * @return DB에 저장할 파일 정보
      */
-    public PostFileRequest uploadFile(final MultipartFile multipartFile) {
+    public FileRequest uploadFile(final MultipartFile multipartFile) {
 
         if (multipartFile.isEmpty()) {
             return null;
@@ -60,7 +57,7 @@ public class PostFileUtils {
             throw new RuntimeException(e);
         }
 
-        return PostFileRequest.builder()
+        return FileRequest.builder()
                 .originalName(multipartFile.getOriginalFilename())
                 .saveName(saveName)
                 .size(multipartFile.getSize())
@@ -106,42 +103,6 @@ public class PostFileUtils {
             dir.mkdirs();
         }
         return dir.getPath();
-    }
-
-
-    /**
-     * 파일 삭제 (from Disk)
-     * @param files - 삭제할 파일 정보 List
-     */
-    public void deleteFiles(final List<PostFileResponse> files) {
-        if (CollectionUtils.isEmpty(files)) {
-            return;
-        }
-        for (PostFileResponse file : files) {
-            String uploadedDate = file.getCreatedDate().toLocalDate().format(DateTimeFormatter.ofPattern("yyMMdd"));
-            deleteFile(uploadedDate, file.getSaveName());
-        }
-    }
-
-    /**
-     * 파일 삭제 (from Disk)
-     * @param addPath - 추가 경로
-     * @param filename - 파일명
-     */
-    private void deleteFile(final String addPath, final String filename) {
-        String filePath = Paths.get(uploadPath, addPath, filename).toString();
-        deleteFile(filePath);
-    }
-
-    /**
-     * 파일 삭제 (from Disk)
-     * @param filePath - 파일 경로
-     */
-    private void deleteFile(final String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
-        }
     }
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.joeun.mapper.PostFileMapper">
+<mapper namespace="com.joeun.mapper.FileMapper">
 
     <!-- tb_file 테이블 전체 컬럼 -->
     <sql id="fileColumns">
@@ -35,7 +35,7 @@
         </foreach>
     </insert>
     <!-- 파일 리스트 조회 -->
-    <select id="findAllByPostId" parameterType="long" resultType="com.joeun.dto.PostFileResponse">
+    <select id="findAllByPostId" parameterType="long" resultType="com.joeun.dto.FileResponse">
         SELECT
         <include refid="fileColumns" />
         FROM
@@ -49,7 +49,7 @@
 
 
     <!-- 파일 리스트 조회 -->
-    <select id="findAllByIds" parameterType="list" resultType="com.joeun.dto.PostFileResponse">
+    <select id="findAllByIds" parameterType="list" resultType="com.joeun.dto.FileResponse">
         SELECT
         <include refid="fileColumns" />
         FROM
@@ -78,7 +78,7 @@
         </foreach>
     </delete>
 
-    <select id="file_cc" parameterType="list" resultType="com.joeun.dto.PostFileRequest">
+    <select id="file_cc" parameterType="list" resultType="com.joeun.dto.FileRequest">
         SELECT
         <include refid="fileColumns" />
         FROM

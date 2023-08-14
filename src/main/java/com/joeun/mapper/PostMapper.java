@@ -48,4 +48,6 @@ public interface PostMapper {
      * @return 게시글 수
      */
     int count(SearchDto params);
+
+
 }
