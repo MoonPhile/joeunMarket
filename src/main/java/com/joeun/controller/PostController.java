@@ -54,7 +54,7 @@ public class PostController {
 
 
     // 기존 게시글 수정
-    @PostMapping("/post/update.do")
+    @PostMapping("/update.do")
     public String updatePost(final PostRequest params, final SearchDto queryParams, Model model) {
 
         // 1. 게시글 정보 수정
@@ -78,7 +78,6 @@ public class PostController {
         MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/list.do", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
-
 
     // 게시글 삭제
     @PostMapping("/delete.do")
