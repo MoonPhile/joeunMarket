@@ -52,7 +52,7 @@
                 </tbody>
             </table>
             <p class="btn_set">
-                <a th:href="@{/write.do( id=${post.id} )}" class="btns btn_bdr4 btn_mid">수정</a>
+                <button type="button" onclick="goWritePage();" class="btns btn_bdr4 btn_mid">수정</button>
                 <button type="button" onclick="deletePost();" class="btns btn_bdr1 btn_mid">삭제</button>
                 <a th:href="@{/list.do}" class="btns btn_bdr3 btn_mid">뒤로</a>
             </p>
@@ -81,16 +81,18 @@
         <div class="pop_container">
             <table class="tb tb_row tl">
                 <colgroup>
-                    <col style="width:30%;" /><col style="width:70%;" />
+                    <col style="width:30%;"/>
+                    <col style="width:70%;"/>
                 </colgroup>
                 <tbody>
                 <tr>
                     <th scope="row">작성자<span class="es">필수 입력</span></th>
-                    <td><input type="text" id="modalWriter" name="modalWriter" placeholder="작성자를 입력해 주세요." /></td>
+                    <td><input type="text" id="modalWriter" name="modalWriter" placeholder="작성자를 입력해 주세요."/></td>
                 </tr>
                 <tr>
                     <th scope="row">내용<span class="es">필수 입력</span></th>
-                    <td><textarea id="modalContent" name="modalContent" cols="90" rows="10" placeholder="수정할 내용을 입력해 주세요."></textarea></td>
+                    <td><textarea id="modalContent" name="modalContent" cols="90" rows="10"
+                                  placeholder="수정할 내용을 입력해 주세요."></textarea></td>
                 </tr>
                 </tbody>
             </table>
@@ -99,7 +101,8 @@
                 <button type="button" class="btns btn_bdr2" onclick="closeCommentUpdatePopup();">삭제</button>
             </p>
         </div>
-        <button type="button" class="btn_close" onclick="closeCommentUpdatePopup();"><span><i class="far fa-times-circle"></i></span></button>
+        <button type="button" class="btn_close" onclick="closeCommentUpdatePopup();"><span><i
+                class="far fa-times-circle"></i></span></button>
     </div>
 </th:block>
 
@@ -351,7 +354,7 @@ function layerPopClose2(popName){
                 const postId = [[ ${post.id}]];
                 const response = getJson(`/${postId}/files`);
 
-function getJson(uri, params) {
+                function getJson(uri, params) {
 
     let json = {}
 
