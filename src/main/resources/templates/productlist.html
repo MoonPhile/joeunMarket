@@ -6,116 +6,179 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>전체 상품 보기</title>
 	<!-- Bootstrap core CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="/css/custom.css" rel="stylesheet">
+	<style>
+		.container {
+			border: 4px solid rgb(192, 192, 192);
+			padding: 10px;
+			border-radius: 3px;
+		}
+
+		.product {
+			border: 4px solid rgb(0, 0, 0);
+			padding: 10px;
+			border-radius: 5px;
+		}
+
+
+		.info-label {
+			margin-right: 20px;
+		}
+	</style>
 </head>
 
 <body>
 	<!-- Top Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container px-4 px-lg-5">
-			<!-- Left side -->
-			<a class="navbar-brand" href="/main">
-				<button class="btn btn-primary btn-lg">더조은</button>
-			</a>
-
-			<!-- Right side -->
-			<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-				<form th:action="@{/productlist}" method="get" class="d-flex">
-					<input type="text" name="keyword" class="form-control me-2" placeholder="상품 이름 검색">
-					<button type="submit" class="btn btn-outline-dark">검색</button>
-				</form>
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<form th:action="@{/login}">
-							<button class="btn btn-outline-dark" type="submit">로그인</button>
-						</form>
-					</li>
-					<li class="nav-item">
-						<form th:action="@{/signup}">
-							<button class="btn btn-outline-dark" type="submit">회원가입</button>
-						</form>
-					</li>
-				</ul>
-			</div>
+	<nav th:replace="~{navbar :: navbarFragment}"></nav>
+	<header class="bg-dark py-4">
+		<div class="text-center text-white">
+			<h1>상품 목록</h1>
 		</div>
-	</nav>
-
+	</header>
 
 	<!-- Item List -->
 	<section class="py-5">
-		<div class="container px-4 px-lg-5">
-			<h1>상품 목록</h1>
-			<div class="row">
+		<div class="container product px-4 px-lg-5">
+			<div class="">
+				<br>
+				<div class="container col-12 text-center mb-4">
+					<h3>전체 상품 리스트</h3>
+					<p></p>
+					<a class="btn btn-primary btn-lg px-4" th:href="@{/productlist}">전체상품</a>
 
-				<div class="col-12 text-center mb-4">
-					<h3>상품 리스트</h3>
-					<button class="btn btn-outline-dark">카테고리 1</button>
-					<button class="btn btn-outline-dark">카테고리 2</button>
-					<button class="btn btn-outline-dark">카테고리 3</button>
-					<button class="btn btn-outline-dark">카테고리 4</button>
-				</div>
-
-				<!-- 상품 리스트 반복 -->
-				<section class="py-5">
-
-					<form th:action="@{/productlist}" method="get" class="d-flex">
-						<button type="submit" name="Sequence" class="btn btn-outline-dark">이름순</button>
-					</form>
-					<form th:action="@{/productlist}" method="get" class="d-flex">
-						<button type="submit" name="Sequence"  value="0" class="btn btn-outline-dark">가격순</button>
-					</form>
-
-			</div>
-			<div class="container px-4 px-lg-5">
-				<div class="row">
-					<!-- Use th:each to iterate over the list of items -->
-					<div th:each="item : ${items}" class="col-md-6 mb-4">
-						<div class="col-md-3">
-							<img th:src="${item?.img1}" width="300" height="300" alt="Item Image 1">
+					<!-- 자동으로 생성된 카테고리 버튼들 -->
+					<div class="d-flex flex-wrap px-5 py-2"> <!-- 가로로 정렬하고 넘치면 줄바꿈 -->
+						<div th:each="category : ${categoryList}" class="mb-2">
+							<a class="btn btn-secondary btn-lg px-4 mx-1"
+								th:href="@{/productcategorylist(category=${category.productCategoryId})}"
+								th:text="${category.productCategoryName}"></a>
 						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<img th:src="${item?.img2}" width="100" height="100" alt="Item Image 2">
-							</div>
-							<div class="col-md-4">
-								<img th:src="${item?.img3}" width="100" height="100" alt="Item Image 3">
-							</div>
-							<div class="col-md-4">
-								<img th:src="${item?.img4}" width="100" height="100" alt="Item Image 4">
-							</div>
-						</div>
-						<h5 class="card-title" th:text="'이름: ' + ${item?.productName}"></h5>
-						<p class="card-text" th:text="'상태: ' + ${item?.productCondition}"></p>
-						<p class="card-text">설명: <span th:text="${item?.productDescription}"></span></p>
-						<p class="card-text">가격: <span th:text="${item?.productPrice}"></span></p>
 					</div>
 				</div>
+				<section class="py-3">
+					<!-- 상품 정렬 버튼  -->
+					<div class="d-flex justify-content-end px-5">
+						<form th:action="@{/productlist}" method="get" class="d-flex">
+							<input type="hidden" name="keyword" th:value="${keyword}">
+							<button type="submit" name="Sequence" id="nameBtn" class="btn btn-outline-dark btn-lg"
+								th:value="${Sequence == '3' ? '2' : '3'}"
+								th:text="${Sequence == '3' ? '등록순▲' : '등록순▼'}">등록순▼</button>
+							<button type="submit" name="Sequence" id="priceBtn" class="btn btn-outline-dark btn-lg"
+								th:value="${Sequence == '0' ? '1' : '0'}"
+								th:text="${Sequence == '0' ? '가격순▲' : '가격순▼'}">가격순▼</button>
+						</form>
+
+
+					</div>
+
+			</div>
+			<br>
+			<!-- 상품 리스트 반복 -->
+			<div class=" px-4 px-lg-5">
+				<div class="row">
+					<ul class="pagination" th:if="${totalPages == 0}">
+						<p>등록된 상품이 존재하지 않습니다.</p>
+					</ul>
+					<!-- Use th:each to iterate over the list of items -->
+					<div th:each="item : ${items}" class=" col-md-6 mb-4">
+						<div class="container">
+							<p></p>
+							<div class="row justify-content-center">
+								<img th:src="${item?.img1}" width="360" height="300" alt="Item Image 1">
+							</div>
+							<div class="row justify-content-center px-3">
+								<div class="">
+									<img th:src="${item?.img2}" width="120" height="100" alt="Item Image 2">
+								</div>
+								<div class="">
+									<img th:src="${item?.img3}" width="120" height="100" alt="Item Image 3">
+								</div>
+								<div class="">
+									<img th:src="${item?.img4}" width="120" height="100" alt="Item Image 4">
+								</div>
+							</div>
+							<p></p>
+							<div class="row justify-content-end px-5">
+								<form th:action="@{/ordershow}" method="get" class="d-flex px-2">
+									<input type="hidden" name="order" th:value="${item?.productId}">
+									<button type="submit" class="btn btn-secondary">상세정보</button>
+								</form>
+								<form th:action="@{/order}" method="get" onsubmit="return confirm('상품을 구매하시겠습니까?')">
+									<button type="submit"
+										style="border: none; background: none; padding: 0; cursor: pointer;">
+										<input type="hidden" name="productId" th:value="${item?.productId}" />
+										<img src="/jpg/carttest.png" alt="장바구니 이미지" width="50" height="50">
+									</button>
+								</form>
+							</div>
+						</div>
+						<div class="container px-5">
+							<p class="card-text mb-2"><strong class="info-label">이름:</strong> <span
+									th:text="${item?.productName}"></span></p>
+							<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
+									th:text="${item?.productCondition}"></span></p>
+							<p class="card-text mb-2"><strong class="info-label">가격:</strong>
+								<span class="px-3" th:id="'formattedPrice' + ${item.productId}"></span>원
+							</p>
+							<script th:inline="javascript">
+								/* 숫자를 가격 형식으로 변환하여 출력하는 함수 */
+								function formatPrice(price) {
+									return price.toLocaleString('en-US');
+								}
+
+								/* 페이지 로딩 시 실행하여 가격 값을 변환하여 출력 */
+								document.addEventListener("DOMContentLoaded", function () {
+									var itemPrice = /*[[${item?.productPrice}]]*/ 0; // 실제 가격값으로 변경
+									var formattedPriceSpan = document.getElementById('formattedPrice' + /*[[${item.productId}]]*/);
+									formattedPriceSpan.textContent = formatPrice(itemPrice); // 가격을 포맷팅하여 출력
+								});
+							</script>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="pagination d-flex justify-content-center">
+				<ul class="pagination" th:if="${totalPages > 0}">
+
+					<!-- 이전 페이지 버튼 -->
+					<li th:if="${currentPage > 1}">
+						<!-- 이전 페이지 번호를 클릭하면 현재 페이지보다 1 작은 페이지로 이동하고, 기존의 Sequence 값을 유지 -->
+						<a
+							th:href="@{/productlist(do='productlist', page=${currentPage - 1}, Sequence=${Sequence})}">◀&nbsp;</a>
+					</li>
+
+					<!-- 페이지 번호 버튼들 -->
+					<li th:each="page : ${#numbers.sequence(1, totalPages)}">
+						<span th:if="${page == currentPage}">
+							<!-- 현재 페이지는 강조하여 표시 -->
+							<strong th:text="${page}" style="margin-right: 10px;"></strong>
+						</span>
+						<!-- 기존의 페이지 버튼 생성 링크에 Sequence 파라미터를 추가 -->
+						<a th:if="${page != currentPage}"
+							th:href="@{/productlist(do='productlist', page=${page}, Sequence=${Sequence})}"
+							th:text="${page}" style="margin-right: 10px;"></a>
+					</li>
+
+					<!-- 다음 페이지 버튼 -->
+					<li th:if="${currentPage < totalPages}">
+						<!-- 다음 페이지 번호를 클릭하면 현재 페이지보다 1 큰 페이지로 이동하고, 기존의 Sequence 값을 유지 -->
+						<a
+							th:href="@{/productlist(do='productlist', page=${currentPage + 1}, Sequence=${Sequence})}">▶</a>
+					</li>
+
+				</ul>
 			</div>
 	</section>
-	<div class="pagination d-flex justify-content-center">
-		<ul class="pagination">
 
-			<li th:if="${currentPage > 1}">
-				<a th:href="@{/productlist(do=productlist, page=${currentPage - 1})}"> ◀</a>
-			</li>
-			<li th:each="page : ${#numbers.sequence(1, totalPages)}">
-				<span th:if="${page == currentPage}">
-					<strong th:text="${page}" style="margin-right: 10px;"></strong>
-				</span>
-				<a th:if="${page != currentPage}" th:href="@{/productlist(do='productlist', page=${page})}"
-					th:text="${page}" style="margin-right: 10px;"></a>
-			</li>
-			<li th:if="${currentPage < totalPages}">
-				<a th:href="@{/productlist(do=productlist, page=${currentPage + 1})}"> ▶ </a>
-			</li>
-
-		</ul>
-	</div>
 	<!-- Footer -->
-	<footer class="my-5 pt-5 text-muted text-center text-small">
-		<p class="mb-1">&copy; 조은 - 2023년 07월 쇼핑몰 프로젝트</p>
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; joeun team</p>
+		</div>
 	</footer>
 
 	<!-- Bootstrap core JS -->

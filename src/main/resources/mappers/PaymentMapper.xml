@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joeun.mapper.PaymentMapper">
+
+    <insert id="insertPayment" parameterType="com.joeun.dto.Payment">
+        insert into payment (user_id, order_id, payment_price, payment_date, imp_uid)
+        values (#{userId},
+                #{orderId},
+                #{paymentPrice},
+                NOW(),
+                #{impUid})
+    </insert>
+
+    <delete id="deletePayment" parameterType="int">
+        delete from payment where payment_id = #{id}
+    </delete>
+
+    <select id="findPaymentById" parameterType="int">
+        select * from payment where payment_id = #{id}
+    </select>
+
+    <select id="findAllPayment" resultType="com.joeun.dto.Payment">
+        select * from payment
+    </select>
+
+    <select id="findPaymentByOrderId" resultType="com.joeun.dto.Payment">
+        select * from payment where order_id = #{oderId}
+    </select>
+
+</mapper>

@@ -11,4 +11,10 @@ public interface UserMapper {
 
     Optional<User> selectById(String userUseId);
 
+    User getUserById(String id);
+
+    void updateUser(User user);
+
+    int getUserIntId(String userUseId);
+
 }

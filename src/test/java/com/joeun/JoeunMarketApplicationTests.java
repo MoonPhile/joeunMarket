@@ -1,4 +1,4 @@
-//package com.joeun;
+package com.joeun;
 //
 //import com.joeun.dto.ProductCategoryDto;
 //import com.joeun.dto.ProductDto;
@@ -37,13 +37,10 @@
 //
 //}
 
+import com.joeun.mapper.ProductMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.joeun.dto.ProductCategoryDto;
-import com.joeun.dto.ProductDto;
-import com.joeun.mapper.ProductMapper;
 
 @SpringBootTest
 class JoeunMarketApplicationTests {

@@ -1,8 +1,11 @@
 package com.joeun;
 
+import com.joeun.dto.Payment;
 import com.joeun.dto.ProductDto;
 import com.joeun.mapper.AdminMapper;
 import com.joeun.service.MailService;
+import com.joeun.service.OrderService;
+import com.joeun.service.PaymentService;
 import com.joeun.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,12 @@ public class AdminTest {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    PaymentService paymentService;
+
+    @Autowired
+    OrderService orderService;
 
     @Test
     void listTest(){
@@ -47,5 +56,28 @@ public class AdminTest {
     void findById(){
         ProductDto productDto = productService.findProductById(1);
         System.out.println(productDto.getProductName());
+    }
+
+    @Test
+    void insertPayment(){
+        Payment payment = new Payment();
+        payment.setUserId(1);
+        payment.setOrderId(1);
+        payment.setPaymentPrice(4500);
+        payment.setImpUid("imptest_1234");
+
+        paymentService.insertPayment(payment);
+    }
+
+    @Test
+    void payCancel(){
+        String accessToken = paymentService.getAccessToken();
+        String imp_uid = "imp_091769698448";
+        paymentService.payCancel(accessToken,imp_uid);
+    }
+
+    @Test
+    void orderUpdateTest(){
+        orderService.updateOrders(61);
     }
 }

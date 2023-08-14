@@ -9,14 +9,18 @@
             select * from user where user_use_id = #{userUseId};
         </if>
     </select>
-<!--    <update id="updateUser" parameterType="User">-->
-<!--        update user set password=#{password}, name=#{name}, birth=#{birth}, gender=#{gender},-->
-<!--        email=#{email}, phone=#{phone} where id =#{id};-->
-<!--    </update>-->
-<!--    <select id="searchIdPw" parameterType="User" resultType="User">-->
-<!--        select * from user where  birth=#{birth} and name=#{name};-->
-<!--    </select>-->
-<!--    <delete id="deleteById" parameterType="String">-->
-<!--        delete from user where id = #{id};-->
-<!--    </delete>-->
+
+    <select id="getUserById" resultType="com.joeun.dto.User">
+        SELECT * FROM user WHERE user_use_id = #{userUseId}
+    </select>
+
+    <update id="updateUser">
+        UPDATE user
+        SET user_pw = #{userPw}, user_address = #{userAddress}, user_phone = #{userPhone}, user_email = #{userEmail}
+        WHERE user_use_id = #{userUseId}
+    </update>
+
+    <select id="getUserIntId" resultType="int">
+        select user_id from user where user_use_id = #{userUseId}
+    </select>
 </mapper>

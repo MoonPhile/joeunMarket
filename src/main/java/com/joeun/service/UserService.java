@@ -27,6 +27,19 @@ public class UserService {
         this.userMapper.insertUser(user);
         return user;
     }
+
+    public User getUserById(String id) {
+        return userMapper.getUserById(id);
+    }
+
+    public void updateUser(User user) {
+        user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+        userMapper.updateUser(user);
+    }
+
+    public int getUserIntId(String userUseId){
+        return userMapper.getUserIntId(userUseId);
+    }
 //    public User getUser(String id){
 //        Optional<User> user = this.userMapper.selectById(id);
 //        if(user.isPresent()){
