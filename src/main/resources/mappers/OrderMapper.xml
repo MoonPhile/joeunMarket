@@ -8,10 +8,11 @@
         VALUES (#{userUseId}, #{productId}, #{ordersName}, #{ordersPhone}, #{ordersAddress}, #{ordersDate})
     </insert>
 
-    <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
-        SELECT o.orders_id AS orderId, o.user_use_id, o.product_id, o.orders_date,
+    <select id="getAllOrders">
+        SELECT o.orders_id AS ordersId, o.user_use_id, o.product_id, o.orders_date,
         o.orders_name AS ordersName, o.orders_phone AS ordersPhone, o.orders_address AS ordersAddress,
-        p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice
+        p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice,
+        o.orders_canceltimes AS ordersCanceltimes
         FROM orders o
         JOIN product p ON o.product_id = p.product_id
     </select>
