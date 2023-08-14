@@ -19,6 +19,8 @@ public interface OrderMapper {
    List<OrderDto> getOrdersByUserId(@Param("userId") int userId);
 
     List<OrderDto> getOrdersWithProductInfoByUserId(@Param("userUseId") String userUseId);
+    List<OrderDto> getCanceledwithProductInfoByUserId(@Param("userUseId") String userUseId);
+
 
     OrderDto findOrderById(@Param("userId") String userId,@Param("productId") int productId);
 

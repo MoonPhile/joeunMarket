@@ -91,7 +91,9 @@ public class OrderController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserId = userDetails.getUsername();
         List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(currentUserId);
+        List<OrderDto> orderCanceled = orderService.getCanceledwithProductInfoByUserId(currentUserId);
         model.addAttribute("orderHistory", orderHistory);
+        model.addAttribute("orderCanceled", orderCanceled);
         return "order_history";
     }
 
