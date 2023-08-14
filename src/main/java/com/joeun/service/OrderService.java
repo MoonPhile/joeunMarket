@@ -38,6 +38,10 @@ public class OrderService {
     public List<OrderDto> getOrdersWithProductInfoByUserId(String userId) {
         return orderMapper.getOrdersWithProductInfoByUserId(userId);
     }
+ // 주문 출력
+    public List<OrderDto> getCanceledwithProductInfoByUserId(String userId) {
+        return orderMapper.getCanceledwithProductInfoByUserId(userId);
+    }
 
     public OrderDto findOrderById(String userId, int productId) {
         return orderMapper.findOrderById(userId, productId);
