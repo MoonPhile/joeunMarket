@@ -4,8 +4,8 @@
 
     <!-- 주문 입력 -->
     <insert id="saveOrder" parameterType="com.joeun.dto.OrderDto">
-        INSERT INTO orders (user_id, product_id, orders_name, orders_phone, orders_address, orders_date)
-        VALUES (#{userId}, #{productId}, #{ordersName}, #{ordersPhone}, #{ordersAddress}, #{ordersDate})
+        INSERT INTO orders (user_use_id, product_id, orders_name, orders_phone, orders_address, orders_date)
+        VALUES (#{userUseId}, #{productId}, #{ordersName}, #{ordersPhone}, #{ordersAddress}, #{ordersDate})
     </insert>
 
     <select id="getAllOrders" resultType="com.joeun.dto.OrderDto">
@@ -14,12 +14,25 @@
 
     <!-- 주문 정보 출력 -->
     <select id="getOrdersWithProductInfoByUserId" resultType="com.joeun.dto.OrderDto">
-        SELECT o.orders_id, o.user_id, o.product_id, o.orders_date,
+        SELECT o.orders_id, o.user_use_id, o.product_id, o.orders_date,
         o.orders_name AS ordersName, o.orders_phone AS ordersPhone, o.orders_address AS ordersAddress,
         p.product_name AS productName, p.product_description AS productDescription, p.product_price AS productPrice
         FROM orders o
         JOIN product p ON o.product_id = p.product_id
-        WHERE user_id = #{userId}
+        WHERE user_use_id = #{userUseId}
     </select>
 
+    <select id="findOrderById" resultType="com.joeun.dto.OrderDto">
+        select * from orders where product_id = #{productId} and user_use_id = #{userId}
+    </select>
+
+    <!-- 주문 취소 -->
+    <!-- OrderMapper.xml -->
+        <!-- 주문 상태 업데이트를 위한 SQL 쿼리 정의 -->
+    <update id="cancelOrder">
+        UPDATE orders
+        SET orders_status = #{ordersStatus},
+        orders_canceltimes = #{ordersCanceltimes}
+        WHERE orders_id = #{ordersId}
+    </update>
 </mapper>

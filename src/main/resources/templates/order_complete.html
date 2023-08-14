@@ -13,11 +13,21 @@
 <p>주문이 성공적으로 처리되었습니다.</p>
 <div>
     <input type="hidden" th:value="${order.ordersId}" id="ordersId">
-    <input type="hidden" th:value="${order.userId}" id="userId">
+    <input type="hidden" th:value="${order.userUseId}" id="userUseId">
     <input type="hidden" th:value="${order.productId}" id="productId">
-<!--    <input type="hidden" th:value="${price}" id="price">-->
+    <input type="hidden" th:value="${order.ordersName}" id="ordersName">
+    <input type="hidden" th:value="${order.ordersPhone}" id="ordersPhone">
+    <input type="hidden" th:value="${order.ordersAddress}" id="ordersAddress">
+    <input type="hidden" th:value="${order.ordersDate}" id="ordersDate">
+    <input type="hidden" th:value="${order.ordersStatus}" id="ordersStatus">
+    <input type="hidden" th:value="${order.ordersCanceltimes}" id="ordersCancelTime">
+<!--&lt;!&ndash;    <input type="hidden" th:value="${price}" id="price">&ndash;&gt;-->
     <input type="hidden" th:value="${product.productPrice}" id="price">
     <input type="hidden" th:value="${product.productName}" id="productName">
+    <input type="hidden" th:value="${paymentMethod}" id="paymentMethod">
+    <input type="hidden" th:value="${userId}" id="userId">
+
+
 </div>
 <script src="/js/readyRequestPay.js"></script>
 </body>

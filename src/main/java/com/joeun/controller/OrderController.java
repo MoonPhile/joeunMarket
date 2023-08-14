@@ -6,18 +6,17 @@ import com.joeun.dto.User;
 import com.joeun.mapper.OrderMapper;
 import com.joeun.service.OrderService;
 import com.joeun.service.ProductService;
+import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.joeun.mapper.UserMapper;
 
 import java.time.LocalDateTime;
@@ -30,16 +29,7 @@ import java.util.Optional;
 public class OrderController {
     private final OrderService orderService; // OrderService 주입
     private final ProductService productService;
-    private UserMapper userMapper;
-    private OrderMapper orderMapper;
-
-    @Autowired
-    public OrderController(OrderService orderService, ProductService productService, UserMapper userMapper, OrderMapper orderMapper) {
-        this.orderService = orderService;
-        this.productService = productService;
-        this.userMapper = userMapper;
-        this.orderMapper = orderMapper;
-    }
+    private final UserService userService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/order")
@@ -65,24 +55,31 @@ public class OrderController {
     // 주문 완료
     @PostMapping("/completeOrder")
     public String completeOrder(@ModelAttribute OrderDto order,
-                                @RequestParam String ordersName,
-                                @RequestParam String ordersPhone,
-                                @RequestParam String ordersAddress,
                                 @RequestParam(defaultValue = "1") int productId,
                                 Authentication authentication,
+                                String paymentMethod,
                                 Model model) {
-
+        System.out.println(paymentMethod);
         // 현재 로그인된 사용자의 아이디
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserId = userDetails.getUsername();
 
         // 로그인한 유저 정보를 이용하여 주문 정보 설정
-        order.setUserId(Integer.parseInt(currentUserId)); // 사용자 아이디 설정
+        order.setUserUseId(currentUserId); // 사용자 아이디 설정
         order.setProductId(productId); // 상품 아이디 설정
         order.setOrderDate(new Date()); // 주문 날짜 설정
 
-        orderService.placeOrder(order, ordersName, ordersPhone, ordersAddress);
+        System.out.println("order toString\n"+order.toString());
 
+        orderService.placeOrder(order);
+        //방금 저장된 order 정보를 불러옵니다.
+        OrderDto orderDto = orderService.findOrderById(currentUserId,productId);
+        ProductDto product = productService.findProductById(productId);
+        int userId = userService.getUserIntId(currentUserId);
+        model.addAttribute("order",orderDto);
+        model.addAttribute("product",product);
+        model.addAttribute("paymentMethod",paymentMethod);
+        model.addAttribute("userId",userId);
         model.addAttribute("message", "주문이 완료되었습니다.");
 
         return "order_complete";
@@ -94,12 +91,25 @@ public class OrderController {
     public String showOrderHistoryPage(Authentication authentication, Model model) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String currentUserId = userDetails.getUsername();
-        int userId = Integer.parseInt(currentUserId);
 
-        List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(userId);
+        List<OrderDto> orderHistory = orderService.getOrdersWithProductInfoByUserId(currentUserId);
         model.addAttribute("orderHistory", orderHistory);
 
         return "order_history";
     }
 
+    // 주문 취소
+//    @PostMapping("/cancelOrder")
+//    @ResponseBody
+//    public ResponseEntity<String> cancelOrder(@RequestParam("ordersId") int ordersId) {
+//        try {
+//            LocalDateTime cancelTime = LocalDateTime.now(); // 현재 시간 가져오기
+//            orderMapper.cancelOrder(ordersId, "취소", cancelTime);
+//            return ResponseEntity.ok("주문이 취소되었습니다.");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("주문 취소 중 오류가 발생했습니다.");
+//        }
+//    }
 }
+
+
