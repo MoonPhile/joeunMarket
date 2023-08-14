@@ -1,8 +1,11 @@
 package com.joeun.controller;
 
+import com.joeun.dto.FileRequest;
+import com.joeun.dto.FileResponse;
 import com.joeun.dto.MessageDto;
 import com.joeun.dto.PostRequest;
 import com.joeun.dto.PostResponse;
+import com.joeun.dto.SearchDto;
 import com.joeun.mapper.PagingMapper;
 import com.joeun.service.FileService;
 import com.joeun.service.FileUtils;
@@ -38,19 +41,40 @@ public class PostController {
         return "post_write";
     }
 
+
     // 신규 게시글 생성
     @PostMapping("/save.do")
     public String savePost(final PostRequest params, Model model) {
-        postService.savePost(params);
+        Long id = postService.savePost(params);
+        List<FileRequest> files = fileUtils.uploadFiles(params.getFiles());
+        fileService.saveFiles(id, files);
         MessageDto message = new MessageDto("게시글 생성이 완료되었습니다.", "/list.do", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
 
 
     // 기존 게시글 수정
-    @PostMapping("/update.do")
-    public String updatePost(final PostRequest params, Model model) {
+    @PostMapping("/post/update.do")
+    public String updatePost(final PostRequest params, final SearchDto queryParams, Model model) {
+
+        // 1. 게시글 정보 수정
         postService.updatePost(params);
+
+        // 2. 파일 업로드 (to disk)
+        List<FileRequest> uploadFiles = fileUtils.uploadFiles(params.getFiles());
+
+        // 3. 파일 정보 저장 (to database)
+        fileService.saveFiles(params.getId(), uploadFiles);
+
+        // 4. 삭제할 파일 정보 조회 (from database)
+        List<FileResponse> deleteFiles = fileService.findAllFileByIds(params.getRemoveFileIds());
+
+        // 5. 파일 삭제 (from disk)
+        fileUtils.deleteFiles(deleteFiles);
+
+        // 6. 파일 삭제 (from database)
+        fileService.deleteAllFileByIds(params.getRemoveFileIds());
+
         MessageDto message = new MessageDto("게시글 수정이 완료되었습니다.", "/list.do", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
     }
