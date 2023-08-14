@@ -119,12 +119,26 @@
 									th:text="${item?.productName}"></span></p>
 							<p class="card-text mb-2"><strong class="info-label">상태:</strong> <span
 									th:text="${item?.productCondition}"></span></p>
-							<p class="card-text mb-2"><strong class="info-label">가격:</strong> <span
-									th:text="${item?.productPrice}"></span>원</p>
+							<p class="card-text mb-2"><strong class="info-label">가격:</strong>
+								<span class="px-3" th:id="'formattedPrice' + ${item.productId}"></span>원
+							</p>
+							<script th:inline="javascript">
+								/* 숫자를 가격 형식으로 변환하여 출력하는 함수 */
+								function formatPrice(price) {
+									return price.toLocaleString('en-US');
+								}
 
+								/* 페이지 로딩 시 실행하여 가격 값을 변환하여 출력 */
+								document.addEventListener("DOMContentLoaded", function () {
+									var itemPrice = /*[[${item?.productPrice}]]*/ 0; // 실제 가격값으로 변경
+									var formattedPriceSpan = document.getElementById('formattedPrice' + /*[[${item.productId}]]*/);
+									formattedPriceSpan.textContent = formatPrice(itemPrice); // 가격을 포맷팅하여 출력
+								});
+							</script>
 						</div>
 					</div>
 				</div>
+
 			</div>
 			<div class="pagination d-flex justify-content-center">
 				<ul class="pagination" th:if="${totalPages > 0}">
@@ -158,6 +172,7 @@
 				</ul>
 			</div>
 	</section>
+
 	<!-- Footer -->
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">
