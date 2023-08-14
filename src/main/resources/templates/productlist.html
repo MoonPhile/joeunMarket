@@ -131,7 +131,7 @@
 								/* 페이지 로딩 시 실행하여 가격 값을 변환하여 출력 */
 								document.addEventListener("DOMContentLoaded", function () {
 									var itemPrice = /*[[${item?.productPrice}]]*/ 0; // 실제 가격값으로 변경
-									var formattedPriceSpan = document.getElementById('formattedPrice' + /*[[${item.productId}]]*/);
+									var formattedPriceSpan = document.getElementById('formattedPrice' + /*[[${item.productId}]]*/0);
 									formattedPriceSpan.textContent = formatPrice(itemPrice); // 가격을 포맷팅하여 출력
 								});
 							</script>
