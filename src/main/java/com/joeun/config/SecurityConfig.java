@@ -22,6 +22,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/admin.do").hasRole("ADMIN")
+                .antMatchers("/list.do").authenticated() // 게시판 들어갈려면 로그인할 수 있도록 추가함(윤상)
                 .requestMatchers(
                         new AntPathRequestMatcher("/**")).permitAll()
                 .and()
@@ -44,4 +45,7 @@ public class SecurityConfig {
             throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+
+
 }
