@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 주문 전체 내역</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .product {
+            border: 4px solid rgb(0, 0, 0);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+
+        .info-label {
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<!-- Top Bar -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div class="container mt-5">
+    <h1 class="mb-4">주문 내역</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="highlight">ID</th>
+            <th class="highlight">상품명</th>
+            <th class="highlight">주문자 이름</th>
+            <th class="highlight">주문자 전화번호</th>
+            <th class="highlight">주문 물품 가격</th>
+            <th class="highlight">주문 일자</th>
+            <th class="highlight">주문 취소 일자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.ordersId}"></td>
+            <td th:text="${order.productName}"></td>
+            <td th:text="${order.ordersName}"></td>
+            <td th:text="${order.ordersPhone}"></td>
+            <td th:text="${order.productPrice}"></td>
+            <td th:text="${order.ordersDate}"></td>
+            <td th:text="${order.ordersCanceltimes}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>상품 수정</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/adminProduct.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <form id="updateProductForm" method="post" action="/updateProduct" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="productId" class="form-label">상품 ID:</label>
+            <select name="productId" id="productId" class="form-select">
+                <option value="0" selected>ID를 선택해주세요</option>
+                <option th:each="id : ${idList}" th:value="${id}" th:utext="${id}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="productName" class="form-label">상품 이름:</label>
+            <input type="text" name="productName" id="productName" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="productCondition" class="form-label">상품 상태:</label>
+            <input type="text" name="productCondition" id="productCondition" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="productPrice" class="form-label">상품 가격:</label>
+            <input type="text" name="productPrice" id="productPrice" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="productDescription" class="form-label">상품 설명:</label>
+            <textarea name="productDescription" id="productDescription" class="form-control"></textarea>
+        </div>
+       	<div class="mb-3">
+				<label for="img1" class="form-label">상품 이미지:</label>
+				<input type="file" name="imgs" id="img1" class="form-control image-input">
+			</div>
+			<p th:name="filePath1"></p>
+			<div class="mb-3">
+				<label for="img2" class="form-label">상품 이미지:</label>
+				<input type="file" name="imgs" id="img2" class="form-control image-input">
+			</div>
+			<p th:name="filePath2"></p>
+			<div class="mb-3">
+				<label for="img3" class="form-label">상품 이미지:</label>
+				<input type="file" name="imgs" id="img3" class="form-control image-input">
+			</div>
+			<p th:name="filePath3"></p>
+			<div class="mb-3">
+				<label for="img4" class="form-label">상품 이미지:</label>
+				<input type="file" name="imgs" id="img4" class="form-control image-input">
+			</div>
+			<p th:name="filePath4"></p>
+        <div class="mb-3">
+            <label for="productCategoryId" class="form-label">상품 카테고리:</label>
+            <select name="productCategoryId" id="productCategoryId" class="form-select">
+                <option th:each="category : ${categoryList}" th:value="${category.productCategoryId}"
+                        th:utext="${category.productCategoryName}"></option>
+            </select>
+        </div>
+        <button type="button" id="updateProduct" class="btn btn-primary" onclick="check(this)">등록하기</button>
+    </form>
+</div>
+</body>
+</html>

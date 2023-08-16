@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <title>AdminMail</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>메일 보내기</h2>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <select id="selectLeft" size="10" multiple>
+                    <option th:each="user :${users}" th:value="${user.getUserEmail()}"
+                            th:utext="${user.getUserEmail()}"></option>
+                </select>
+                <select id="toList" size="10" multiple></select>
+            </div>
+            <div>
+                <button id="moveRight" class="btn btn-primary">→</button>
+                <button id="moveAllRight" class="btn btn-primary">전체 →</button>
+                <button id="moveLeft" class="btn btn-primary">←</button>
+                <button id="moveAllLeft" class="btn btn-primary">← 전체</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <textarea id="subject" class="form-control mb-3" placeholder="제목을 입력해주세요"></textarea>
+            <textarea id="message" class="form-control mb-3" placeholder="내용을 입력해주세요"></textarea>
+            <button onclick="send()" class="btn btn-success">이메일 보내기</button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                사용법
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">사용법</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- 여기에 p의 내용이 들어갑니다 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var Content = `
+            왼쪽 select 에서 메일을 보낼 대상을 선택해줍니다.
+            그 후 ->버튼을 누르거나 allR을 눌러 개별사용자 및 전체 사용자를 대상으로합니다.
+            그리고 제목 및 내용 입력 후 버튼 누르면 발송됩니다.
+        `;
+
+        $('#modalContent').html(Content);
+    });
+
+    function send() {
+        // const selectedEmails = Array.from(document.querySelectorAll('#toList option:checked'))
+        const selectedEmails = Array.from(document.querySelectorAll('#toList option'))
+            .map(option => option.value).join(',');
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
+        console.log(selectedEmails);
+        console.log(subject);
+        console.log(message);
+        //아래 주석을 해제하면 메일 발송 기능이 정상적으로 활성화 됩니다.
+         $.ajax({
+                 url: "/adminMailSend",
+                 type: "POST",
+                 data: {
+                     toList: selectedEmails,
+                     subject: subject,
+                     message: message
+                 },
+                 success: function () {
+                     alert("메일 전송에 성공했습니다")
+                 },
+                 error: function () {
+                     alert("비동기 통신 실패")
+                 }
+
+             }
+         )
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectLeft = document.getElementById("selectLeft");
+        const selectRight = document.getElementById("toList");
+        const moveRightButton = document.getElementById("moveRight");
+        const moveLeftButton = document.getElementById("moveLeft");
+        const moveAllRightButton = document.getElementById("moveAllRight");
+        const moveAllLeftButton = document.getElementById("moveAllLeft");
+
+        moveRightButton.addEventListener("click", function () {
+            moveSelectedOptions(selectLeft, selectRight);
+        });
+
+        moveLeftButton.addEventListener("click", function () {
+            moveSelectedOptions(selectRight, selectLeft);
+        });
+        moveAllRightButton.addEventListener("click", function () {
+            moveAllOptions(selectLeft, selectRight);
+        });
+
+        moveAllLeftButton.addEventListener("click", function () {
+            moveAllOptions(selectRight, selectLeft);
+        });
+
+        function moveSelectedOptions(sourceSelect, targetSelect) {
+            const selectedOptions = [...sourceSelect.selectedOptions];
+            selectedOptions.forEach(option => {
+                targetSelect.appendChild(option);
+            });
+        }
+
+        function moveAllOptions(sourceSelect, targetSelect) {
+            const allOptions = [...sourceSelect.options];
+            allOptions.forEach(option => {
+                targetSelect.appendChild(option);
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<meta charset="UTF-8">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>현재 시간 출력</title>
+    <script>
+        function displayCurrentTime() {
+            var now = new Date();
+            var formattedTime = now.toLocaleString('en-US', { timeZone: 'Asia/Seoul', hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('currentTime').textContent = formattedTime;
+        }
+
+        window.onload = function() {
+            displayCurrentTime();
+            setInterval(displayCurrentTime, 1000); // 1초마다 갱신
+        }
+    </script>
 </head>
 <body>
-<h3>공사중입니다.</h3>
-</body>s
+<p>현재 시간: <span id="currentTime"></span></p>
+</body>
 </html>
