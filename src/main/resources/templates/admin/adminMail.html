@@ -81,23 +81,23 @@
         console.log(subject);
         console.log(message);
         //아래 주석을 해제하면 메일 발송 기능이 정상적으로 활성화 됩니다.
-        // $.ajax({
-        //         url: "/adminMailSend",
-        //         type: "POST",
-        //         data: {
-        //             toList: selectedEmails,
-        //             subject: subject,
-        //             message: message
-        //         },
-        //         success: function () {
-        //             alert("메일 전송에 성공했습니다")
-        //         },
-        //         error: function () {
-        //             alert("비동기 통신 실패")
-        //         }
-        //
-        //     }
-        // )
+         $.ajax({
+                 url: "/adminMailSend",
+                 type: "POST",
+                 data: {
+                     toList: selectedEmails,
+                     subject: subject,
+                     message: message
+                 },
+                 success: function () {
+                     alert("메일 전송에 성공했습니다")
+                 },
+                 error: function () {
+                     alert("비동기 통신 실패")
+                 }
+
+             }
+         )
     }
 
     document.addEventListener("DOMContentLoaded", function () {
