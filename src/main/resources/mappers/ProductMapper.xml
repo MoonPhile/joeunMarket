@@ -226,11 +226,10 @@
 		product_price =
 		#{productPrice},
 		product_description = #{productDescription},
-		img1 =
-		#{img1},
-		img2 = #{img2},
-		img3 = #{img3},
-		img4 = #{img4},
+<!-- 		Img1 = #{img1}, -->
+<!-- 		Img2 = #{img2}, -->
+<!-- 		Img3 = #{img3}, -->
+<!-- 		Img4 = #{img4}, -->
 		product_category_id = #{productCategoryId}
 		WHERE product_id =
 		#{productId}
