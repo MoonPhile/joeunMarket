@@ -2,7 +2,6 @@ package com.joeun.service;
 
 import com.joeun.dto.PostRequest;
 import com.joeun.dto.PostResponse;
-import com.joeun.mapper.CommentMapper;
 import com.joeun.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
@@ -69,7 +68,10 @@ public class PostService {
      * @return list & pagination information
      */
     public List<PostResponse> findAllPost(@Param("offset") int offset, @Param("size") int size) {
-        return postMapper.findAll(offset,size);
+        return postMapper.findAll(offset, size);
     }
 
+    public boolean cntPlus(Long id) {
+        return postMapper.cntPlus(id);
+    }
 }

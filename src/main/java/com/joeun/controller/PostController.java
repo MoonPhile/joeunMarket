@@ -6,11 +6,11 @@ import com.joeun.dto.MessageDto;
 import com.joeun.dto.PostRequest;
 import com.joeun.dto.PostResponse;
 import com.joeun.dto.SearchDto;
-import com.joeun.mapper.PagingMapper;
 import com.joeun.service.FileService;
 import com.joeun.service.FileUtils;
 import com.joeun.service.PagingService;
 import com.joeun.service.PostService;
+import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,8 @@ public class PostController {
     private final FileService fileService;
     private final FileUtils fileUtils;
     private final PagingService pagingService;
-    private final PagingMapper pagingMapper;
+    private final UserService userService;
+
 
     // 게시글 작성 페이지
     @GetMapping("/write.do")
@@ -115,7 +116,10 @@ public class PostController {
     @GetMapping("/view.do")
     public String openPostView(@RequestParam final Long id, Model model) {
         PostResponse post = postService.findPostById(id);
+        PostResponse view = postService.findPostById(id);
         model.addAttribute("post", post);
+        model.addAttribute("viewCnt", view);
+        postService.cntPlus(id);
         return "post_view";
     }
 
@@ -125,4 +129,9 @@ public class PostController {
         model.addAttribute("params", params);
         return "messageRedirect";
     }
+
 }
+
+
+
+
