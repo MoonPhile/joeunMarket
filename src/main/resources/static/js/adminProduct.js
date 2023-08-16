@@ -60,10 +60,7 @@ function check(button) {
 		return;
 	}
 
-	if (!hasImage) {
-		alert("파일을 선택해주세요")
-		return;
-	}
+
 
 	console.log("submit^^")
 	if (buttonId === 'addProduct') {
