@@ -10,6 +10,7 @@ import com.joeun.service.FileService;
 import com.joeun.service.FileUtils;
 import com.joeun.service.PagingService;
 import com.joeun.service.PostService;
+import com.joeun.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ public class PostController {
     private final FileService fileService;
     private final FileUtils fileUtils;
     private final PagingService pagingService;
+    private final UserService userService;
+
 
     // 게시글 작성 페이지
     @GetMapping("/write.do")
@@ -126,7 +129,6 @@ public class PostController {
         model.addAttribute("params", params);
         return "messageRedirect";
     }
-
 
 }
 

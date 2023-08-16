@@ -235,14 +235,14 @@ function layerPopClose2(popName){
 
                // 댓글 저장
     function saveComment() {
-
+        const writer = [[ ${post.writer}]];
         const content = document.getElementById('content');
 
         const postId = [[ ${post.id} ]];
         const params = {
             postId : postId,
             content : content.value,
-            writer : '홍길동'
+            writer : writer
         }
 
         $.ajax({
@@ -275,6 +275,7 @@ function layerPopClose2(popName){
             async : false,
             success : function (response) {
                 document.getElementById('modalWriter').value = response.writer;
+                document.getElementById('modalWriter').readOnly = true;
                 document.getElementById('modalContent').value = response.content;
                 document.getElementById('commentUpdateBtn').setAttribute('onclick', `updateComment(${id})`);
                 layerPop('commentUpdatePopup');

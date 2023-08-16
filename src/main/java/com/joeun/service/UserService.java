@@ -1,15 +1,11 @@
 package com.joeun.service;
 
-import com.joeun.config.DataNotFoundException;
 import com.joeun.dto.User;
 import com.joeun.form.UserCreateForm;
 import com.joeun.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class UserService {
