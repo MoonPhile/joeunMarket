@@ -22,7 +22,6 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/admin.do").hasRole("ADMIN")
-                .antMatchers("/list.do").authenticated() // 게시판 들어갈려면 로그인해야 하도록 추가함(윤상)
                 .requestMatchers(
                         new AntPathRequestMatcher("/**")).permitAll()
                 .and()
