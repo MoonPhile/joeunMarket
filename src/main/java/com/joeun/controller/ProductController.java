@@ -176,7 +176,7 @@ public class ProductController {
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("category", category);
 		model.addAttribute("items", products);
-		return "productcategorylist";
+		return "Productcategorylist";
 	}
 
 	@GetMapping("/ordershow")
