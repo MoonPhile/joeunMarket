@@ -26,7 +26,7 @@ public class AdminController {
     @GetMapping("/admin.do")
     public String goToAdmin(Model model) {
 //        model.addAttribute("data", "모델 테스트입니다");
-        return "/admin/adminMain";
+        return "admin/adminMain";
     }
 
     @GetMapping("/adminGetUserList")
@@ -42,7 +42,7 @@ public class AdminController {
     public String goToMailForm(Model model) {
         List<User> list = adminService.findAllUser();
         model.addAttribute("users", list);
-        return "/admin/adminMail";
+        return "admin/adminMail";
     }
 
     @PostMapping("/adminMailSend")
@@ -51,6 +51,6 @@ public class AdminController {
         System.out.println(toList);
         String[] toArray = toList.split(",");
         mailService.sendMailReject(toArray, message);
-        return "/admin/adminMain";
+        return "admin/adminMain";
     }
 }

@@ -28,19 +28,19 @@ public class ProductController {
 	public String goToAddProduct(Model model) {
 		List<ProductCategoryDto> categoryList = productService.findAllCategory();
 		model.addAttribute("categoryList", categoryList);
-		return "/admin/addProduct";
+		return "admin/addProduct";
 	}
 
 	@GetMapping("/addCategory.do")
 	public String goToAddCategory() {
-		return "/admin/addCategory";
+		return "admin/addCategory";
 	}
 
 	@GetMapping("/productList.do")
 	public String goToProductList(Model model) {
 		List<ProductDto> productList = productService.findAllProduct();
 		model.addAttribute("products", productList);
-		return "/admin/adminProductList";
+		return "admin/adminProductList";
 	}
 
 	@PostMapping("/addCategory")
@@ -74,7 +74,7 @@ public class ProductController {
 		product.setImg3(filePath[2]);
 		product.setImg4(filePath[3]);
 		productService.addProduct(product);
-		return "/admin/adminMain";
+		return "admin/adminMain";
 	}
 
 	@GetMapping("/productlist")
@@ -192,7 +192,7 @@ public class ProductController {
 		List<ProductCategoryDto> categoryList = productService.findAllCategory();
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("idList", idList);
-		return "/admin/productUpdate";
+		return "admin/productUpdate";
 	}
 
 	@GetMapping("/getProductInfo")
@@ -229,7 +229,7 @@ public class ProductController {
 		product.setImg3(filePath[2]);
 		product.setImg4(filePath[3]);
 		productService.updateProduct(product);
-		return "/admin/adminMain";
+		return "admin/adminMain";
 	}
 
 }
