@@ -35,7 +35,7 @@ function requestPay() {
         if (rsp.success) {
             console.log("ajax시작")
             $.ajax({
-                url: "/payment/validate",
+                url: "payment/validate",
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({

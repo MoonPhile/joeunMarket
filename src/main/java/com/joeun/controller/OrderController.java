@@ -102,7 +102,7 @@ public class OrderController {
     public String getAllOrders(Model model){
         List<OrderDto> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
-        return "/admin/adminOrders";
+        return "admin/adminOrders";
     }
 
 

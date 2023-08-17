@@ -58,12 +58,12 @@ public class PaymentController {
         paymentService.payCancel(accessToken, impUid);  //실제 결제를 취소합니다
         paymentService.deletePayment(paymentId);    //결제정보를 삭제합니다
         orderService.updateOrders(orderId); //orders의 정보를 변경합니다
-        return "redirect: order-history";
+        return "redirect:order-history";
     }
 
     @GetMapping("/tossPay.do")
     public String goToToss(){
-        return "/test/tossPayTest";
+        return "test/tossPayTest";
     }
 
 }
